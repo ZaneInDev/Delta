@@ -1,0 +1,28 @@
+-- DECOMPILED BY ADVANCED DECOMPILER V3
+-- USED GLOBALS: script.
+1.	
+2.	local v0 = script
+4.	local v2 = "SocialTab"
+5.	
+7.	v0 = v0:FindFirstAncestor(v2)
+8.	local v1 = v0.Parent
+10.	v2 = require
+12.	local v3 = v0.dependencies
+14.	v2 = v2(v3)
+15.	v3 = v2.NetworkingUsers
+17.	local v4 = {"FetchChatSettings", "GetUserV2FromUserId", "GetUnreadConversationCount"}
+18.	local v8 = require
+20.	local v9 = v1.AppChat
+22.	v8 = v8(v9)
+23.	local v7 = v8.Conversations
+25.	local v6 = v7.Thunks
+27.	local v5 = v6.FetchChatSettings
+29.	v4.FetchChatSettings = v5
+31.	v5 = v3.GetUserV2FromUserId
+33.	v4.GetUserV2FromUserId = v5
+35.	v5 = require
+37.	v7 = script
+39.	v6 = v7.GetUnreadConversationCount
+41.	v5 = v5(v6)
+42.	v4.GetUnreadConversationCount = v5
+44.	return v4
