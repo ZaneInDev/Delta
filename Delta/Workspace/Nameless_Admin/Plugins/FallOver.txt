@@ -1,0 +1,17 @@
+cmd.add({"fall"}, {"fall", "get up NOW"}, function()
+    game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState(0)
+    game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Velocity = -game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame.LookVector * 25
+end)
+ 
+cmd.add({"seizure"}, {"seizure", "get up NOW"}, function()
+    game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Physics)
+    game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Velocity = -game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame.LookVector * 25
+    
+    game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("TouchGui"):WaitForChild("TouchControlFrame"):WaitForChild("JumpButton").MouseButton1Click:Wait()
+        
+    game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Standing)
+end)
+ 
+cmd.add({"flip"}, {"flip", "get up NOW"}, function()
+    if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Humanoid.RigType == Enum.HumanoidRigType.R6 then game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").RootJoint.C0 = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").RootJoint.C0 * CFrame.Angles(math.pi, 0, math.pi) else game.Players.LocalPlayer.Character:FindFirstChild("LowerTorso").Root.C0 =  game.Players.LocalPlayer.Character:FindFirstChild("LowerTorso").Root.C0 * CFrame.Angles(0, 0, math.pi) * CFrame.new(0, -1, 0) end
+end)
