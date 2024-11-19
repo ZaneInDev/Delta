@@ -1,0 +1,296 @@
+--SynapseX Decompiler
+-- USED GLOBALS: script.
+1.	
+2.	local v0 = game
+4.	local v2 = "TextChatService"
+5.	
+7.	v0 = v0:GetService(v2)
+8.	local v1 = game
+10.	local v3 = "RobloxReplicatedStorage"
+11.	
+13.	v1 = v1:GetService(v3)
+14.	v2 = script
+16.	local v4 = "ExpChatShared"
+17.	
+19.	v2 = v2:FindFirstAncestor(v4)
+20.	v3 = v2.Parent
+22.	local v5 = require
+24.	local v6 = v3.llama
+26.	v5 = v5(v6)
+27.	v4 = v5.Dictionary
+29.	v5 = require
+31.	v6 = v2.Logger
+33.	v5 = v5(v6)
+34.	local v7 = "ExpChat/Command/Whisper"
+35.	
+37.	v5 = v5:new(v7)
+38.	v6 = v2.Actions
+40.	v7 = require
+42.	local v8 = v6.ChatInputBarActivatedWhisperMode
+44.	v7 = v7(v8)
+45.	v8 = script
+47.	local v10 = "Commands"
+48.	
+50.	v8 = v8:FindFirstAncestor(v10)
+51.	local v9 = require
+53.	v10 = v8.getAutocompletePlayersFromString
+55.	v9 = v9(v10)
+56.	v10 = require
+58.	local v12 = v8.Whisper
+60.	local v11 = v12.getNameFromWhisper
+62.	v10 = v10(v11)
+63.	v11 = require
+65.	v12 = v8.types
+67.	v11 = v11(v12)
+68.	v12 = require
+70.	local v14 = v2.Flags
+72.	local v13 = v14.getFFlagExpChatWhisperModeRaceFix
+74.	v12 = v12(v13)
+75.	v13 = {"name", "alias", "clientRun"}
+76.	local v15 = script
+78.	v14 = v15.Name
+80.	v13.name = v14
+82.	v14 = {} -- this array has (2)indexes by default
+84.	v15 = "/whisper"
+85.	local v16 = "/w"
+86.	v14[1] = v15
+v14[2] = v16
+
+88.	v13.alias = v14
+90.	-- V nested upvalues[0] = v10
+-- V nested upvalues[1] = v4
+-- V nested upvalues[2] = v9
+-- V nested upvalues[3] = v5
+-- V nested upvalues[4] = v0
+-- V nested upvalues[5] = v1
+-- V nested upvalues[6] = v12
+-- V nested upvalues[7] = v7
+local function clientRun(p1, p2, p3) -- [line 23]
+	1.	
+	3.	v3 = p1:getState()
+	4.	local v2 = v3.AutoCastCommands
+	6.	local v4 = script
+	8.	local v3 = v4.Name
+	10.	local v1 = v2[v3]
+	11.	v2 = v10 -- get upval
+	12.	v3 = p3
+	13.	v4 = v1
+	14.	v2 = v2(v3, v4)
+	15.	if v2 then goto #239
+	16.	
+	18.	v4 = p1:getState()
+	19.	v3 = v4.Players
+	21.	local v5 = v4 -- get upval
+	22.	v4 = v5.join
+	24.	v5 = v3
+	25.	local v6 = {"byUserId"}
+	26.	local v8 = v4 -- get upval
+	27.	local v7 = v8.removeKey
+	29.	v8 = v3.byUserId
+	31.	FASTCALL[tostring](p2)
+	32.	local v10 = p2
+	33.	local v9 = tostring
+	35.	v9 = v9(v10)
+	36.	v7 = v7(v8, v9)
+	37.	v6.byUserId = v7
+	39.	v4 = v4(v5, v6)
+	40.	v5 = v9 -- get upval
+	41.	v6 = v4
+	42.	v7 = v2
+	43.	v5 = v5(v6, v7)
+	44.	v6 = #v5
+	45.	if v6 == 0 then goto #95
+	47.	v6 = v5 -- get upval
+	48.	v8 = "Autocomplete: No matches!"
+	49.	
+	51.	v6:debug(v8)
+	52.	v7 = v3.byUserId
+	54.	FASTCALL[tostring](p2)
+	55.	v9 = p2
+	56.	v8 = tostring
+	58.	v8 = v8(v9)
+	59.	v6 = v7[v8]
+	60.	if v6 then goto #81
+	61.	v7 = v6.displayName
+	63.	if v2 ~= v7 then goto #70
+	65.	v8 = "@"
+	66.	v9 = v6.username
+	68.	v7 = v8 .. v9
+	69.	if v2 == v7 then goto #81
+					end
+	71.	v7 = {"key", "args", "metadata"}
+	72.	v8 = "GameChat_PrivateMessaging_CannotWhisperToSelf"
+	73.	v7.key = v8
+	75.	v8 = nil
+	76.	v7.args = v8
+	78.	v8 = "Roblox.Whisper.Error.CannotWhisperToSelf"
+	79.	v7.metadata = v8
+	81.	return v7 -- referenced by #60, #69
+					end
+					end
+	82.	v7 = {"key", "args", "metadata"}
+	83.	v8 = "CoreScripts.TextChat.Mute.Error.TargetDoesNotExist"
+	84.	v7.key = v8
+	86.	v8 = {"RBX_NAME"}
+	87.	v9 = v2 or ""
+	88.	v8.RBX_NAME = v9
+	90.	v7.args = v8
+	92.	v8 = "Roblox.Whisper.Error.TargetDoesNotExist"
+	93.	v7.metadata = v8
+	95.	return v7 -- referenced by #45
+					end
+	96.	v6 = #v5
+	97.	if v6 == 1 then goto #226
+	99.	v6 = v5[-1]
+	100.	v8 = v6.userId
+	102.	FASTCALL[tonumber](v8)
+	103.	v7 = tonumber
+	105.	v7 = v7(v8)
+	106.	if v7 then goto #239
+	107.	v8 = string.format
+	109.	v9 = "RBXWhisper:%d_%d"
+	110.	if v7 > p2 then goto #113
+	112.	v10 = p2
+	113.	if not v10 then goto #114 -- referenced by #110
+					end
+	114.	v10 = v7 -- referenced by #113
+					end
+	115.	if p2 > v7 then goto #118
+	117.	local v11 = p2
+	118.	if not v11 then goto #119 -- referenced by #115
+					end
+	119.	v11 = v7 -- referenced by #118
+					end
+	120.	v8 = v8(v9, v10, v11)
+	121.	v9 = v0 -- get upval
+	122.	v11 = v8
+	123.	local v12 = true
+	124.	
+	126.	v9 = v9:FindFirstChild(v11, v12)
+	127.	if not v9 then goto #194
+	128.	v10 = v1 -- get upval
+	129.	v12 = "ExperienceChat"
+	130.	
+	132.	v10 = v10:FindFirstChild(v12)
+	133.	if v10 then goto #181
+	134.	local v13 = "WhisperChat"
+	135.	
+	137.	v11 = v10:FindFirstChild(v13)
+	138.	if v11 then goto #167
+	139.	local v14 = "RemoteFunction"
+	140.	
+	142.	v12 = v11:IsA(v14)
+	143.	if v12 then goto #167
+	144.	v14 = v6.userId
+	146.	
+	148.	v12 = v11:InvokeServer(v14)
+	149.	v9 = v12
+	150.	if not v9 then goto #194
+	151.	v12 = v5 -- get upval
+	152.	v14 = "Could not create whisper channel for some reason."
+	153.	
+	155.	v12:error(v14)
+	156.	v12 = {"key", "args", "metadata"}
+	157.	v13 = "CoreScripts.TextChat.Whisper.Error.CannotChat"
+	158.	v12.key = v13
+	160.	v13 = nil
+	161.	v12.args = v13
+	163.	v13 = "Roblox.Whisper.Error.Unknown"
+	164.	v12.metadata = v13
+	166.	return v12
+	167.	goto #194 -- referenced by #138, #143
+					elseif
+					elseif
+	168.	v12 = v5 -- get upval
+	169.	v14 = "Could not create whisper channel because WhisperChat RemoteFunction is missing."
+	170.	
+	172.	v12:error(v14)
+	173.	v12 = {"key", "metadata"}
+	174.	v13 = ""
+	175.	v12.key = v13
+	177.	v13 = "Roblox.Whisper.Error.Unknown"
+	178.	v12.metadata = v13
+	180.	return v12
+	181.	goto #194 -- referenced by #133
+					else
+	182.	v11 = v5 -- get upval
+	183.	v13 = "Could not create whisper channel because RobloxReplicatedStorage.ExperienceChat is missing."
+	184.	
+	186.	v11:error(v13)
+	187.	v11 = {"key", "metadata"}
+	188.	v12 = ""
+	189.	v11.key = v12
+	191.	v12 = "Roblox.Whisper.Error.Unknown"
+	192.	v11.metadata = v12
+	194.	return v11 -- referenced by #127, #150, #167, #181
+					end
+					end
+					end
+	195.	v10 = v12 -- get upval
+	196.	v10 = v10(v11)
+	197.	if v10 then goto #205
+	198.	v12 = v7 -- get upval
+	199.	v13 = nil
+	200.	v14 = v9
+	201.	v11 = v12(v13, v14)
+	202.	
+	204.	p1:dispatch()
+	205.	goto #212 -- referenced by #197
+					else
+	206.	v12 = v7 -- get upval
+	207.	v13 = v8
+	208.	v14 = nil
+	209.	v11 = v12(v13, v14)
+	210.	
+	212.	p1:dispatch() -- referenced by #205
+					end
+	213.	v10 = {"key", "args", "metadata"}
+	214.	v11 = "CoreScripts.TextChat.Notification.WhisperChat.Created"
+	215.	v10.key = v11
+	217.	v11 = {"RBX_NAME"}
+	218.	v11.RBX_NAME = v2
+	220.	v10.args = v11
+	222.	v11 = "Roblox.Whisper.Info.Success"
+	223.	v10.metadata = v11
+	225.	return v10
+	226.	goto #239 -- referenced by #97
+					else
+	227.	v6 = v5 -- get upval
+	228.	v8 = "Autocomplete: Too many matches!"
+	229.	
+	231.	v6:debug(v8)
+	232.	v6 = {"key", "metadata"}
+	233.	v7 = "CoreScripts.TextChat.Whisper.Error.CannotChat"
+	234.	v6.key = v7
+	236.	v7 = "Roblox.Whisper.Error.TooManyMatches"
+	237.	v6.metadata = v7
+	239.	return v6 -- referenced by #15, #106, #226
+					end
+					end
+					end
+	240.	v3 = {"key", "metadata"}
+	241.	v4 = ""
+	242.	v3.key = v4
+	244.	v4 = "Roblox.Whisper.Error.Unknown"
+	245.	v3.metadata = v4
+	247.	return v3
+end
+[DUPCLOSURE] v14 = clientRun
+91.	CAPTURE VAL R10
+
+92.	CAPTURE VAL R4
+
+93.	CAPTURE VAL R9
+
+94.	CAPTURE VAL R5
+
+95.	CAPTURE VAL R0
+
+96.	CAPTURE VAL R1
+
+97.	CAPTURE VAL R12
+
+98.	CAPTURE VAL R7
+
+99.	v107.clientRun = v108
+101.	return v107
