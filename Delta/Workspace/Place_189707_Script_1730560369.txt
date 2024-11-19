@@ -1,0 +1,948 @@
+-- Sat Nov  2 23:06:57 2024
+-- USED GLOBALS: script, SetCoreGuiChatConnections, checkBothChatTypesDisabled.
+1.	
+2.	local v0 = game
+4.	local v2 = "StarterGui"
+5.	
+7.	v0 = v0:GetService(v2)
+8.	local v1 = game
+10.	local v3 = "GuiService"
+11.	
+13.	v1 = v1:GetService(v3)
+14.	v2 = game
+16.	local v4 = "Chat"
+17.	
+19.	v2 = v2:GetService(v4)
+20.	v3 = game
+22.	local v5 = "ReplicatedStorage"
+23.	
+25.	v3 = v3:GetService(v5)
+26.	local v6 = "ClientChatModules"
+27.	
+29.	v4 = v2:WaitForChild(v6)
+30.	v5 = require
+32.	local v8 = "ChatSettings"
+33.	
+35.	v5 = v4:WaitForChild(v8)
+36.	v5 = v5()
+37.	-- V nested upvalues[0] = v5
+local function DoEverything() -- [line 16]
+	1.	local v1 = require
+	3.	local v2 = script
+	5.	local v4 = "ChatMain"
+	6.	
+	8.	v1 = v2:WaitForChild(v4)
+	9.	v1 = v1()
+	10.	v2 = {} -- this array is empty
+	12.	local v3 = {} -- this array is empty
+	14.	v2.ChatWindow = v3
+	16.	v3 = {} -- this array is empty
+	18.	v2.SetCore = v3
+	20.	v3 = {} -- this array is empty
+	22.	v2.GetCore = v3
+	24.	v3 = v2.ChatWindow
+	26.	v4 = {} -- this array is empty
+	28.	v3.ChatTypes = v4
+	30.	v4 = v2.ChatWindow
+	32.	v3 = v4.ChatTypes
+	34.	local v5 = v5 -- get upval
+	35.	v4 = v5.BubbleChatEnabled
+	37.	v3.BubbleChatEnabled = v4
+	39.	v4 = v2.ChatWindow
+	41.	v3 = v4.ChatTypes
+	43.	v5 = v5 -- get upval
+	44.	v4 = v5.ClassicChatEnabled
+	46.	v3.ClassicChatEnabled = v4
+	48.		-- V nested upvalues[0] = v2
+	-- V nested upvalues[1] = v1
+	local function ConnectEvent(p1) -- [line 29]
+		1.	local v2 = Instance.new
+		3.	local v3 = "BindableEvent"
+		4.	v2 = v2(v3)
+		5.	v2.Name = p1
+		7.	local v4 = v2 -- get upval
+		8.	v3 = v4.ChatWindow
+		10.	v3[p1] = v2
+		11.	v3 = v2.Event
+		13.			-- V nested upvalues[0] = upvalues[1]
+		-- V nested upvalues[1] = p1
+		[NEWCLOSURE] v5 = function(...) -- [line 34]
+			1.	
+			2.	local v4 = upvalues[1] -- get upval
+			3.	local v5 = p1 -- get upval
+			4.	local v3 = v4[v5]
+			5.	v4 = upvalues[1] -- get upval
+			6.	v5 = ...
+			7.	v3()
+			8.	return
+		end
+
+		14.	CAPTURE UPVAL U1
+
+		15.	CAPTURE VAL R0
+
+		16.	
+		18.	v8:connect(v10)
+		19.	return
+	end
+	[NEWCLOSURE] v8 = ConnectEvent
+	49.	CAPTURE VAL R1
+
+	50.	CAPTURE VAL R0
+
+	51.		-- V nested upvalues[0] = v2
+	-- V nested upvalues[1] = v1
+	local function ConnectFunction(p2) -- [line 37]
+		1.	local v12 = Instance.new
+		3.	local v13 = "BindableFunction"
+		4.	v12 = v12(v13)
+		5.	v12.Name = p2
+		7.	local v14 = v2 -- get upval
+		8.	v13 = v14.ChatWindow
+		10.	v13[p2] = v12
+		11.			-- V nested upvalues[0] = upvalues[1]
+		-- V nested upvalues[1] = p2
+		[NEWCLOSURE] v13 = function(...) -- [line 42]
+			1.	
+			2.	local v14 = upvalues[1] -- get upval
+			3.	local v15 = p2 -- get upval
+			4.	local v13 = v14[v15]
+			5.	v14 = upvalues[1] -- get upval
+			6.	v15 = ...
+			7.	p2 = v13()
+			8.	return v13, ...
+		end
+
+		12.	CAPTURE UPVAL U1
+
+		13.	CAPTURE VAL R0
+
+		14.	v17.OnInvoke = v18
+		16.	return
+	end
+	[NEWCLOSURE] v19 = ConnectFunction
+	52.	CAPTURE VAL R1
+
+	53.	CAPTURE VAL R0
+
+	54.		-- V nested upvalues[0] = v2
+	-- V nested upvalues[1] = v1
+	local function ReverseConnectEvent(p3) -- [line 45]
+		1.	local v21 = Instance.new
+		3.	local v22 = "BindableEvent"
+		4.	v21 = v21(v22)
+		5.	v21.Name = p3
+		7.	local v23 = v2 -- get upval
+		8.	v22 = v23.ChatWindow
+		10.	v22[p3] = v21
+		11.	v23 = v1 -- get upval
+		12.	v22 = v23[p3]
+		13.			-- V nested upvalues[0] = v2
+		[NEWCLOSURE] v24 = function(...) -- [line 50]
+			1.	
+			2.	local v22 = v2 -- get upval
+			3.	local v24 = ...
+			4.	
+			6.	v22:Fire()
+			7.	return
+		end
+
+		14.	CAPTURE VAL R1
+
+		15.	
+		17.	v24:connect(v26)
+		18.	return
+	end
+	[NEWCLOSURE] v26 = ReverseConnectEvent
+	55.	CAPTURE VAL R1
+
+	56.	CAPTURE VAL R0
+
+	57.		-- V nested upvalues[0] = v2
+	-- V nested upvalues[1] = v1
+	local function ConnectSignal(p4) -- [line 53]
+		1.	local v29 = Instance.new
+		3.	local v30 = "BindableEvent"
+		4.	v29 = v29(v30)
+		5.	v29.Name = p4
+		7.	local v31 = v2 -- get upval
+		8.	v30 = v31.ChatWindow
+		10.	v30[p4] = v29
+		11.	v30 = v29.Event
+		13.			-- V nested upvalues[0] = upvalues[1]
+		-- V nested upvalues[1] = p4
+		[NEWCLOSURE] v32 = function(...) -- [line 58]
+			1.	
+			2.	local v31 = upvalues[1] -- get upval
+			3.	local v32 = p4 -- get upval
+			4.	local v30 = v31[v32]
+			5.	v32 = ...
+			6.	
+			8.	v30:fire()
+			9.	return
+		end
+
+		14.	CAPTURE UPVAL U1
+
+		15.	CAPTURE VAL R0
+
+		16.	
+		18.	v34:connect(v36)
+		19.	return
+	end
+	[NEWCLOSURE] v37 = ConnectSignal
+	58.	CAPTURE VAL R1
+
+	59.	CAPTURE VAL R0
+
+	60.		-- V nested upvalues[0] = v2
+	-- V nested upvalues[1] = v1
+	local function ConnectSetCore(p5) -- [line 61]
+		1.	local v38 = Instance.new
+		3.	local v39 = "BindableEvent"
+		4.	v38 = v38(v39)
+		5.	v38.Name = p5
+		7.	local v40 = v2 -- get upval
+		8.	v39 = v40.SetCore
+		10.	v39[p5] = v38
+		11.	v39 = v38.Event
+		13.			-- V nested upvalues[0] = upvalues[1]
+		-- V nested upvalues[1] = p5
+		[NEWCLOSURE] v41 = function(...) -- [line 66]
+			1.	
+			2.	local v40 = upvalues[1] -- get upval
+			3.	local v42 = p5 -- get upval
+			4.	local v43 = "Event"
+			5.	local v41 = v42 .. v43
+			6.	local v39 = v40[v41]
+			7.	v41 = ...
+			8.	
+			10.	v39:fire()
+			11.	return
+		end
+
+		14.	CAPTURE UPVAL U1
+
+		15.	CAPTURE VAL R0
+
+		16.	
+		18.	v45:connect(v47)
+		19.	return
+	end
+	[NEWCLOSURE] v49 = ConnectSetCore
+	61.	CAPTURE VAL R1
+
+	62.	CAPTURE VAL R0
+
+	63.		-- V nested upvalues[0] = v2
+	-- V nested upvalues[1] = v1
+	local function ConnectGetCore(p6) -- [line 69]
+		1.	local v49 = Instance.new
+		3.	local v50 = "BindableFunction"
+		4.	v49 = v49(v50)
+		5.	v49.Name = p6
+		7.	local v51 = v2 -- get upval
+		8.	v50 = v51.GetCore
+		10.	v50[p6] = v49
+		11.			-- V nested upvalues[0] = upvalues[1]
+		-- V nested upvalues[1] = p6
+		[NEWCLOSURE] v50 = function(...) -- [line 74]
+			1.	
+			2.	local v51 = upvalues[1] -- get upval
+			3.	local v53 = "f"
+			4.	local v54 = p6 -- get upval
+			5.	local v52 = v53 .. v54
+			6.	local v50 = v51[v52]
+			7.	v51 = ...
+			8.	p6 = v50()
+			9.	return v50, ...
+		end
+
+		12.	CAPTURE UPVAL U1
+
+		13.	CAPTURE VAL R0
+
+		14.	v55.OnInvoke = v56
+		16.	return
+	end
+	[NEWCLOSURE] v61 = ConnectGetCore
+	64.	CAPTURE VAL R1
+
+	65.	CAPTURE VAL R0
+
+	66.	local v66 = Instance.new
+	68.	local v67 = "BindableEvent"
+	69.	v66 = v66(v67)
+	70.	v67 = "ToggleVisibility"
+	71.	v66.Name = v67
+	73.	v67 = v59.ChatWindow
+	75.	v67.ToggleVisibility = v66
+	77.	v67 = v66.Event
+	79.	local v70 = "ToggleVisibility"
+	80.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v13
+	[NEWCLOSURE] v69 = function(...) -- [line 34]
+		1.	
+		2.	local v60 = v1 -- get upval
+		3.	local v61 = v13 -- get upval
+		4.	local v59 = v60[v61]
+		5.	v60 = v1 -- get upval
+		6.	v61 = ...
+		7.	v59()
+		8.	return
+	end
+
+	81.	CAPTURE VAL R0
+
+	82.	CAPTURE VAL R12
+
+	83.	
+	85.	v72:connect(v74)
+	86.	v71 = Instance.new
+	88.	v72 = "BindableEvent"
+	89.	v71 = v71(v72)
+	90.	v72 = "SetVisible"
+	91.	v71.Name = v72
+	93.	v72 = v64.ChatWindow
+	95.	v72.SetVisible = v71
+	97.	v72 = v71.Event
+	99.	v75 = "SetVisible"
+	100.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v13
+	[NEWCLOSURE] v74 = function(...) -- [line 34]
+		1.	
+		2.	local v65 = v1 -- get upval
+		3.	local v66 = v13 -- get upval
+		4.	local v64 = v65[v66]
+		5.	v65 = v1 -- get upval
+		6.	v66 = ...
+		7.	v64()
+		8.	return
+	end
+
+	101.	CAPTURE VAL R0
+
+	102.	CAPTURE VAL R12
+
+	103.	
+	105.	v77:connect(v79)
+	106.	v76 = Instance.new
+	108.	v77 = "BindableEvent"
+	109.	v76 = v76(v77)
+	110.	v77 = "FocusChatBar"
+	111.	v76.Name = v77
+	113.	v77 = v69.ChatWindow
+	115.	v77.FocusChatBar = v76
+	117.	v77 = v76.Event
+	119.	v80 = "FocusChatBar"
+	120.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v13
+	[NEWCLOSURE] v79 = function(...) -- [line 34]
+		1.	
+		2.	local v70 = v1 -- get upval
+		3.	local v71 = v13 -- get upval
+		4.	local v69 = v70[v71]
+		5.	v70 = v1 -- get upval
+		6.	v71 = ...
+		7.	v69()
+		8.	return
+	end
+
+	121.	CAPTURE VAL R0
+
+	122.	CAPTURE VAL R12
+
+	123.	
+	125.	v82:connect(v84)
+	126.	v81 = Instance.new
+	128.	v82 = "BindableEvent"
+	129.	v81 = v81(v82)
+	130.	v82 = "EnterWhisperState"
+	131.	v81.Name = v82
+	133.	v82 = v74.ChatWindow
+	135.	v82.EnterWhisperState = v81
+	137.	v82 = v81.Event
+	139.	v85 = "EnterWhisperState"
+	140.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v13
+	[NEWCLOSURE] v84 = function(...) -- [line 34]
+		1.	
+		2.	local v75 = v1 -- get upval
+		3.	local v76 = v13 -- get upval
+		4.	local v74 = v75[v76]
+		5.	v75 = v1 -- get upval
+		6.	v76 = ...
+		7.	v74()
+		8.	return
+	end
+
+	141.	CAPTURE VAL R0
+
+	142.	CAPTURE VAL R12
+
+	143.	
+	145.	v87:connect(v89)
+	146.	v86 = Instance.new
+	148.	v87 = "BindableFunction"
+	149.	v86 = v86(v87)
+	150.	v87 = "GetVisibility"
+	151.	v86.Name = v87
+	153.	v87 = v79.ChatWindow
+	155.	v87.GetVisibility = v86
+	157.	local v88 = "GetVisibility"
+	158.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v11
+	[NEWCLOSURE] v87 = function(...) -- [line 42]
+		1.	
+		2.	local v80 = v1 -- get upval
+		3.	local v81 = v11 -- get upval
+		4.	local v79 = v80[v81]
+		5.	v80 = v1 -- get upval
+		6.	v81 = ...
+		7.	p6 = v79()
+		8.	return v79, ...
+	end
+
+	159.	CAPTURE VAL R0
+
+	160.	CAPTURE VAL R10
+
+	161.	v91.OnInvoke = v92
+	163.	v91 = Instance.new
+	165.	v92 = "BindableFunction"
+	166.	v91 = v91(v92)
+	167.	v92 = "GetMessageCount"
+	168.	v91.Name = v92
+	170.	v92 = v84.ChatWindow
+	172.	v92.GetMessageCount = v91
+	174.	v93 = "GetMessageCount"
+	175.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v11
+	[NEWCLOSURE] v92 = function(...) -- [line 42]
+		1.	
+		2.	local v85 = v1 -- get upval
+		3.	local v86 = v11 -- get upval
+		4.	local v84 = v85[v86]
+		5.	v85 = v1 -- get upval
+		6.	v86 = ...
+		7.	p6 = v84()
+		8.	return v84, ...
+	end
+
+	176.	CAPTURE VAL R0
+
+	177.	CAPTURE VAL R10
+
+	178.	v96.OnInvoke = v97
+	180.	v96 = Instance.new
+	182.	v97 = "BindableEvent"
+	183.	v96 = v96(v97)
+	184.	v97 = "TopbarEnabledChanged"
+	185.	v96.Name = v97
+	187.	v97 = v89.ChatWindow
+	189.	v97.TopbarEnabledChanged = v96
+	191.	v97 = v96.Event
+	193.	v100 = "TopbarEnabledChanged"
+	194.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v13
+	[NEWCLOSURE] v99 = function(...) -- [line 34]
+		1.	
+		2.	local v90 = v1 -- get upval
+		3.	local v91 = v13 -- get upval
+		4.	local v89 = v90[v91]
+		5.	v90 = v1 -- get upval
+		6.	v91 = ...
+		7.	v89()
+		8.	return
+	end
+
+	195.	CAPTURE VAL R0
+
+	196.	CAPTURE VAL R12
+
+	197.	
+	199.	v102:connect(v104)
+	200.	v101 = Instance.new
+	202.	v102 = "BindableFunction"
+	203.	v101 = v101(v102)
+	204.	v102 = "IsFocused"
+	205.	v101.Name = v102
+	207.	v102 = v94.ChatWindow
+	209.	v102.IsFocused = v101
+	211.	v103 = "IsFocused"
+	212.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v11
+	[NEWCLOSURE] v102 = function(...) -- [line 42]
+		1.	
+		2.	local v95 = v1 -- get upval
+		3.	local v96 = v11 -- get upval
+		4.	local v94 = v95[v96]
+		5.	v95 = v1 -- get upval
+		6.	v96 = ...
+		7.	p6 = v94()
+		8.	return v94, ...
+	end
+
+	213.	CAPTURE VAL R0
+
+	214.	CAPTURE VAL R10
+
+	215.	v106.OnInvoke = v107
+	217.	v106 = Instance.new
+	219.	v107 = "BindableEvent"
+	220.	v106 = v106(v107)
+	221.	v107 = "ChatBarFocusChanged"
+	222.	v106.Name = v107
+	224.	v107 = v99.ChatWindow
+	226.	v107.ChatBarFocusChanged = v106
+	228.	v107 = v98.ChatBarFocusChanged
+	230.		-- V nested upvalues[0] = v9
+	[NEWCLOSURE] v109 = function(...) -- [line 50]
+		1.	
+		2.	local v99 = v9 -- get upval
+		3.	local v101 = ...
+		4.	
+		6.	v99:Fire()
+		7.	return
+	end
+
+	231.	CAPTURE VAL R8
+
+	232.	
+	234.	v109:connect(v111)
+	235.	v108 = Instance.new
+	237.	v109 = "BindableEvent"
+	238.	v108 = v108(v109)
+	239.	v109 = "VisibilityStateChanged"
+	240.	v108.Name = v109
+	242.	v109 = v101.ChatWindow
+	244.	v109.VisibilityStateChanged = v108
+	246.	v109 = v100.VisibilityStateChanged
+	248.		-- V nested upvalues[0] = v9
+	[NEWCLOSURE] v111 = function(...) -- [line 50]
+		1.	
+		2.	local v101 = v9 -- get upval
+		3.	local v103 = ...
+		4.	
+		6.	v101:Fire()
+		7.	return
+	end
+
+	249.	CAPTURE VAL R8
+
+	250.	
+	252.	v111:connect(v113)
+	253.	v110 = Instance.new
+	255.	v111 = "BindableEvent"
+	256.	v110 = v110(v111)
+	257.	v111 = "MessagesChanged"
+	258.	v110.Name = v111
+	260.	v111 = v103.ChatWindow
+	262.	v111.MessagesChanged = v110
+	264.	v111 = v102.MessagesChanged
+	266.		-- V nested upvalues[0] = v9
+	[NEWCLOSURE] v113 = function(...) -- [line 50]
+		1.	
+		2.	local v103 = v9 -- get upval
+		3.	local v105 = ...
+		4.	
+		6.	v103:Fire()
+		7.	return
+	end
+
+	267.	CAPTURE VAL R8
+
+	268.	
+	270.	v113:connect(v115)
+	271.	v112 = Instance.new
+	273.	v113 = "BindableEvent"
+	274.	v112 = v112(v113)
+	275.	v113 = "MessagePosted"
+	276.	v112.Name = v113
+	278.	v113 = v105.ChatWindow
+	280.	v113.MessagePosted = v112
+	282.	v113 = v104.MessagePosted
+	284.		-- V nested upvalues[0] = v9
+	[NEWCLOSURE] v115 = function(...) -- [line 50]
+		1.	
+		2.	local v105 = v9 -- get upval
+		3.	local v107 = ...
+		4.	
+		6.	v105:Fire()
+		7.	return
+	end
+
+	285.	CAPTURE VAL R8
+
+	286.	
+	288.	v115:connect(v117)
+	289.	v114 = Instance.new
+	291.	v115 = "BindableEvent"
+	292.	v114 = v114(v115)
+	293.	v115 = "CoreGuiEnabled"
+	294.	v114.Name = v115
+	296.	v115 = v107.ChatWindow
+	298.	v115.CoreGuiEnabled = v114
+	300.	v115 = v114.Event
+	302.	v118 = "CoreGuiEnabled"
+	303.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v13
+	[NEWCLOSURE] v117 = function(...) -- [line 58]
+		1.	
+		2.	local v108 = v1 -- get upval
+		3.	local v109 = v13 -- get upval
+		4.	local v107 = v108[v109]
+		5.	v109 = ...
+		6.	
+		8.	v107:fire()
+		9.	return
+	end
+
+	304.	CAPTURE VAL R0
+
+	305.	CAPTURE VAL R12
+
+	306.	
+	308.	v119:connect(v121)
+	309.	v118 = Instance.new
+	311.	v119 = "BindableEvent"
+	312.	v118 = v118(v119)
+	313.	v119 = "ChatMakeSystemMessage"
+	314.	v118.Name = v119
+	316.	v119 = v111.SetCore
+	318.	v119.ChatMakeSystemMessage = v118
+	320.	v119 = v118.Event
+	322.	v122 = "ChatMakeSystemMessage"
+	323.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v13
+	[NEWCLOSURE] v121 = function(...) -- [line 66]
+		1.	
+		2.	local v112 = v1 -- get upval
+		3.	local v114 = v13 -- get upval
+		4.	local v115 = "Event"
+		5.	local v113 = v114 .. v115
+		6.	local v111 = v112[v113]
+		7.	v113 = ...
+		8.	
+		10.	v111:fire()
+		11.	return
+	end
+
+	324.	CAPTURE VAL R0
+
+	325.	CAPTURE VAL R12
+
+	326.	
+	328.	v125:connect(v127)
+	329.	v124 = Instance.new
+	331.	v125 = "BindableEvent"
+	332.	v124 = v124(v125)
+	333.	v125 = "ChatWindowPosition"
+	334.	v124.Name = v125
+	336.	v125 = v117.SetCore
+	338.	v125.ChatWindowPosition = v124
+	340.	v125 = v124.Event
+	342.	v128 = "ChatWindowPosition"
+	343.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v13
+	[NEWCLOSURE] v127 = function(...) -- [line 66]
+		1.	
+		2.	local v118 = v1 -- get upval
+		3.	local v120 = v13 -- get upval
+		4.	local v121 = "Event"
+		5.	local v119 = v120 .. v121
+		6.	local v117 = v118[v119]
+		7.	v119 = ...
+		8.	
+		10.	v117:fire()
+		11.	return
+	end
+
+	344.	CAPTURE VAL R0
+
+	345.	CAPTURE VAL R12
+
+	346.	
+	348.	v131:connect(v133)
+	349.	v130 = Instance.new
+	351.	v131 = "BindableEvent"
+	352.	v130 = v130(v131)
+	353.	v131 = "ChatWindowSize"
+	354.	v130.Name = v131
+	356.	v131 = v123.SetCore
+	358.	v131.ChatWindowSize = v130
+	360.	v131 = v130.Event
+	362.	v134 = "ChatWindowSize"
+	363.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v13
+	[NEWCLOSURE] v133 = function(...) -- [line 66]
+		1.	
+		2.	local v124 = v1 -- get upval
+		3.	local v126 = v13 -- get upval
+		4.	local v127 = "Event"
+		5.	local v125 = v126 .. v127
+		6.	local v123 = v124[v125]
+		7.	v125 = ...
+		8.	
+		10.	v123:fire()
+		11.	return
+	end
+
+	364.	CAPTURE VAL R0
+
+	365.	CAPTURE VAL R12
+
+	366.	
+	368.	v137:connect(v139)
+	369.	v136 = Instance.new
+	371.	v137 = "BindableFunction"
+	372.	v136 = v136(v137)
+	373.	v137 = "ChatWindowPosition"
+	374.	v136.Name = v137
+	376.	v137 = v129.GetCore
+	378.	v137.ChatWindowPosition = v136
+	380.	v138 = "ChatWindowPosition"
+	381.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v11
+	[NEWCLOSURE] v137 = function(...) -- [line 74]
+		1.	
+		2.	local v130 = v1 -- get upval
+		3.	local v132 = "f"
+		4.	local v133 = v11 -- get upval
+		5.	local v131 = v132 .. v133
+		6.	local v129 = v130[v131]
+		7.	v130 = ...
+		8.	p6 = v129()
+		9.	return v129, ...
+	end
+
+	382.	CAPTURE VAL R0
+
+	383.	CAPTURE VAL R10
+
+	384.	v142.OnInvoke = v143
+	386.	v142 = Instance.new
+	388.	v143 = "BindableFunction"
+	389.	v142 = v142(v143)
+	390.	v143 = "ChatWindowSize"
+	391.	v142.Name = v143
+	393.	v143 = v135.GetCore
+	395.	v143.ChatWindowSize = v142
+	397.	v144 = "ChatWindowSize"
+	398.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v11
+	[NEWCLOSURE] v143 = function(...) -- [line 74]
+		1.	
+		2.	local v136 = v1 -- get upval
+		3.	local v138 = "f"
+		4.	local v139 = v11 -- get upval
+		5.	local v137 = v138 .. v139
+		6.	local v135 = v136[v137]
+		7.	v136 = ...
+		8.	p6 = v135()
+		9.	return v135, ...
+	end
+
+	399.	CAPTURE VAL R0
+
+	400.	CAPTURE VAL R10
+
+	401.	v148.OnInvoke = v149
+	403.	v148 = Instance.new
+	405.	v149 = "BindableEvent"
+	406.	v148 = v148(v149)
+	407.	v149 = "ChatBarDisabled"
+	408.	v148.Name = v149
+	410.	v149 = v141.SetCore
+	412.	v149.ChatBarDisabled = v148
+	414.	v149 = v148.Event
+	416.	v152 = "ChatBarDisabled"
+	417.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v13
+	[NEWCLOSURE] v151 = function(...) -- [line 66]
+		1.	
+		2.	local v142 = v1 -- get upval
+		3.	local v144 = v13 -- get upval
+		4.	local v145 = "Event"
+		5.	local v143 = v144 .. v145
+		6.	local v141 = v142[v143]
+		7.	v143 = ...
+		8.	
+		10.	v141:fire()
+		11.	return
+	end
+
+	418.	CAPTURE VAL R0
+
+	419.	CAPTURE VAL R12
+
+	420.	
+	422.	v155:connect(v157)
+	423.	v154 = Instance.new
+	425.	v155 = "BindableFunction"
+	426.	v154 = v154(v155)
+	427.	v155 = "ChatBarDisabled"
+	428.	v154.Name = v155
+	430.	v155 = v147.GetCore
+	432.	v155.ChatBarDisabled = v154
+	434.	v156 = "ChatBarDisabled"
+	435.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v11
+	[NEWCLOSURE] v155 = function(...) -- [line 74]
+		1.	
+		2.	local v148 = v1 -- get upval
+		3.	local v150 = "f"
+		4.	local v151 = v11 -- get upval
+		5.	local v149 = v150 .. v151
+		6.	local v147 = v148[v149]
+		7.	v148 = ...
+		8.	p6 = v147()
+		9.	return v147, ...
+	end
+
+	436.	CAPTURE VAL R0
+
+	437.	CAPTURE VAL R10
+
+	438.	v160.OnInvoke = v161
+	440.	v160 = Instance.new
+	442.	v161 = "BindableEvent"
+	443.	v160 = v160(v161)
+	444.	v161 = "SpecialKeyPressed"
+	445.	v160.Name = v161
+	447.	v161 = v153.ChatWindow
+	449.	v161.SpecialKeyPressed = v160
+	451.	v161 = v160.Event
+	453.	v164 = "SpecialKeyPressed"
+	454.		-- V nested upvalues[0] = v1
+	-- V nested upvalues[1] = v13
+	[NEWCLOSURE] v163 = function(...) -- [line 34]
+		1.	
+		2.	local v154 = v1 -- get upval
+		3.	local v155 = v13 -- get upval
+		4.	local v153 = v154[v155]
+		5.	v154 = v1 -- get upval
+		6.	v155 = ...
+		7.	v153()
+		8.	return
+	end
+
+	455.	CAPTURE VAL R0
+
+	456.	CAPTURE VAL R12
+
+	457.	
+	459.	v166:connect(v168)
+	460.	v165 = SetCoreGuiChatConnections
+	462.	v166 = v158
+	463.	v165(v166)
+	464.	return
+end
+[DUPCLOSURE] v162 = DoEverything
+38.	CAPTURE VAL R5
+
+39.	-- V nested upvalues[0] = v291
+local function SetCoreGuiChatConnections(p7) -- [line 107]
+	1.	local v292 = 0
+	2.	local v293 = 10
+	3.	if v293 > v292 then goto #25
+	5.	v292 = v292 + 1
+	6.	v293 = pcall
+	8.		-- V nested upvalues[0] = upvalues[0]
+	-- V nested upvalues[1] = p7
+	[NEWCLOSURE] v294 = function() -- [line 111]
+		1.	local v293 = upvalues[0] -- get upval
+		2.	local v295 = "CoreGuiChatConnections"
+		3.	local v296 = p7 -- get upval
+		4.	
+		6.	v293:SetCore(v295, v296)
+		7.	return
+	end
+
+	9.	CAPTURE UPVAL U0
+
+	10.	CAPTURE VAL R0
+
+	11.	v296, v297 = v296(v297)
+	12.	if not v296 then goto #25
+	13.	if not v296 then goto #21
+	14.	if v295 == 10 then goto #21
+	16.	local v298 = error
+	18.	local v300 = "Error calling SetCore CoreGuiChatConnections: "
+	19.	local v301 = v297
+	20.	local v299 = v300 .. v301
+	21.	v298(v299) -- referenced by #13, #14
+					end
+					end
+	22.	v298 = wait
+	24.	v298(v299)
+	25.	go back to #2 -- might be a repeating loop -- referenced by #3, #12
+					end
+					end
+	26.	return
+end
+[DUPCLOSURE] v301 = SetCoreGuiChatConnections
+40.	CAPTURE VAL R0
+
+41.	SetCoreGuiChatConnections = v310
+43.	-- V nested upvalues[0] = v308
+local function checkBothChatTypesDisabled() -- [line 122]
+	1.	local v305 = v308 -- get upval
+	2.	local v304 = v305.BubbleChatEnabled
+	4.	if v304 ~= nil then goto #19
+	6.	v305 = v308 -- get upval
+	7.	v304 = v305.ClassicChatEnabled
+	9.	if v304 ~= nil then goto #19
+	11.	local v306 = v308 -- get upval
+	12.	v305 = v306.BubbleChatEnabled
+	14.	if not v305 then goto #17
+	15.	v306 = v308 -- get upval
+	16.	v305 = v306.ClassicChatEnabled
+					end
+	18.	v304 = not v305
+	19.	return v304 -- referenced by #4, #9
+					end
+					end
+	20.	v304 = false
+	21.	return v304
+end
+[DUPCLOSURE] v310 = checkBothChatTypesDisabled
+44.	CAPTURE VAL R5
+
+45.	checkBothChatTypesDisabled = v320
+47.	
+49.	v320 = v314:IsTenFootInterface()
+50.	if not v320 then goto #88
+51.	local v320 = checkBothChatTypesDisabled
+53.	v320 = v320(v321)
+54.	if not v320 then goto #57
+55.	v320 = v319
+56.	v320(v321)
+57.	return -- referenced by #54
+				end
+58.	v320 = {} -- this array is empty
+60.	v321 = {} -- this array is empty
+62.	v320.ChatWindow = v321
+64.	v321 = v320.ChatWindow
+66.	local v322 = {} -- this array is empty
+68.	v321.ChatTypes = v322
+70.	v322 = v320.ChatWindow
+72.	v321 = v322.ChatTypes
+74.	v322 = false
+75.	v321.BubbleChatEnabled = v322
+77.	v322 = v320.ChatWindow
+79.	v321 = v322.ChatTypes
+81.	v322 = false
+82.	v321.ClassicChatEnabled = v322
+84.	v321 = SetCoreGuiChatConnections
+86.	v322 = v320
+87.	v321(v322)
+88.	return -- referenced by #50
+				end
+89.	v322 = "DefaultChatSystemChatEvents"
+90.	
+92.	v320 = v316:WaitForChild(v322)
+93.	v321 = v320.GetInitDataRequest
+95.	
+97.	v321:InvokeServer()
+98.	return
