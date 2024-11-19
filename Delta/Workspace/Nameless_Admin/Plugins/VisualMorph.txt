@@ -1,0 +1,71 @@
+cmd.add({"morph", "char"}, {"morph (char) [name]", "morph you into someone else"}, function(playerName)
+    local player = nil
+
+    for _, p in pairs(game.Players:GetPlayers()) do
+        if string.find(string.lower(p.Name), string.lower(playerName)) == 1 then
+            player = p
+            break
+        end
+    end
+
+    if player == nil then
+        for _, p in pairs(game.Players:GetPlayers()) do
+            if string.find(string.lower(p.DisplayName), string.lower(playerName)) == 1 then
+                player = p
+                break
+            end
+        end
+    end
+
+    if player then
+        function Morph(userId)
+            local appearance = game.Players:GetCharacterAppearanceAsync(userId)
+            local localPlayer = game.Players.LocalPlayer
+
+            for i,v in pairs(localPlayer.Character:GetChildren()) do
+                if v:IsA("Accessory") or v:IsA("Shirt") or v:IsA("Pants") or v:IsA("CharacterMesh") or v:IsA("BodyColors") then
+                    v:Destroy()
+                end
+            end
+
+            if localPlayer.Character.Head:FindFirstChild("face") then
+                localPlayer.Character.Head.face:Destroy()
+            end
+
+            for i,v in pairs(appearance:GetChildren()) do
+                if v:IsA("Shirt") or v:IsA("Pants") or v:IsA("BodyColors") then
+                    v.Parent = localPlayer.Character
+                elseif v:IsA("Accessory") then
+                    localPlayer.Character.Humanoid:AddAccessory(v)
+                elseif v.Name == "R6" then
+                    if localPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6 then
+                        v:FindFirstChildOfClass("CharacterMesh").Parent = localPlayer.Character
+                    end
+                elseif v.Name == "R15" then
+                    if localPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
+                        v:FindFirstChildOfClass("CharacterMesh").Parent = localPlayer.Character
+                    end
+                end
+            end
+
+            if appearance:FindFirstChild("face") then
+                appearance.face.Parent = localPlayer.Character.Head
+            else
+                local face = Instance.new("Decal")
+                face.Face = "Front"
+                face.Name = "face"
+                face.Texture = "rbxasset://textures/face.png"
+                face.Transparency = 0
+                face.Parent = localPlayer.Character.Head
+            end
+
+            local parent = localPlayer.Character.Parent
+            localPlayer.Character.Parent = nil
+            localPlayer.Character.Parent = parent
+        end
+
+        Morph(player.UserId)
+    else
+        print("Invalid player name")
+    end
+end)
