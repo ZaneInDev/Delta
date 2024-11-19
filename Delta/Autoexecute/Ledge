@@ -1,0 +1,156 @@
+local UserInputService = game:GetService("UserInputService")
+local ContextActionService = game:GetService("ContextActionService")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local DebrisService = game:GetService("Debris")
+local GuiService = game:GetService("GuiService")
+
+local Player = game.Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+
+local RaycastParams = RaycastParams.new()
+RaycastParams.FilterType = Enum.RaycastFilterType.Exclude
+
+local VaultMoveNumber = 10
+local CanVault = true
+local CanMove = true
+local VaultConnection = nil
+local LedgePart = nil
+
+local function GetCharacterReferences()
+    local Character = Player.Character or Player.CharacterAdded:Wait()
+    local Humanoid = Character:WaitForChild("Humanoid")
+    local RootPart = Character:WaitForChild("HumanoidRootPart")
+    local Head = Character:WaitForChild("Head")
+    
+    RaycastParams.FilterDescendantsInstances = {Character}
+    return Character, Humanoid, RootPart, Head
+end
+
+local function PartCheck(Ledge)
+    local VaultPartCheck = workspace:Raycast(Ledge.Position + Vector3.new(0, -1, 0) + Ledge.LookVector * 1, Ledge.UpVector * 3, RaycastParams)
+    return VaultPartCheck == nil
+end
+
+local function VaultMoveCheck(Ray, Humanoid, Head)
+    local LocalPos = Ray.Instance.CFrame:PointToObjectSpace(Ray.Position)
+    local LocalLedgePos = Vector3.new(LocalPos.X, Ray.Instance.Size.Y / 2, LocalPos.Z)
+    local LedgePos = Ray.Instance.CFrame:PointToWorldSpace(LocalLedgePos)
+    local LedgeOffset = CFrame.lookAt(LedgePos, LedgePos - Ray.Normal)
+
+    if PartCheck(LedgeOffset) then
+        local Magnitude = (LedgePos - Head.Position).Magnitude
+        if Magnitude < 3 then
+            local Info = TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
+            local Goal = {CFrame = LedgeOffset + Vector3.new(0, -2, 0) + LedgeOffset.LookVector * -1}
+            local Tween = TweenService:Create(LedgePart, Info, Goal)
+            Tween:Play()
+            CanMove = false
+
+            task.delay(0.35, function()
+                CanMove = true
+            end)
+        end
+    end
+end
+
+local function VaultMove(Direction, Humanoid, Head)
+    local MoveRay = workspace:Raycast(Head.CFrame.Position, Head.CFrame.RightVector * Direction + Head.CFrame.LookVector * 8, RaycastParams)
+    if MoveRay and MoveRay.Instance then
+        VaultMoveCheck(MoveRay, Humanoid, Head)
+    else
+        local TurnRay = workspace:Raycast(Head.CFrame.Position + Vector3.new(0, -1, 0) + Head.CFrame.RightVector * Direction, Head.CFrame.RightVector * -Direction + Head.CFrame.LookVector * 2, RaycastParams)
+        if TurnRay and TurnRay.Instance then
+            VaultMoveCheck(TurnRay, Humanoid, Head)
+        end
+    end
+end
+
+local function DetectLedge(Humanoid, RootPart, Head)
+    if CanVault and (Humanoid:GetState() == Enum.HumanoidStateType.Freefall or Humanoid:GetState() == Enum.HumanoidStateType.Jumping or Humanoid:GetState() == Enum.HumanoidStateType.Climbing) then
+        local VaultCheck = workspace:Raycast(RootPart.CFrame.Position, RootPart.CFrame.LookVector * 5, RaycastParams)
+        
+        if VaultCheck and VaultCheck.Instance then
+            local LocalPos = VaultCheck.Instance.CFrame:PointToObjectSpace(VaultCheck.Position)
+            local LocalLedgePos = Vector3.new(LocalPos.X, VaultCheck.Instance.Size.Y / 2, LocalPos.Z)
+            local LedgePos = VaultCheck.Instance.CFrame:PointToWorldSpace(LocalLedgePos)
+            local LedgeOffset = CFrame.lookAt(LedgePos, LedgePos - VaultCheck.Normal)
+
+            local Magnitude = (LedgePos - Head.Position).Magnitude
+            if Magnitude < 4 and PartCheck(LedgeOffset) then
+                CanVault = false
+                Humanoid:ChangeState(Enum.HumanoidStateType.Climbing)
+
+                LedgePart = Instance.new("Part")
+                LedgePart.Parent = workspace
+                LedgePart.Anchored = true
+                LedgePart.Size = Vector3.one
+                LedgePart.CFrame = LedgeOffset + Vector3.new(0, -2, 0) + LedgeOffset.LookVector * -1
+                LedgePart.CanQuery = false
+                LedgePart.CanCollide = false
+                LedgePart.CanTouch = false
+                LedgePart.Transparency = 1
+
+                VaultConnection = RunService.RenderStepped:Connect(function()
+                    RootPart.Anchored = true
+                    Humanoid.AutoRotate = false
+                    RootPart.CFrame = RootPart.CFrame:Lerp(CFrame.lookAt(LedgePart.Position, (LedgePart.CFrame * CFrame.new(0, 0, -1)).Position), 0.25)
+                end)
+            end
+        end
+    elseif not CanVault then
+        CanVault = true
+        Humanoid.AutoRotate = true
+        RootPart.Anchored = false
+        Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+
+        if VaultConnection then
+            VaultConnection:Disconnect()
+        end
+
+        if LedgePart then
+            LedgePart:Destroy()
+        end
+    end
+end
+
+local function MoveUpOrDown(Direction, RootPart, Humanoid, Head)
+    local Offset = Direction == "Up" and Vector3.new(0, 5, 0) or Vector3.new(0, -5, 0)
+    local LedgeRay = workspace:Raycast(RootPart.Position + Offset, RootPart.CFrame.LookVector * 5, RaycastParams)
+    
+    if LedgeRay and LedgeRay.Instance then
+        DetectLedge(Humanoid, RootPart, Head)
+    end
+end
+
+local function InitializeCharacter()
+    local Character, Humanoid, RootPart, Head = GetCharacterReferences()
+    
+    Humanoid:GetPropertyChangedSignal("MoveDirection"):Connect(function()
+        if (Humanoid.MoveDirection:Dot(Camera.CFrame.RightVector) > 0.7) and not CanVault and CanMove then
+            VaultMove(VaultMoveNumber, Humanoid, Head)
+        end
+        if (Humanoid.MoveDirection:Dot(-Camera.CFrame.RightVector) > 0.7) and not CanVault and CanMove then
+            VaultMove(-VaultMoveNumber, Humanoid, Head)
+        end
+        if (Humanoid.MoveDirection:Dot(RootPart.CFrame.LookVector) > 0.7) and not CanVault and CanMove then
+            MoveUpOrDown("Up", RootPart, Humanoid, Head)
+        end
+        if (Humanoid.MoveDirection:Dot(-RootPart.CFrame.LookVector) > 0.7) and not CanVault and CanMove then
+            MoveUpOrDown("Down", RootPart, Humanoid, Head)
+        end
+    end)
+
+    UserInputService.InputBegan:Connect(function(Input, GameProcessed)
+        if (Input.KeyCode == Enum.KeyCode.ButtonA or Input.KeyCode == Enum.KeyCode.Space) then
+            DetectLedge(Humanoid, RootPart, Head)
+        elseif Input.KeyCode == Enum.KeyCode.W then
+            MoveUpOrDown("Up", RootPart, Humanoid, Head)
+        elseif Input.KeyCode == Enum.KeyCode.S then
+            MoveUpOrDown("Down", RootPart, Humanoid, Head)
+        end
+    end)
+end
+
+Player.CharacterAdded:Connect(InitializeCharacter)
+InitializeCharacter()
