@@ -1,0 +1,2 @@
+cmd.add({"ForceR6"}, {"ForceR6", "It forces R6 when the command r6 doesn't work"}, function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Imagnir/r6_anims_for_r15/main/r6_anims.lua"))()end)
