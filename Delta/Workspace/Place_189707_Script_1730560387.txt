@@ -1,0 +1,3017 @@
+-- Sat Nov  2 23:06:57 2024
+-- USED GLOBALS: script, TryRemoveChildWithVerifyingIsCorrectType, CheckIfPointIsInSquare, DoBackgroundFadeIn, DoBackgroundFadeOut, DoTextFadeIn, DoTextFadeOut, DoFadeInFromNewInformation, InstantFadeIn, InstantFadeOut, UpdateFadingForMouseState, getClassicChatEnabled, getBubbleChatEnabled, bubbleChatOnly, UpdateMousePosition, SetVisibility, trimTrailingSpaces, DoSwitchCurrentChannel, SendMessageToSelfInTargetChannel, chatBarFocused, chatBarFocusLost, setupChatBarConnections, getEchoMessagesInGeneral, HandleChannelJoined, SendSystemMessageToSelf, MutePlayer, UnmutePlayer.
+1.	
+2.	local v0 = {} -- this array is empty
+4.	local v1 = nil
+5.	v0.Visible = v1
+7.	v1 = nil
+8.	v0.IsCoreGuiEnabled = v1
+10.	v1 = nil
+11.	v0.TopbarEnabled = v1
+13.	v1 = nil
+14.	v0.VisibilityStateChanged = v1
+16.	v1 = false
+17.	local v2 = pcall
+19.	[DUPCLOSURE] v3 = function() -- [line 22]
+	1.	local v1 = UserSettings
+	3.	v1 = v1(v2)
+	4.	local v3 = "UserHandleFriendJoinNotifierOnClient"
+	5.	
+	7.	p0 = v1:IsUserFeatureEnabled(v3)
+	8.	return v1, ...
+end
+
+20.	v4, v5 = v4(v5)
+21.	if v4 then goto #22
+22.	v3 = v5 -- referenced by #21
+				end
+23.	v4 = false
+24.	local v5 = pcall
+26.	[DUPCLOSURE] v6 = function() -- [line 32]
+	1.	local v3 = UserSettings
+	3.	v3 = v3(v4)
+	4.	local v5 = "UserIsChatTranslationEnabled2"
+	5.	
+	7.	p0 = v3:IsUserFeatureEnabled(v5)
+	8.	return v3, ...
+end
+
+27.	v7, v8 = v7(v8)
+28.	v6 = v7 and v8
+29.	v7 = nil
+30.	local v8 = pcall
+32.	[DUPCLOSURE] v9 = function() -- [line 39]
+	1.	local v5 = UserSettings
+	3.	v5 = v5(v6)
+	4.	local v7 = "UserAddBetterConsoleCheckForLegacyChat"
+	5.	
+	7.	p0 = v5:IsUserFeatureEnabled(v7)
+	8.	return v5, ...
+end
+
+33.	v10, v11 = v10(v11)
+34.	v9 = v10 and v11
+35.	v10 = game
+37.	local v12 = "RunService"
+38.	
+40.	v10 = v10:GetService(v12)
+41.	local v11 = game
+43.	local v13 = "ReplicatedStorage"
+44.	
+46.	v11 = v11:GetService(v13)
+47.	v12 = game
+49.	local v14 = "Chat"
+50.	
+52.	v12 = v12:GetService(v14)
+53.	v13 = game
+55.	local v15 = "StarterGui"
+56.	
+58.	v13 = v13:GetService(v15)
+59.	v14 = game
+61.	local v16 = "ContextActionService"
+62.	
+64.	v14 = v14:GetService(v16)
+65.	local v17 = "DefaultChatSystemChatEvents"
+66.	
+68.	v15 = v11:WaitForChild(v17)
+69.	local v18 = "DefaultChatSystemChatEvents"
+70.	
+72.	v16 = v11:WaitForChild(v18)
+73.	local v19 = "ClientChatModules"
+74.	
+76.	v17 = v12:WaitForChild(v19)
+77.	v18 = require
+79.	local v21 = "ChatConstants"
+80.	
+82.	v18 = v17:WaitForChild(v21)
+83.	v18 = v18()
+84.	v19 = require
+86.	local v22 = "ChatSettings"
+87.	
+89.	v19 = v17:WaitForChild(v22)
+90.	v19 = v19()
+91.	v22 = "MessageCreatorModules"
+92.	
+94.	v20 = v17:WaitForChild(v22)
+95.	v21 = require
+97.	local v24 = "Util"
+98.	
+100.	v21 = v20:WaitForChild(v24)
+101.	v21 = v21()
+102.	v22 = nil
+103.	local v23 = pcall
+105.	-- V nested upvalues[0] = v16
+[NEWCLOSURE] v24 = function() -- [line 63]
+	1.	local v7 = require
+	3.	local v10 = game
+	5.	local v12 = "Chat"
+	6.	
+	8.	v10 = v10:GetService(v12)
+	9.	local v9 = v10.ClientChatModules
+	11.	local v8 = v9.ChatLocalization
+	13.	v7 = v7(v8)
+	14.	v16 = v7 -- set upval
+	15.	return
+end
+
+106.	CAPTURE REF R16
+
+107.	v28(v29)
+108.	if v27 == nil then goto #114
+110.	v27 = {} -- this array is empty
+112.	local function Get(p1, p2, p3) -- [line 64]
+	1.	return p3
+end
+[DUPCLOSURE] v28 = Get
+113.	v27.Get = v28
+				end
+115.	v28 = nil
+116.	if v13 then goto #138
+117.	v29 = script
+119.	local v31 = "ChatTranslationEnabled"
+120.	
+122.	v29 = v29:FindFirstChild(v31)
+123.	v28 = v29
+124.	if v28 == nil then goto #138
+126.	v29 = nil
+127.	v31 = script
+129.	local v30 = v31.ChildAdded
+131.	-- V nested upvalues[0] = v17
+-- V nested upvalues[1] = v18
+[NEWCLOSURE] v32 = function(p4) -- [line 71]
+	1.	local v12 = p4.Name
+	3.	if v12 == "ChatTranslationEnabled" then goto #9
+	5.	v17 = p4 -- set upval
+	6.	v12 = v18 -- get upval
+	7.	
+	9.	v12:Disconnect() -- referenced by #3
+					end
+	10.	return
+end
+
+132.	CAPTURE REF R17
+
+133.	CAPTURE REF R18
+
+134.	
+136.	v32 = v32:Connect(v34)
+137.	v31 = v32
+138.	[CLOSEUPVALS]: clear captures from back until: 18 -- referenced by #116, #124
+				end
+				end
+139.	v31 = 10
+140.	v32 = {"OnNewMessage", "OnMessageDoneFiltering", "OnNewSystemMessage", "OnChannelJoined", "OnChannelLeft", "OnMuted", "OnUnmuted", "OnMainChannelSet", "SayMessageRequest", "GetInitDataRequest"}
+141.	v33 = "RemoteEvent"
+142.	v32.OnNewMessage = v33
+144.	v33 = "RemoteEvent"
+145.	v32.OnMessageDoneFiltering = v33
+147.	v33 = "RemoteEvent"
+148.	v32.OnNewSystemMessage = v33
+150.	v33 = "RemoteEvent"
+151.	v32.OnChannelJoined = v33
+153.	v33 = "RemoteEvent"
+154.	v32.OnChannelLeft = v33
+156.	v33 = "RemoteEvent"
+157.	v32.OnMuted = v33
+159.	v33 = "RemoteEvent"
+160.	v32.OnUnmuted = v33
+162.	v33 = "RemoteEvent"
+163.	v32.OnMainChannelSet = v33
+165.	v33 = "RemoteEvent"
+166.	v32.SayMessageRequest = v33
+168.	v33 = "RemoteFunction"
+169.	v32.GetInitDataRequest = v33
+171.	v33 = {} -- this array is empty
+173.	local v34 = Instance.new
+175.	local v35 = "BindableEvent"
+176.	v34 = v34(v35)
+177.	-- V nested upvalues[0] = v19
+-- V nested upvalues[1] = v20
+-- V nested upvalues[2] = v18
+local function TryRemoveChildWithVerifyingIsCorrectType(p5) -- [line 104]
+	1.	local v15 = v19 -- get upval
+	2.	local v16 = p5.Name
+	4.	local v14 = v15[v16]
+	5.	if v14 then goto #25
+	6.	local v17 = v19 -- get upval
+	7.	local v18 = p5.Name
+	9.	v16 = v17[v18]
+	10.	
+	12.	v14 = p5:IsA(v16)
+	13.	if v14 then goto #25
+	14.	v14 = v19 -- get upval
+	15.	v15 = p5.Name
+	17.	v16 = nil
+	18.	v14[v15] = v16
+	19.	v14 = v20 -- get upval
+	20.	v15 = p5.Name
+	22.	v14[v15] = p5
+	23.	v15 = v18 -- get upval
+	24.	v14 = v15 - 1
+	25.	v18 = v14 -- set upval -- referenced by #5, #13
+					end
+					end
+	26.	return
+end
+[NEWCLOSURE] v35 = TryRemoveChildWithVerifyingIsCorrectType
+178.	CAPTURE VAL R19
+
+179.	CAPTURE VAL R20
+
+180.	CAPTURE REF R18
+
+181.	TryRemoveChildWithVerifyingIsCorrectType = v48
+183.	v48 = pairs
+185.	
+187.	v48 = v36:GetChildren()
+188.	v48, v49, v50 = v48()
+189.	for v51, v52 in v48(v49) do -- [escape at #194] (pairs/next)
+190.	local v53 = TryRemoveChildWithVerifyingIsCorrectType
+192.	local v54 = v52
+193.	v53(v54)
+194.	end -- FORGLOOP - iterate + goto #189
+196.	v48 = 0
+197.	if v44 > v48 then goto #217
+199.	v48 = v36.ChildAdded
+201.	-- V nested upvalues[0] = v18
+-- V nested upvalues[1] = v21
+[NEWCLOSURE] v50 = function(p6) -- [line 117]
+	1.	local v27 = TryRemoveChildWithVerifyingIsCorrectType
+	3.	local v28 = p6
+	4.	v27(v28)
+	5.	v27 = v18 -- get upval
+	6.	v28 = 1
+	7.	if v28 > v27 then goto #12
+	9.	v27 = v21 -- get upval
+	10.	
+	12.	v27:Fire() -- referenced by #7
+					end
+	13.	return
+end
+
+202.	CAPTURE REF R18
+
+203.	CAPTURE VAL R21
+
+204.	
+206.	v53 = v53:connect(v55)
+207.	local v54 = v52.Event
+209.	
+211.	v54:wait()
+212.	
+214.	v53:disconnect()
+215.	
+217.	v52:Destroy() -- referenced by #197
+				end
+218.	v41 = v51
+219.	v53 = game
+221.	local v55 = "UserInputService"
+222.	
+224.	v53 = v53:GetService(v55)
+225.	v54 = game
+227.	local v56 = "RunService"
+228.	
+230.	v54 = v54:GetService(v56)
+231.	v55 = game
+233.	local v57 = "Players"
+234.	
+236.	v55 = v55:GetService(v57)
+237.	v56 = v55.LocalPlayer
+239.	if not v56 then goto #247
+240.	v57 = v55.ChildAdded
+242.	
+244.	v57:wait()
+245.	v56 = v55.LocalPlayer
+247.	go back to #239 -- might be a repeating loop -- referenced by #239
+				end
+248.	v57 = true
+249.	v58 = 6
+250.	v59 = v44.ScreenGuiDisplayOrder
+252.	if v59 ~= nil then goto #255
+254.	v58 = v44.ScreenGuiDisplayOrder
+				end
+256.	local v61 = "PlayerGui"
+257.	
+259.	v59 = v56:WaitForChild(v61)
+260.	local v60 = Instance.new
+262.	v61 = "ScreenGui"
+263.	v60 = v60(v61)
+264.	v61 = "Chat"
+265.	v60.Name = v61
+267.	v61 = false
+268.	v60.ResetOnSpawn = v61
+270.	v60.DisplayOrder = v58
+272.	v60.Parent = v59
+274.	if v34 then goto #287
+275.	v61 = game
+277.	local v63 = "GuiService"
+278.	
+280.	v61 = v61:GetService(v63)
+281.	
+283.	v61 = v61:IsTenFootInterface()
+284.	if v61 then goto #287
+285.	v61 = false
+286.	v60.Enabled = v61
+				end
+				end
+288.	v61 = false
+289.	local v62 = script
+291.	v63 = require
+293.	local v66 = "ChatWindow"
+294.	
+296.	v63 = v62:WaitForChild(v66)
+297.	v63 = v63()
+298.	local v64 = require
+300.	local v67 = "ChatBar"
+301.	
+303.	v64 = v62:WaitForChild(v67)
+304.	v64 = v64()
+305.	local v65 = require
+307.	local v68 = "ChannelsBar"
+308.	
+310.	v65 = v62:WaitForChild(v68)
+311.	v65 = v65()
+312.	v66 = require
+314.	local v69 = "MessageLabelCreator"
+315.	
+317.	v66 = v62:WaitForChild(v69)
+318.	v66 = v66()
+319.	v67 = require
+321.	local v70 = "MessageLogDisplay"
+322.	
+324.	v67 = v62:WaitForChild(v70)
+325.	v67 = v67()
+326.	v68 = require
+328.	local v71 = "ChatChannel"
+329.	
+331.	v68 = v62:WaitForChild(v71)
+332.	v68 = v68()
+333.	v69 = require
+335.	local v72 = "CommandProcessor"
+336.	
+338.	v69 = v62:WaitForChild(v72)
+339.	v69 = v69()
+340.	v70 = v63.new
+342.	v70 = v70(v71)
+343.	v71 = v65.new
+345.	v71 = v71(v72)
+346.	v72 = v67.new
+348.	v72 = v72(v73)
+349.	local v73 = v69.new
+351.	v73 = v73(v74)
+352.	local v74 = v64.new
+354.	local v75 = v73
+355.	local v76 = v70
+356.	v74 = v74(v75, v76)
+357.	local v77 = v60
+358.	
+360.	v70:CreateGuiObjects(v77)
+361.	v77 = v74
+362.	
+364.	v70:RegisterChatBar(v77)
+365.	v77 = v71
+366.	
+368.	v70:RegisterChannelsBar(v77)
+369.	v77 = v72
+370.	
+372.	v70:RegisterMessageLogDisplay(v77)
+373.	v77 = v70
+374.	
+376.	v46:RegisterChatWindow(v77)
+377.	v75 = require
+379.	local v78 = "MessageSender"
+380.	
+382.	v75 = v62:WaitForChild(v78)
+383.	v75 = v75()
+384.	v78 = v41.SayMessageRequest
+386.	
+388.	v75:RegisterSayMessageFunction(v78)
+389.	v76 = v53.TouchEnabled
+391.	if v76 then goto #400
+392.	local v80 = "GameChat_ChatMain_ChatBarTextTouch"
+393.	local v81 = "Tap here to chat"
+394.	
+396.	v77 = v47:Get(v80, v81)
+397.	
+399.	v74:SetTextLabelText()
+400.	goto #408 -- referenced by #391
+				else
+401.	v80 = "GameChat_ChatMain_ChatBarText"
+402.	v81 = 'To chat click here or press "/" key'
+403.	
+405.	v77 = v47:Get(v80, v81)
+406.	
+408.	v74:SetTextLabelText() -- referenced by #400
+				end
+409.	v76 = spawn
+411.	-- V nested upvalues[0] = v62
+-- V nested upvalues[1] = v44
+-- V nested upvalues[2] = v70
+[DUPCLOSURE] v77 = function() -- [line 204]
+	1.	local v32 = require
+	3.	local v33 = v62 -- get upval
+	4.	local v35 = "CurveUtil"
+	5.	
+	7.	v32 = v33:WaitForChild(v35)
+	8.	v32 = v32()
+	9.	v35 = v44 -- get upval
+	10.	local v34 = v35.ChatAnimationFPS
+	12.	v33 = v34 or 20
+	13.	v34 = 1 / v33
+	14.	v35 = tick
+	16.	v35 = v35(v36)
+	17.	local v36 = tick
+	19.	v36 = v36(v37)
+	20.	local v37 = v36 - v35
+	21.	local v40 = v37
+	22.	
+	24.	v38 = v32:DeltaTimeToTimescale(v40)
+	25.	if v38 ~= 0 then goto #31
+	27.	local v39 = v70 -- get upval
+	28.	local v41 = v38
+	29.	
+	31.	v39:Update(v41) -- referenced by #25
+					end
+	32.	v35 = v36
+	33.	v39 = wait
+	35.	v40 = v34
+	36.	v39(v40)
+	37.	go back to #17 -- might be a repeating loop
+	38.	return
+end
+
+412.	CAPTURE VAL R31
+
+413.	CAPTURE VAL R13
+
+414.	CAPTURE VAL R39
+
+415.	v92(v93)
+416.	local function CheckIfPointIsInSquare(p7, p8, p9) -- [line 230]
+	1.	local v48 = false
+	2.	local v49 = p8.X
+	4.	local v50 = p7.X
+	6.	if v49 <= v50 then goto #29
+	8.	v48 = false
+	9.	v49 = p7.X
+	11.	v50 = p9.X
+	13.	if v49 <= v50 then goto #29
+	15.	v48 = false
+	16.	v49 = p8.Y
+	18.	v50 = p7.Y
+	20.	if v49 <= v50 then goto #29
+	22.	v49 = p7.Y
+	24.	v50 = p9.Y
+	26.	if v49 > v50 then goto #28
+	28.	v48 = false +1 -- referenced by #26
+					end
+	29.	v48 = true -- referenced by #6, #13, #20
+					end
+					end
+					end
+	30.	return v48
+end
+[DUPCLOSURE] v92 = CheckIfPointIsInSquare
+417.	CheckIfPointIsInSquare = v105
+419.	v105 = false
+420.	v106 = false
+421.	v107 = 0
+422.	local v108 = 0
+423.	v109 = Instance.new
+425.	v110 = "BindableEvent"
+426.	v109 = v109(v110)
+427.	v110 = Instance.new
+429.	local v111 = "BindableEvent"
+430.	v110 = v110(v111)
+431.	v111 = Instance.new
+433.	local v112 = "BindableEvent"
+434.	v111 = v111(v112)
+435.	-- V nested upvalues[0] = v48
+-- V nested upvalues[1] = v45
+-- V nested upvalues[2] = v49
+-- V nested upvalues[3] = v39
+-- V nested upvalues[4] = v13
+-- V nested upvalues[5] = v41
+-- V nested upvalues[6] = v36
+local function DoBackgroundFadeIn(p10) -- [line 244]
+	1.	local v61 = tick
+	3.	v61 = v61(v62)
+	4.	v48 = v61 -- set upval
+	5.	v61 = false
+	6.	v45 = v61 -- set upval
+	7.	v61 = v49 -- get upval
+	8.	
+	10.	v61:Fire()
+	11.	v61 = v39 -- get upval
+	12.	local v63 = p10
+	13.	if not v63 then goto #16
+	14.	local v64 = v13 -- get upval
+	15.	v63 = v64.ChatDefaultFadeDuration
+					end
+	17.	
+	19.	v61:FadeInBackground(v63)
+	20.	v61 = v39 -- get upval
+	21.	
+	23.	v61 = v61:GetCurrentChannel()
+	24.	if v61 then goto #35
+	25.	v63 = v41 -- get upval
+	26.	local v62 = v63.Scroller
+	28.	v63 = true
+	29.	v62.ScrollingEnabled = v63
+	31.	v64 = v36 -- get upval
+	32.	v63 = v64.ScrollBarThickness
+	34.	v62.ScrollBarThickness = v63
+					end
+	36.	return
+end
+[NEWCLOSURE] v112 = DoBackgroundFadeIn
+436.	CAPTURE REF R48
+
+437.	CAPTURE REF R45
+
+438.	CAPTURE VAL R49
+
+439.	CAPTURE VAL R39
+
+440.	CAPTURE VAL R13
+
+441.	CAPTURE VAL R41
+
+442.	CAPTURE VAL R36
+
+443.	DoBackgroundFadeIn = v125
+445.	-- V nested upvalues[0] = v48
+-- V nested upvalues[1] = v45
+-- V nested upvalues[2] = v49
+-- V nested upvalues[3] = v39
+-- V nested upvalues[4] = v13
+-- V nested upvalues[5] = v41
+local function DoBackgroundFadeOut(p11) -- [line 259]
+	1.	local v74 = tick
+	3.	v74 = v74(v75)
+	4.	v48 = v74 -- set upval
+	5.	v74 = true
+	6.	v45 = v74 -- set upval
+	7.	v74 = v49 -- get upval
+	8.	
+	10.	v74:Fire()
+	11.	v74 = v39 -- get upval
+	12.	local v76 = p11
+	13.	if not v76 then goto #16
+	14.	local v77 = v13 -- get upval
+	15.	v76 = v77.ChatDefaultFadeDuration
+					end
+	17.	
+	19.	v74:FadeOutBackground(v76)
+	20.	v74 = v39 -- get upval
+	21.	
+	23.	v74 = v74:GetCurrentChannel()
+	24.	if v74 then goto #33
+	25.	v76 = v41 -- get upval
+	26.	local v75 = v76.Scroller
+	28.	v76 = false
+	29.	v75.ScrollingEnabled = v76
+	31.	v76 = 0
+	32.	v75.ScrollBarThickness = v76
+					end
+	34.	return
+end
+[NEWCLOSURE] v125 = DoBackgroundFadeOut
+446.	CAPTURE REF R48
+
+447.	CAPTURE REF R45
+
+448.	CAPTURE VAL R49
+
+449.	CAPTURE VAL R39
+
+450.	CAPTURE VAL R13
+
+451.	CAPTURE VAL R41
+
+452.	DoBackgroundFadeOut = v137
+454.	-- V nested upvalues[0] = v47
+-- V nested upvalues[1] = v46
+-- V nested upvalues[2] = v49
+-- V nested upvalues[3] = v39
+-- V nested upvalues[4] = v13
+local function DoTextFadeIn(p12) -- [line 274]
+	1.	local v86 = tick
+	3.	v86 = v86(v87)
+	4.	v47 = v86 -- set upval
+	5.	v86 = false
+	6.	v46 = v86 -- set upval
+	7.	v86 = v49 -- get upval
+	8.	
+	10.	v86:Fire()
+	11.	v86 = v39 -- get upval
+	12.	local v89 = p12
+	13.	if not v89 then goto #16
+	14.	local v90 = v13 -- get upval
+	15.	v89 = v90.ChatDefaultFadeDuration
+					end
+	17.	local v88 = v89 * 0
+	18.	
+	20.	v86:FadeInText(v88)
+	21.	return
+end
+[NEWCLOSURE] v137 = DoTextFadeIn
+455.	CAPTURE REF R47
+
+456.	CAPTURE REF R46
+
+457.	CAPTURE VAL R49
+
+458.	CAPTURE VAL R39
+
+459.	CAPTURE VAL R13
+
+460.	DoTextFadeIn = v145
+462.	-- V nested upvalues[0] = v47
+-- V nested upvalues[1] = v46
+-- V nested upvalues[2] = v49
+-- V nested upvalues[3] = v39
+-- V nested upvalues[4] = v13
+local function DoTextFadeOut(p13) -- [line 281]
+	1.	local v94 = tick
+	3.	v94 = v94(v95)
+	4.	v47 = v94 -- set upval
+	5.	v94 = true
+	6.	v46 = v94 -- set upval
+	7.	v94 = v49 -- get upval
+	8.	
+	10.	v94:Fire()
+	11.	v94 = v39 -- get upval
+	12.	local v96 = p13
+	13.	if not v96 then goto #16
+	14.	local v97 = v13 -- get upval
+	15.	v96 = v97.ChatDefaultFadeDuration
+					end
+	17.	
+	19.	v94:FadeOutText(v96)
+	20.	return
+end
+[NEWCLOSURE] v145 = DoTextFadeOut
+463.	CAPTURE REF R47
+
+464.	CAPTURE REF R46
+
+465.	CAPTURE VAL R49
+
+466.	CAPTURE VAL R39
+
+467.	CAPTURE VAL R13
+
+468.	DoTextFadeOut = v152
+470.	-- V nested upvalues[0] = v113
+local function DoFadeInFromNewInformation() -- [line 288]
+	1.	local v101 = DoTextFadeIn
+	3.	v101(v102)
+	4.	local v102 = v113 -- get upval
+	5.	v101 = v102.ChatShouldFadeInFromNewInformation
+	7.	if v101 then goto #10
+	8.	v101 = DoBackgroundFadeIn
+	10.	v101(v102) -- referenced by #7
+					end
+	11.	return
+end
+[DUPCLOSURE] v152 = DoFadeInFromNewInformation
+471.	CAPTURE VAL R13
+
+472.	DoFadeInFromNewInformation = v156
+474.	local function InstantFadeIn() -- [line 295]
+	1.	local v105 = DoBackgroundFadeIn
+	3.	local v106 = 0
+	4.	v105(v106)
+	5.	v105 = DoTextFadeIn
+	7.	v106 = 0
+	8.	v105(v106)
+	9.	return
+end
+[DUPCLOSURE] v156 = InstantFadeIn
+475.	InstantFadeIn = v160
+477.	local function InstantFadeOut() -- [line 300]
+	1.	local v109 = DoBackgroundFadeOut
+	3.	local v110 = 0
+	4.	v109(v110)
+	5.	v109 = DoTextFadeOut
+	7.	v110 = 0
+	8.	v109(v110)
+	9.	return
+end
+[DUPCLOSURE] v160 = InstantFadeOut
+478.	InstantFadeOut = v164
+480.	v164 = nil
+481.	-- V nested upvalues[0] = v52
+-- V nested upvalues[1] = v50
+-- V nested upvalues[2] = v43
+local function UpdateFadingForMouseState(p14) -- [line 306]
+	1.	v52 = p14 -- set upval
+	2.	local v113 = v50 -- get upval
+	3.	
+	5.	v113:Fire()
+	6.	v113 = v43 -- get upval
+	7.	
+	9.	v113 = v113:IsFocused()
+	10.	if v113 then goto #11
+	11.	return -- referenced by #10
+					end
+	12.	if p14 then goto #19
+	13.	v113 = DoBackgroundFadeIn
+	15.	v113(v114)
+	16.	v113 = DoTextFadeIn
+	18.	v113(v114)
+	19.	return -- referenced by #12
+					end
+	20.	v113 = DoBackgroundFadeIn
+	22.	v113(v114)
+	23.	return
+end
+[NEWCLOSURE] v165 = UpdateFadingForMouseState
+482.	CAPTURE REF R52
+
+483.	CAPTURE VAL R50
+
+484.	CAPTURE VAL R43
+
+485.	UpdateFadingForMouseState = v170
+487.	local v170 = spawn
+489.	-- V nested upvalues[0] = v23
+-- V nested upvalues[1] = v52
+-- V nested upvalues[2] = v43
+-- V nested upvalues[3] = v50
+-- V nested upvalues[4] = v51
+-- V nested upvalues[5] = v45
+-- V nested upvalues[6] = v48
+-- V nested upvalues[7] = v13
+-- V nested upvalues[8] = v46
+-- V nested upvalues[9] = v47
+-- V nested upvalues[10] = v49
+[NEWCLOSURE] v171 = function() -- [line 322]
+	1.	local v119 = v23 -- get upval
+	2.	local v118 = v119.RenderStepped
+	4.	
+	6.	v118:wait()
+	7.	v118 = v52 -- get upval
+	8.	if not v118 then goto #13
+	9.	v118 = v43 -- get upval
+	10.	
+	12.	v118 = v118:IsFocused()
+	13.	if v118 then goto #33 -- referenced by #8
+					end
+	14.	v118 = v52 -- get upval
+	15.	if v118 then goto #21
+	16.	v119 = v50 -- get upval
+	17.	v118 = v119.Event
+	19.	
+	21.	v118:wait() -- referenced by #15
+					end
+	22.	v118 = v43 -- get upval
+	23.	
+	25.	v118 = v118:IsFocused()
+	26.	if v118 then goto #32
+	27.	v119 = v51 -- get upval
+	28.	v118 = v119.Event
+	30.	
+	32.	v118:wait() -- referenced by #26
+					end
+	33.	go back to #7 -- might be a repeating loop -- referenced by #13
+					end
+	34.	v118 = v45 -- get upval
+	35.	if not v118 then goto #49
+	36.	v119 = tick
+	38.	v119 = v119(v120)
+	39.	local v120 = v48 -- get upval
+	40.	v118 = v119 - v120
+	41.	v120 = v13 -- get upval
+	42.	v119 = v120.ChatWindowBackgroundFadeOutTime
+	44.	if v118 > v119 then goto #71
+	46.	v119 = DoBackgroundFadeOut
+	48.	v119(v120)
+	49.	goto #71 -- referenced by #35
+					else
+	50.	v118 = v46 -- get upval
+	51.	if not v118 then goto #65
+	52.	v119 = tick
+	54.	v119 = v119(v120)
+	55.	v120 = v47 -- get upval
+	56.	v118 = v119 - v120
+	57.	v120 = v13 -- get upval
+	58.	v119 = v120.ChatWindowTextFadeOutTime
+	60.	if v118 > v119 then goto #71
+	62.	v119 = DoTextFadeOut
+	64.	v119(v120)
+	65.	goto #71 -- referenced by #51
+					else
+	66.	v119 = v49 -- get upval
+	67.	v118 = v119.Event
+	69.	
+	71.	v118:wait() -- referenced by #44, #49, #60, #65
+					end
+					end
+					end
+					end
+	72.	go back to #1 -- might be a repeating loop
+	73.	return
+end
+
+490.	CAPTURE VAL R23
+
+491.	CAPTURE REF R52
+
+492.	CAPTURE VAL R43
+
+493.	CAPTURE VAL R50
+
+494.	CAPTURE VAL R51
+
+495.	CAPTURE REF R45
+
+496.	CAPTURE REF R48
+
+497.	CAPTURE VAL R13
+
+498.	CAPTURE REF R46
+
+499.	CAPTURE REF R47
+
+500.	CAPTURE VAL R49
+
+501.	v196(v197)
+502.	-- V nested upvalues[0] = v156
+-- V nested upvalues[1] = v167
+local function getClassicChatEnabled() -- [line 355]
+	1.	local v145 = v156 -- get upval
+	2.	local v144 = v145.ClassicChatEnabled
+	4.	if v144 ~= nil then goto #9
+	6.	v145 = v156 -- get upval
+	7.	v144 = v145.ClassicChatEnabled
+	9.	return v144 -- referenced by #4
+					end
+	10.	v145 = v167 -- get upval
+	11.	v144 = v145.ClassicChat
+	13.	return v144
+end
+[DUPCLOSURE] v196 = getClassicChatEnabled
+503.	CAPTURE VAL R13
+
+504.	CAPTURE VAL R24
+
+505.	getClassicChatEnabled = v202
+507.	-- V nested upvalues[0] = v162
+-- V nested upvalues[1] = v173
+local function getBubbleChatEnabled() -- [line 362]
+	1.	local v151 = v162 -- get upval
+	2.	local v150 = v151.BubbleChatEnabled
+	4.	if v150 ~= nil then goto #9
+	6.	v151 = v162 -- get upval
+	7.	v150 = v151.BubbleChatEnabled
+	9.	return v150 -- referenced by #4
+					end
+	10.	v151 = v173 -- get upval
+	11.	v150 = v151.BubbleChat
+	13.	return v150
+end
+[DUPCLOSURE] v202 = getBubbleChatEnabled
+508.	CAPTURE VAL R13
+
+509.	CAPTURE VAL R24
+
+510.	getBubbleChatEnabled = v208
+512.	local function bubbleChatOnly() -- [line 369]
+	1.	local v157 = getClassicChatEnabled
+	3.	v157 = v157(v158)
+	4.	local v156 = not v157
+	5.	if v156 then goto #8
+	6.	v156 = getBubbleChatEnabled
+	8.	v156 = v156(v157) -- referenced by #5
+					end
+	9.	return v156
+end
+[DUPCLOSURE] v208 = bubbleChatOnly
+513.	bubbleChatOnly = v211
+515.	-- V nested upvalues[0] = v0
+-- V nested upvalues[1] = v13
+-- V nested upvalues[2] = v39
+-- V nested upvalues[3] = v52
+local function UpdateMousePosition(p15) -- [line 373]
+	1.	local v160 = v0 -- get upval
+	2.	local v159 = v160.Visible
+	4.	if v159 then goto #16
+	5.	v160 = v0 -- get upval
+	6.	v159 = v160.IsCoreGuiEnabled
+	8.	if v159 then goto #16
+	9.	v160 = v0 -- get upval
+	10.	v159 = v160.TopbarEnabled
+	12.	if not v159 then goto #17
+	13.	v160 = v13 -- get upval
+	14.	v159 = v160.ChatOnWithTopBarOff
+	16.	if not v159 then goto #17 -- referenced by #4, #8
+					end
+					end
+	17.	return -- referenced by #12, #16
+					end
+					end
+	18.	v159 = bubbleChatOnly
+	20.	v159 = v159(v160)
+	21.	if v159 then goto #22
+	22.	return -- referenced by #21
+					end
+	23.	local v161 = v39 -- get upval
+	24.	v160 = v161.GuiObject
+	26.	v159 = v160.AbsolutePosition
+	28.	local v162 = v39 -- get upval
+	29.	v161 = v162.GuiObject
+	31.	v160 = v161.AbsoluteSize
+	33.	v161 = CheckIfPointIsInSquare
+	35.	v162 = p15
+	36.	local v163 = v159
+	37.	local v164 = v159 + v160
+	38.	v161 = v161(v162, v163, v164)
+	39.	v162 = v52 -- get upval
+	40.	if v161 ~= v162 then goto #45
+	42.	v162 = UpdateFadingForMouseState
+	44.	v163 = v161
+	45.	v162(v163) -- referenced by #40
+					end
+	46.	return
+end
+[NEWCLOSURE] v211 = UpdateMousePosition
+516.	CAPTURE VAL R0
+
+517.	CAPTURE VAL R13
+
+518.	CAPTURE VAL R39
+
+519.	CAPTURE REF R52
+
+520.	UpdateMousePosition = v233
+522.	v233 = v202.InputChanged
+524.	[DUPCLOSURE] v235 = function(p16, p17) -- [line 390]
+	1.	local v181 = p16.UserInputType
+	3.	local v182 = Enum.UserInputType.MouseMovement
+	5.	if v181 == v182 then goto #21
+	7.	v181 = Vector2.new
+	9.	local v183 = p16.Position
+	11.	v182 = v183.X
+	13.	local v184 = p16.Position
+	15.	v183 = v184.Y
+	17.	v181 = v181(v182, v183)
+	18.	v182 = UpdateMousePosition
+	20.	v183 = v181
+	21.	v182(v183) -- referenced by #5
+					end
+	22.	return
+end
+
+525.	
+527.	v242:connect(v244)
+528.	v242 = v211.TouchTap
+530.	[DUPCLOSURE] v244 = function(p18, p19) -- [line 397]
+	1.	local v190 = UpdateMousePosition
+	3.	local v191 = p18[-1]
+	4.	v190(v191)
+	5.	return
+end
+
+531.	
+533.	v244:connect(v246)
+534.	v244 = v213.TouchMoved
+536.	[DUPCLOSURE] v246 = function(p20, p21) -- [line 401]
+	1.	local v192 = Vector2.new
+	3.	local v194 = p20.Position
+	5.	local v193 = v194.X
+	7.	local v195 = p20.Position
+	9.	v194 = v195.Y
+	11.	v192 = v192(v193, v194)
+	12.	v193 = UpdateMousePosition
+	14.	v194 = v192
+	15.	v193(v194)
+	16.	return
+end
+
+537.	
+539.	v251:connect(v253)
+540.	v251 = v220.Changed
+542.	-- V nested upvalues[0] = v220
+-- V nested upvalues[1] = v237
+-- V nested upvalues[2] = v227
+[DUPCLOSURE] v253 = function(p22) -- [line 406]
+	1.	if p22 == "MouseBehavior" then goto #34
+	3.	local v200 = v220 -- get upval
+	4.	local v199 = v200.MouseBehavior
+	6.	v200 = Enum.MouseBehavior.LockCenter
+	8.	if v199 == v200 then goto #34
+	10.	local v201 = v237 -- get upval
+	11.	v200 = v201.GuiObject
+	13.	v199 = v200.AbsolutePosition
+	15.	local v202 = v237 -- get upval
+	16.	v201 = v202.GuiObject
+	18.	v200 = v201.AbsoluteSize
+	20.	v202 = v227 -- get upval
+	21.	v201 = v202.AbsoluteSize
+	23.	v202 = CheckIfPointIsInSquare
+	25.	local v203 = v201 / 2
+	26.	local v204 = v199
+	27.	local v205 = v199 + v200
+	28.	v202 = v202(v203, v204, v205)
+	29.	if v202 then goto #34
+	30.	v203 = v220 -- get upval
+	31.	v204 = Enum.MouseBehavior.Default
+	33.	v203.MouseBehavior = v204
+					end
+					end
+					end
+	35.	return
+end
+
+543.	CAPTURE VAL R22
+
+544.	CAPTURE VAL R39
+
+545.	CAPTURE VAL R29
+
+546.	
+548.	v268:connect(v270)
+549.	v268 = UpdateFadingForMouseState
+551.	local v269 = true
+552.	v268(v269)
+553.	v268 = UpdateFadingForMouseState
+555.	v269 = false
+556.	v268(v269)
+557.	v268 = {} -- this array is empty
+559.	local function Signal() -- [line 431]
+	1.	local v216 = {} -- this array is empty
+	3.	local v217 = Instance.new
+	5.	local v218 = "BindableEvent"
+	6.	v217 = v217(v218)
+	7.	v218 = nil
+	8.	local v219 = nil
+	9.		-- V nested upvalues[0] = v3
+	-- V nested upvalues[1] = v4
+	-- V nested upvalues[2] = v2
+	local function fire(p23, ...) -- [line 439]
+		1.	
+		2.	local v217 = {} -- this array is empty
+		4.	local v218 = ...
+		5.	v217[1] = ...
+		7.	v3 = v217 -- set upval
+		8.	v218 = "#"
+		9.	FASTCALL[select](v218)
+		10.	v217 = select
+		12.	local v219 = ...
+		13.	v217 = v217()
+		14.	v4 = v217 -- set upval
+		15.	v217 = v2 -- get upval
+		16.	
+		18.	v217:Fire()
+		19.	return
+	end
+	[NEWCLOSURE] v220 = fire
+	10.	CAPTURE REF R2
+
+	11.	CAPTURE REF R3
+
+	12.	CAPTURE VAL R1
+
+	13.	v222.fire = v226
+	15.		-- V nested upvalues[0] = v2
+	-- V nested upvalues[1] = v3
+	-- V nested upvalues[2] = v4
+	local function connect(p24, p25) -- [line 445]
+		1.	if not p25 then goto #6
+		2.	local v223 = error
+		4.	local v224 = "connect(nil)"
+		5.	local v225 = 2
+		6.	v223(v224, v225) -- referenced by #1
+						end
+		7.	v224 = v2 -- get upval
+		8.	v223 = v224.Event
+		10.			-- V nested upvalues[0] = p25
+		-- V nested upvalues[1] = upvalues[1]
+		-- V nested upvalues[2] = upvalues[2]
+		[NEWCLOSURE] v225 = function() -- [line 447]
+			1.	local v224 = p25 -- get upval
+			2.	local v226 = upvalues[1] -- get upval
+			3.	local v227 = 1
+			4.	local v228 = upvalues[2] -- get upval
+			5.	FASTCALL[unpack]()
+			6.	local v225 = unpack
+			8.	v224 = v225(v226, v227, v228)
+			9.	v224()
+			10.	return
+		end
+
+		11.	CAPTURE VAL R1
+
+		12.	CAPTURE UPVAL U1
+
+		13.	CAPTURE UPVAL U2
+
+		14.	
+		16.	p25 = v228:connect(v230)
+		17.	return v228, ...
+	end
+	[NEWCLOSURE] v231 = connect
+	16.	CAPTURE VAL R1
+
+	17.	CAPTURE REF R2
+
+	18.	CAPTURE REF R3
+
+	19.	v232.connect = v236
+	21.		-- V nested upvalues[0] = v2
+	-- V nested upvalues[1] = v3
+	-- V nested upvalues[2] = v4
+	local function wait(p26) -- [line 452]
+		1.	local v234 = v2 -- get upval
+		2.	local v233 = v234.Event
+		4.	
+		6.	v233:wait()
+		7.	v234 = v3 -- get upval
+		8.	FASTCALL[assert](v234, "Missing arg data, likely due to :TweenSize/Position corrupting threadrefs.")
+		10.	local v235 = "Missing arg data, likely due to :TweenSize/Position corrupting threadrefs."
+		11.	v233 = assert
+		13.	v233(v234, v235)
+		14.	v234 = v3 -- get upval
+		15.	v235 = 1
+		16.	local v236 = v4 -- get upval
+		17.	FASTCALL[unpack]()
+		18.	v233 = unpack
+		20.	p26 = v233(v234, v235, v236)
+		21.	return v233, ...
+	end
+	[NEWCLOSURE] v236 = wait
+	22.	CAPTURE VAL R1
+
+	23.	CAPTURE REF R2
+
+	24.	CAPTURE REF R3
+
+	25.	v241.wait = v245
+	27.	[CLOSEUPVALS]: clear captures from back until: 2
+	28.	return v241
+end
+[DUPCLOSURE] v294 = Signal
+560.	v298.Signal = v299
+562.	-- V nested upvalues[0] = v284
+-- V nested upvalues[1] = v245
+local function SetVisibility(p27) -- [line 463]
+	1.	local v246 = v284 -- get upval
+	2.	local v248 = p27
+	3.	
+	5.	v246:SetVisible(v248)
+	6.	local v247 = v245 -- get upval
+	7.	v246 = v247.VisibilityStateChanged
+	9.	v248 = p27
+	10.	
+	12.	v246:fire(v248)
+	13.	v246 = v245 -- get upval
+	14.	v246.Visible = p27
+	16.	v247 = v245 -- get upval
+	17.	v246 = v247.IsCoreGuiEnabled
+	19.	if v246 then goto #27
+	20.	if p27 then goto #24
+	21.	v246 = InstantFadeIn
+	23.	v246(v247)
+	24.	return -- referenced by #20
+					end
+	25.	v246 = InstantFadeOut
+	27.	v246(v247) -- referenced by #19
+					end
+	28.	return
+end
+[DUPCLOSURE] v299 = SetVisibility
+563.	CAPTURE VAL R39
+
+564.	CAPTURE VAL R0
+
+565.	SetVisibility = v309
+567.	v309 = nil
+568.	local v310 = true
+569.	v255.TopbarEnabled = v310
+571.	v310 = 0
+572.	v255.MessageCount = v310
+574.	v310 = true
+575.	v255.Visible = v310
+577.	v310 = true
+578.	v255.IsCoreGuiEnabled = v310
+580.	-- V nested upvalues[0] = v294
+local function ToggleVisibility(p28) -- [line 485]
+	1.	local v256 = SetVisibility
+	3.	local v258 = v294 -- get upval
+	4.	
+	6.	v258 = v258:GetVisible()
+	7.	local v257 = not v258
+	8.	v256(v257)
+	9.	return
+end
+[DUPCLOSURE] v310 = ToggleVisibility
+581.	CAPTURE VAL R39
+
+582.	v258.ToggleVisibility = v313
+584.	-- V nested upvalues[0] = v297
+local function SetVisible(p29, p30) -- [line 489]
+	1.	local v259 = v297 -- get upval
+	2.	
+	4.	v259 = v259:GetVisible()
+	5.	if v259 ~= p30 then goto #10
+	7.	v259 = SetVisibility
+	9.	local v260 = p30
+	10.	v259(v260) -- referenced by #5
+					end
+	11.	return
+end
+[DUPCLOSURE] v313 = SetVisible
+585.	CAPTURE VAL R39
+
+586.	v261.SetVisible = v316
+588.	-- V nested upvalues[0] = v304
+local function FocusChatBar(p31) -- [line 495]
+	1.	local v262 = v304 -- get upval
+	2.	
+	4.	v262:CaptureFocus()
+	5.	return
+end
+[DUPCLOSURE] v316 = FocusChatBar
+589.	CAPTURE VAL R43
+
+590.	v262.FocusChatBar = v317
+592.	-- V nested upvalues[0] = v305
+local function EnterWhisperState(p32, p33) -- [line 499]
+	1.	local v263 = v305 -- get upval
+	2.	local v265 = p33
+	3.	
+	5.	v263:EnterWhisperState(v265)
+	6.	return
+end
+[DUPCLOSURE] v317 = EnterWhisperState
+593.	CAPTURE VAL R43
+
+594.	v264.EnterWhisperState = v319
+596.	-- V nested upvalues[0] = v303
+local function GetVisibility(p34) -- [line 503]
+	1.	local v265 = v303 -- get upval
+	2.	
+	4.	p34 = v265:GetVisible()
+	5.	return v265, ...
+end
+[DUPCLOSURE] v319 = GetVisibility
+597.	CAPTURE VAL R39
+
+598.	v265.GetVisibility = v320
+600.	local function GetMessageCount(p35) -- [line 507]
+	1.	local v266 = p35.MessageCount
+	3.	return v266
+end
+[DUPCLOSURE] v320 = GetMessageCount
+601.	v266.GetMessageCount = v321
+603.	local function TopbarEnabledChanged(p36, p37) -- [line 511]
+	1.	p36.TopbarEnabled = p37
+	3.	local v267 = p36.CoreGuiEnabled
+	5.	local v269 = game
+	7.	local v271 = "StarterGui"
+	8.	
+	10.	v269 = v269:GetService(v271)
+	11.	v271 = Enum.CoreGuiType.Chat
+	13.	
+	15.	v268 = v269:GetCoreGuiEnabled(v271)
+	16.	
+	18.	v267:fire()
+	19.	return
+end
+[DUPCLOSURE] v321 = TopbarEnabledChanged
+604.	v270.TopbarEnabledChanged = v325
+606.	-- V nested upvalues[0] = v313
+local function IsFocused(p38, p39) -- [line 516]
+	1.	local v271 = v313 -- get upval
+	2.	
+	4.	p39 = v271:IsFocused()
+	5.	return v271, ...
+end
+[DUPCLOSURE] v325 = IsFocused
+607.	CAPTURE VAL R43
+
+608.	v271.IsFocused = v326
+610.	v326 = v324.Signal
+612.	v326 = v326(v327)
+613.	v271.ChatBarFocusChanged = v326
+615.	v326 = v324.Signal
+617.	v326 = v326(v327)
+618.	v271.VisibilityStateChanged = v326
+620.	v326 = v324.Signal
+622.	v326 = v326(v327)
+623.	v271.MessagesChanged = v326
+625.	v326 = v324.Signal
+627.	v326 = v326(v327)
+628.	v271.MessagePosted = v326
+630.	v326 = v324.Signal
+632.	v326 = v326(v327)
+633.	v271.CoreGuiEnabled = v326
+635.	v326 = v324.Signal
+637.	v326 = v326(v327)
+638.	v271.ChatMakeSystemMessageEvent = v326
+640.	v326 = v324.Signal
+642.	v326 = v326(v327)
+643.	v271.ChatWindowPositionEvent = v326
+645.	v326 = v324.Signal
+647.	v326 = v326(v327)
+648.	v271.ChatWindowSizeEvent = v326
+650.	v326 = v324.Signal
+652.	v326 = v326(v327)
+653.	v271.ChatBarDisabledEvent = v326
+655.	-- V nested upvalues[0] = v310
+local function fChatWindowPosition(p40) -- [line 534]
+	1.	local v274 = v310 -- get upval
+	2.	local v273 = v274.GuiObject
+	4.	local v272 = v273.Position
+	6.	return v272
+end
+[DUPCLOSURE] v326 = fChatWindowPosition
+656.	CAPTURE VAL R39
+
+657.	v274.fChatWindowPosition = v329
+659.	-- V nested upvalues[0] = v313
+local function fChatWindowSize(p41) -- [line 538]
+	1.	local v277 = v313 -- get upval
+	2.	local v276 = v277.GuiObject
+	4.	local v275 = v276.Size
+	6.	return v275
+end
+[DUPCLOSURE] v329 = fChatWindowSize
+660.	CAPTURE VAL R39
+
+661.	v277.fChatWindowSize = v332
+663.	-- V nested upvalues[0] = v320
+local function fChatBarDisabled(p42) -- [line 542]
+	1.	local v279 = v320 -- get upval
+	2.	
+	4.	v279 = v279:GetEnabled()
+	5.	local v278 = not v279
+	6.	return v278
+end
+[DUPCLOSURE] v332 = fChatBarDisabled
+664.	CAPTURE VAL R43
+
+665.	v279.fChatBarDisabled = v334
+667.	-- V nested upvalues[0] = v26
+-- V nested upvalues[1] = v54
+local function SpecialKeyPressed(p43, p44, p45) -- [line 546]
+	1.	local v280 = Enum.SpecialKey.ChatHotkey
+	3.	if p44 == v280 then goto #8
+	5.	v280 = v26 -- get upval
+	6.	if v280 then goto #8
+	7.	v280 = v54 -- get upval
+	8.	v280(v281) -- referenced by #3, #6
+					end
+					end
+	9.	return
+end
+[NEWCLOSURE] v334 = SpecialKeyPressed
+668.	CAPTURE REF R26
+
+669.	CAPTURE REF R54
+
+670.	v282.SpecialKeyPressed = v337
+672.	v337 = v282.CoreGuiEnabled
+674.	-- V nested upvalues[0] = v282
+-- V nested upvalues[1] = v295
+-- V nested upvalues[2] = v321
+-- V nested upvalues[3] = v325
+[DUPCLOSURE] v339 = function(p46) -- [line 555]
+	1.	local v283 = v282 -- get upval
+	2.	v283.IsCoreGuiEnabled = p46
+	4.	v283 = p46
+	5.	if v283 then goto #12
+	6.	local v284 = v282 -- get upval
+	7.	v283 = v284.TopbarEnabled
+	9.	if not v283 then goto #12
+	10.	v284 = v295 -- get upval
+	11.	v283 = v284.ChatOnWithTopBarOff
+					end
+					end
+	13.	p46 = v283
+	14.	v283 = v321 -- get upval
+	15.	local v285 = p46
+	16.	
+	18.	v283:SetCoreGuiEnabled(v285)
+	19.	if not p46 then goto #27
+	20.	v283 = v325 -- get upval
+	21.	
+	23.	v283:ReleaseFocus()
+	24.	v283 = InstantFadeOut
+	26.	v283(v284)
+	27.	return -- referenced by #19
+					end
+	28.	v283 = InstantFadeIn
+	30.	v283(v284)
+	31.	return
+end
+
+675.	CAPTURE VAL R0
+
+676.	CAPTURE VAL R13
+
+677.	CAPTURE VAL R39
+
+678.	CAPTURE VAL R43
+
+679.	
+681.	v349:connect(v351)
+682.	local function trimTrailingSpaces(p47) -- [line 570]
+	1.	local v295 = #p47
+	2.	local v296 = 0
+	3.	if v295 > v296 then goto #14
+	5.	local v298 = "^%s"
+	6.	local v299 = v295
+	7.	
+	9.	v296 = p47:find(v298, v299)
+	10.	if v296 then goto #14
+	11.	v295 = v295 - 1
+	12.	goto #13
+	13.	goto #14 -- referenced by #12
+					else
+	14.	go back to #2 -- might be a repeating loop -- referenced by #3, #10, #13
+					end
+					end
+					end
+	15.	v298 = 1
+	16.	v299 = v295
+	17.	
+	19.	v295 = p47:sub(v298, v299)
+	20.	return v296, ...
+end
+[DUPCLOSURE] v349 = trimTrailingSpaces
+683.	trimTrailingSpaces = v356
+685.	v356 = v301.ChatMakeSystemMessageEvent
+687.	-- V nested upvalues[0] = v30
+-- V nested upvalues[1] = v13
+-- V nested upvalues[2] = v39
+-- V nested upvalues[3] = v12
+-- V nested upvalues[4] = v40
+-- V nested upvalues[5] = v0
+[NEWCLOSURE] v358 = function(p48) -- [line 583]
+	1.	local v302 = p48.Text
+	3.	if v302 then goto #103
+	4.	local v303 = p48.Text
+	6.	FASTCALL[type](v303)
+	7.	v302 = type
+	9.	v302 = v302(v303)
+	10.	if v302 == "string" then goto #103
+	12.	v302 = v30 -- get upval
+	13.	if not v302 then goto #17
+	14.	v302 = wait
+	16.	v302(v303)
+	17.	go back to #12 -- might be a repeating loop -- referenced by #13
+					end
+	18.	v303 = v13 -- get upval
+	19.	v302 = v303.GeneralChannelName
+	21.	v303 = v39 -- get upval
+	22.	local v305 = v302
+	23.	
+	25.	v303 = v303:GetChannel(v305)
+	26.	if v303 then goto #103
+	27.	local v304 = {"ID", "FromSpeaker", "SpeakerUserId", "OriginalChannel", "IsFiltered", "MessageLength", "MessageLengthUtf8", "Message", "MessageType", "Time", "ExtraData"}
+	28.	v305 = -1
+	29.	v304.ID = v305
+	31.	v305 = nil
+	32.	v304.FromSpeaker = v305
+	34.	v305 = 0
+	35.	v304.SpeakerUserId = v305
+	37.	v304.OriginalChannel = v302
+	39.	v305 = true
+	40.	v304.IsFiltered = v305
+	42.	local v306 = p48.Text
+	44.	FASTCALL[string.len](v306)
+	45.	v305 = string.len
+	47.	v305 = v305(v306)
+	48.	v304.MessageLength = v305
+	50.	v305 = utf8.len
+	52.	v306 = utf8.nfcnormalize
+	54.	local v307 = p48.Text
+	56.	v305 = v306(v307)
+	57.	v305 = v305()
+	58.	v304.MessageLengthUtf8 = v305
+	60.	v305 = trimTrailingSpaces
+	62.	v306 = p48.Text
+	64.	v305 = v305(v306)
+	65.	v304.Message = v305
+	67.	v306 = v12 -- get upval
+	68.	v305 = v306.MessageTypeSetCore
+	70.	v304.MessageType = v305
+	72.	v305 = os.time
+	74.	v305 = v305(v306)
+	75.	v304.Time = v305
+	77.	v304.ExtraData = p48
+	79.	v307 = v304
+	80.	
+	82.	v303:AddMessageToChannel(v307)
+	83.	v305 = v40 -- get upval
+	84.	v307 = v302
+	85.	
+	87.	v305:UpdateMessagePostedInChannel(v307)
+	88.	v305 = v0 -- get upval
+	89.	local v308 = v0 -- get upval
+	90.	v307 = v308.MessageCount
+	92.	v306 = v307 + 1
+	93.	v305.MessageCount = v306
+	95.	v306 = v0 -- get upval
+	96.	v305 = v306.MessagesChanged
+	98.	v308 = v0 -- get upval
+	99.	v307 = v308.MessageCount
+	101.	
+	103.	v305:fire(v307) -- referenced by #3, #10, #26
+					end
+					end
+					end
+	104.	return
+end
+
+688.	CAPTURE REF R30
+
+689.	CAPTURE VAL R13
+
+690.	CAPTURE VAL R39
+
+691.	CAPTURE VAL R12
+
+692.	CAPTURE VAL R40
+
+693.	CAPTURE VAL R0
+
+694.	
+696.	v391:connect(v393)
+697.	v391 = v336.ChatBarDisabledEvent
+699.	-- V nested upvalues[0] = v26
+-- V nested upvalues[1] = v43
+[NEWCLOSURE] v393 = function(p49) -- [line 613]
+	1.	local v337 = v26 -- get upval
+	2.	if v337 then goto #12
+	3.	v337 = v43 -- get upval
+	4.	local v339 = not p49
+	5.	
+	7.	v337:SetEnabled(v339)
+	8.	if p49 then goto #12
+	9.	v337 = v43 -- get upval
+	10.	
+	12.	v337:ReleaseFocus() -- referenced by #2, #8
+					end
+					end
+	13.	return
+end
+
+700.	CAPTURE REF R26
+
+701.	CAPTURE VAL R43
+
+702.	
+704.	v395:connect(v397)
+705.	v395 = v340.ChatWindowSizeEvent
+707.	-- V nested upvalues[0] = v379
+[DUPCLOSURE] v397 = function(p50) -- [line 622]
+	1.	local v342 = v379 -- get upval
+	2.	local v341 = v342.GuiObject
+	4.	v341.Size = p50
+	6.	return
+end
+
+708.	CAPTURE VAL R39
+
+709.	
+711.	v397:connect(v399)
+712.	v397 = v342.ChatWindowPositionEvent
+714.	-- V nested upvalues[0] = v381
+[DUPCLOSURE] v399 = function(p51) -- [line 626]
+	1.	local v344 = v381 -- get upval
+	2.	local v343 = v344.GuiObject
+	4.	v343.Position = p51
+	6.	return
+end
+
+715.	CAPTURE VAL R39
+
+716.	
+718.	v399:connect(v401)
+719.	-- V nested upvalues[0] = v383
+-- V nested upvalues[1] = v387
+-- V nested upvalues[2] = v344
+local function DoChatBarFocus() -- [line 634]
+	1.	local v345 = v383 -- get upval
+	2.	
+	4.	v345 = v345:GetCoreGuiEnabled()
+	5.	if not v345 then goto #6
+	6.	return -- referenced by #5
+					end
+	7.	v345 = v387 -- get upval
+	8.	
+	10.	v345 = v345:GetEnabled()
+	11.	if not v345 then goto #12
+	12.	return -- referenced by #11
+					end
+	13.	v345 = v387 -- get upval
+	14.	
+	16.	v345 = v345:IsFocused()
+	17.	if not v345 then goto #41
+	18.	v345 = v387 -- get upval
+	19.	
+	21.	v345 = v345:GetVisible()
+	22.	if v345 then goto #41
+	23.	v345 = v344 -- get upval
+	24.	local v347 = true
+	25.	
+	27.	v345:SetVisible(v347)
+	28.	v345 = InstantFadeIn
+	30.	v345(v346)
+	31.	v345 = v387 -- get upval
+	32.	
+	34.	v345:CaptureFocus()
+	35.	local v346 = v344 -- get upval
+	36.	v345 = v346.ChatBarFocusChanged
+	38.	v347 = true
+	39.	
+	41.	v345:fire(v347) -- referenced by #17, #22
+					end
+					end
+	42.	return
+end
+[DUPCLOSURE] v398 = DoChatBarFocus
+720.	CAPTURE VAL R39
+
+721.	CAPTURE VAL R43
+
+722.	CAPTURE VAL R0
+
+723.	v410 = v406.Event
+725.	-- V nested upvalues[0] = v355
+[DUPCLOSURE] v412 = function(p52) -- [line 646]
+	1.	local v357 = v355 -- get upval
+	2.	local v356 = v357.ChatBarFocusChanged
+	4.	local v358 = p52
+	5.	
+	7.	v356:fire(v358)
+	8.	return
+end
+
+726.	CAPTURE VAL R0
+
+727.	
+729.	v413:connect(v415)
+730.	-- V nested upvalues[0] = v397
+local function DoSwitchCurrentChannel(p53) -- [line 650]
+	1.	local v359 = v397 -- get upval
+	2.	local v361 = p53
+	3.	
+	5.	v359 = v359:GetChannel(v361)
+	6.	if v359 then goto #11
+	7.	v359 = v397 -- get upval
+	8.	v361 = p53
+	9.	
+	11.	v359:SwitchCurrentChannel(v361) -- referenced by #6
+					end
+	12.	return
+end
+[DUPCLOSURE] v413 = DoSwitchCurrentChannel
+731.	CAPTURE VAL R39
+
+732.	DoSwitchCurrentChannel = v417
+734.	-- V nested upvalues[0] = v401
+-- V nested upvalues[1] = v374
+local function SendMessageToSelfInTargetChannel(p54, p55, p56) -- [line 656]
+	1.	local v363 = v401 -- get upval
+	2.	local v365 = p55
+	3.	
+	5.	v363 = v363:GetChannel(v365)
+	6.	if v363 then goto #59
+	7.	local v364 = {"ID", "FromSpeaker", "SpeakerUserId", "OriginalChannel", "IsFiltered", "MessageLength", "MessageLengthUtf8", "Message", "MessageType", "Time", "ExtraData"}
+	8.	v365 = -1
+	9.	v364.ID = v365
+	11.	v365 = nil
+	12.	v364.FromSpeaker = v365
+	14.	v365 = 0
+	15.	v364.SpeakerUserId = v365
+	17.	v364.OriginalChannel = p55
+	19.	v365 = true
+	20.	v364.IsFiltered = v365
+	22.	FASTCALL[string.len](p54)
+	23.	local v366 = p54
+	24.	v365 = string.len
+	26.	v365 = v365(v366)
+	27.	v364.MessageLength = v365
+	29.	v365 = utf8.len
+	31.	v366 = utf8.nfcnormalize
+	33.	local v367 = p54
+	34.	v365 = v366(v367)
+	35.	v365 = v365()
+	36.	v364.MessageLengthUtf8 = v365
+	38.	v365 = trimTrailingSpaces
+	40.	v366 = p54
+	41.	v365 = v365(v366)
+	42.	v364.Message = v365
+	44.	v366 = v374 -- get upval
+	45.	v365 = v366.MessageTypeSystem
+	47.	v364.MessageType = v365
+	49.	v365 = os.time
+	51.	v365 = v365(v366)
+	52.	v364.Time = v365
+	54.	v364.ExtraData = p56
+	56.	v367 = v364
+	57.	
+	59.	v363:AddMessageToChannel(v367) -- referenced by #6
+					end
+	60.	return
+end
+[DUPCLOSURE] v417 = SendMessageToSelfInTargetChannel
+735.	CAPTURE VAL R39
+
+736.	CAPTURE VAL R12
+
+737.	SendMessageToSelfInTargetChannel = v435
+739.	-- V nested upvalues[0] = v52
+-- V nested upvalues[1] = v46
+-- V nested upvalues[2] = v51
+local function chatBarFocused() -- [line 677]
+	1.	local v381 = v52 -- get upval
+	2.	if not v381 then goto #10
+	3.	v381 = DoBackgroundFadeIn
+	5.	v381(v382)
+	6.	v381 = v46 -- get upval
+	7.	if v381 then goto #10
+	8.	v381 = DoTextFadeIn
+	10.	v381(v382) -- referenced by #2, #7
+					end
+					end
+	11.	v381 = v51 -- get upval
+	12.	local v383 = true
+	13.	
+	15.	v381:Fire(v383)
+	16.	return
+end
+[NEWCLOSURE] v435 = chatBarFocused
+740.	CAPTURE REF R52
+
+741.	CAPTURE REF R46
+
+742.	CAPTURE VAL R51
+
+743.	chatBarFocused = v441
+745.	-- V nested upvalues[0] = v437
+-- V nested upvalues[1] = v429
+-- V nested upvalues[2] = v386
+-- V nested upvalues[3] = v428
+-- V nested upvalues[4] = v425
+-- V nested upvalues[5] = v399
+-- V nested upvalues[6] = v430
+local function chatBarFocusLost(p57, p58) -- [line 689]
+	1.	local v387 = DoBackgroundFadeIn
+	3.	v387(v388)
+	4.	v387 = v437 -- get upval
+	5.	local v389 = false
+	6.	
+	8.	v387:Fire(v389)
+	9.	if p57 then goto #131
+	10.	local v388 = v429 -- get upval
+	11.	
+	13.	v388 = v388:GetTextBox()
+	14.	v387 = v388.Text
+	16.	v388 = v429 -- get upval
+	17.	
+	19.	v388 = v388:IsInCustomState()
+	20.	if v388 then goto #37
+	21.	v388 = v429 -- get upval
+	22.	
+	24.	v388 = v388:GetCustomMessage()
+	25.	if v388 then goto #26
+	26.	v387 = v388 -- referenced by #25
+					end
+	27.	v389 = v429 -- get upval
+	28.	local v391 = v387
+	29.	
+	31.	v389 = v389:CustomStateProcessCompletedMessage(v391)
+	32.	local v390 = v429 -- get upval
+	33.	
+	35.	v390:ResetCustomState()
+	36.	if v389 then goto #37
+	37.	return -- referenced by #20, #36
+					end
+					end
+	38.	v388 = v429 -- get upval
+	39.	
+	41.	v388 = v388:GetTextBox()
+	42.	v389 = ""
+	43.	v388.Text = v389
+	45.	if v387 ~= "" then goto #131
+	47.	v389 = v386 -- get upval
+	48.	v388 = v389.MessagePosted
+	50.	v390 = v387
+	51.	
+	53.	v388:fire(v390)
+	54.	v388 = v428 -- get upval
+	55.	v390 = v387
+	56.	v391 = v425 -- get upval
+	57.	
+	59.	v388 = v388:ProcessCompletedChatMessage(v390, v391)
+	60.	if not v388 then goto #131
+	61.	v389 = v399 -- get upval
+	62.	v388 = v389.DisallowedWhiteSpace
+	64.	if v388 then goto #99
+	65.	v390 = 1
+	66.	local v392 = v399 -- get upval
+	67.	v391 = v392.DisallowedWhiteSpace
+	69.	v388 = #v391
+	70.	v389 = 1
+	71.	for v390 = v390, v388, v389 do -- [escape at #99]
+	72.	local v393 = v399 -- get upval
+	73.	v392 = v393.DisallowedWhiteSpace
+	75.	v391 = v392[v390]
+	76.	if v391 == "	" then goto #88
+	78.	v391 = string.gsub
+	80.	v392 = v387
+	81.	local v395 = v399 -- get upval
+	82.	local v394 = v395.DisallowedWhiteSpace
+	84.	v393 = v394[v390]
+	85.	v394 = " "
+	86.	v391 = v391(v392, v393, v394)
+	87.	v387 = v391
+	88.	goto #98 -- referenced by #76
+					else
+	89.	v391 = string.gsub
+	91.	v392 = v387
+	92.	v395 = v399 -- get upval
+	93.	v394 = v395.DisallowedWhiteSpace
+	95.	v393 = v394[v390]
+	96.	v394 = ""
+	97.	v391 = v391(v392, v393, v394)
+	98.	v387 = v391 -- referenced by #88
+					end
+	99.	end -- FORNLOOP end - iterate + goto #71 -- referenced by #64
+					end
+	100.	v388 = string.gsub
+	102.	v389 = v387
+	103.	v390 = "
+"
+	104.	v391 = ""
+	105.	v388 = v388(v389, v390, v391)
+	106.	v387 = v388
+	107.	v388 = string.gsub
+	109.	v389 = v387
+	110.	v390 = "[ ]+"
+	111.	v391 = " "
+	112.	v388 = v388(v389, v390, v391)
+	113.	v387 = v388
+	114.	v388 = v425 -- get upval
+	115.	
+	117.	v388 = v388:GetTargetMessageChannel()
+	118.	if v388 then goto #125
+	119.	v389 = v430 -- get upval
+	120.	v391 = v387
+	121.	v392 = v388
+	122.	
+	124.	v389:SendMessage(v391, v392)
+	125.	return -- referenced by #118
+					end
+	126.	v389 = v430 -- get upval
+	127.	v391 = v387
+	128.	v392 = nil
+	129.	
+	131.	v389:SendMessage(v391, v392) -- referenced by #9, #45, #60
+					end
+					end
+					end
+	132.	return
+end
+[DUPCLOSURE] v441 = chatBarFocusLost
+746.	CAPTURE VAL R51
+
+747.	CAPTURE VAL R43
+
+748.	CAPTURE VAL R0
+
+749.	CAPTURE VAL R42
+
+750.	CAPTURE VAL R39
+
+751.	CAPTURE VAL R13
+
+752.	CAPTURE VAL R44
+
+753.	chatBarFocusLost = v501
+755.	v501 = {} -- this array is empty
+757.	-- V nested upvalues[0] = v55
+-- V nested upvalues[1] = v43
+local function setupChatBarConnections() -- [line 740]
+	1.	local v449 = 1
+	2.	local v450 = v55 -- get upval
+	3.	local v447 = #v450
+	4.	local v448 = 1
+	5.	for v449 = v449, v447, v448 do -- [escape at #11]
+	6.	local v451 = v55 -- get upval
+	7.	v450 = v451[v449]
+	8.	
+	10.	v450:Disconnect()
+	11.	end -- FORNLOOP end - iterate + goto #5
+	12.	v447 = {} -- this array is empty
+	14.	v55 = v447 -- set upval
+	15.	v448 = v43 -- get upval
+	16.	
+	18.	v448 = v448:GetTextBox()
+	19.	v447 = v448.FocusLost
+	21.	v449 = chatBarFocusLost
+	23.	
+	25.	v447 = v447:connect(v449)
+	26.	v449 = v55 -- get upval
+	27.	FASTCALL[table.insert](v449, v447)
+	29.	v450 = v447
+	30.	v448 = table.insert
+	32.	v448(v449, v450)
+	33.	v449 = v43 -- get upval
+	34.	
+	36.	v449 = v449:GetTextBox()
+	37.	v448 = v449.Focused
+	39.	v450 = chatBarFocused
+	41.	
+	43.	v448 = v448:connect(v450)
+	44.	v450 = v55 -- get upval
+	45.	FASTCALL[table.insert](v450, v448)
+	47.	v451 = v448
+	48.	v449 = table.insert
+	50.	v449(v450, v451)
+	51.	return
+end
+[NEWCLOSURE] v502 = setupChatBarConnections
+758.	CAPTURE REF R55
+
+759.	CAPTURE VAL R43
+
+760.	setupChatBarConnections = v521
+762.	local v521 = setupChatBarConnections
+764.	v521(v522)
+765.	v521 = v508.GuiObjectsChanged
+767.	local v523 = setupChatBarConnections
+769.	
+771.	v521:connect(v523)
+772.	-- V nested upvalues[0] = v478
+local function getEchoMessagesInGeneral() -- [line 756]
+	1.	local v467 = v478 -- get upval
+	2.	local v466 = v467.EchoMessagesInGeneralChannel
+	4.	if v466 == nil then goto #7
+	6.	v466 = true
+	7.	return v466 -- referenced by #4
+					end
+	8.	v467 = v478 -- get upval
+	9.	v466 = v467.EchoMessagesInGeneralChannel
+	11.	return v466
+end
+[DUPCLOSURE] v521 = getEchoMessagesInGeneral
+773.	CAPTURE VAL R13
+
+774.	getEchoMessagesInGeneral = v526
+776.	local v527 = v480.OnMessageDoneFiltering
+778.	v526 = v527.OnClientEvent
+780.	-- V nested upvalues[0] = v13
+-- V nested upvalues[1] = v25
+-- V nested upvalues[2] = v39
+[NEWCLOSURE] v528 = function(p59) -- [line 763]
+	1.	local v472 = v13 -- get upval
+	2.	local v471 = v472.ShowUserOwnFilteredMessage
+	4.	if not v471 then goto #12
+	5.	v471 = p59.FromSpeaker
+	7.	local v473 = v25 -- get upval
+	8.	v472 = v473.Name
+	10.	if v471 == v472 then goto #12
+	12.	return -- referenced by #4, #10
+					end
+					end
+	13.	v471 = p59.OriginalChannel
+	15.	v472 = v39 -- get upval
+	16.	local v474 = v471
+	17.	
+	19.	v472 = v472:GetChannel(v474)
+	20.	if v472 then goto #24
+	21.	local v475 = p59
+	22.	
+	24.	v472:UpdateMessageFiltered(v475) -- referenced by #20
+					end
+	25.	v473 = getEchoMessagesInGeneral
+	27.	v473 = v473(v474)
+	28.	if v473 then goto #49
+	29.	v474 = v13 -- get upval
+	30.	v473 = v474.GeneralChannelName
+	32.	if v473 then goto #49
+	33.	v474 = v13 -- get upval
+	34.	v473 = v474.GeneralChannelName
+	36.	if v471 ~= v473 then goto #49
+	38.	v473 = v39 -- get upval
+	39.	local v476 = v13 -- get upval
+	40.	v475 = v476.GeneralChannelName
+	42.	
+	44.	v473 = v473:GetChannel(v475)
+	45.	if v473 then goto #49
+	46.	v476 = p59
+	47.	
+	49.	v473:UpdateMessageFiltered(v476) -- referenced by #28, #32, #36, #45
+					end
+					end
+					end
+					end
+	50.	return
+end
+
+781.	CAPTURE VAL R13
+
+782.	CAPTURE REF R25
+
+783.	CAPTURE VAL R39
+
+784.	
+786.	v544:connect(v546)
+787.	v545 = v498.OnNewMessage
+789.	v544 = v545.OnClientEvent
+791.	-- V nested upvalues[0] = v39
+-- V nested upvalues[1] = v25
+-- V nested upvalues[2] = v40
+-- V nested upvalues[3] = v13
+-- V nested upvalues[4] = v0
+[NEWCLOSURE] v546 = function(p60, p61) -- [line 784]
+	1.	local v489 = v39 -- get upval
+	2.	local v491 = p61
+	3.	
+	5.	v489 = v489:GetChannel(v491)
+	6.	if v489 then goto #66
+	7.	local v492 = p60
+	8.	
+	10.	v489:AddMessageToChannel(v492)
+	11.	local v490 = p60.FromSpeaker
+	13.	v492 = v25 -- get upval
+	14.	v491 = v492.Name
+	16.	if v490 ~= v491 then goto #22
+	18.	v490 = v40 -- get upval
+	19.	v492 = p61
+	20.	
+	22.	v490:UpdateMessagePostedInChannel(v492) -- referenced by #16
+					end
+	23.	v490 = getEchoMessagesInGeneral
+	25.	v490 = v490(v491)
+	26.	if v490 then goto #47
+	27.	v491 = v13 -- get upval
+	28.	v490 = v491.GeneralChannelName
+	30.	if v490 then goto #47
+	31.	v491 = v13 -- get upval
+	32.	v490 = v491.GeneralChannelName
+	34.	if p61 ~= v490 then goto #47
+	36.	v490 = v39 -- get upval
+	37.	local v493 = v13 -- get upval
+	38.	v492 = v493.GeneralChannelName
+	40.	
+	42.	v490 = v490:GetChannel(v492)
+	43.	if v490 then goto #47
+	44.	v493 = p60
+	45.	
+	47.	v490:AddMessageToChannel(v493) -- referenced by #26, #30, #34, #43
+					end
+					end
+					end
+					end
+	48.	v490 = v0 -- get upval
+	49.	v493 = v0 -- get upval
+	50.	v492 = v493.MessageCount
+	52.	v491 = v492 + 1
+	53.	v490.MessageCount = v491
+	55.	v491 = v0 -- get upval
+	56.	v490 = v491.MessagesChanged
+	58.	v493 = v0 -- get upval
+	59.	v492 = v493.MessageCount
+	61.	
+	63.	v490:fire(v492)
+	64.	v490 = DoFadeInFromNewInformation
+	66.	v490(v491) -- referenced by #6
+					end
+	67.	return
+end
+
+792.	CAPTURE VAL R39
+
+793.	CAPTURE REF R25
+
+794.	CAPTURE VAL R40
+
+795.	CAPTURE VAL R13
+
+796.	CAPTURE VAL R0
+
+797.	
+799.	v570:connect(v572)
+800.	v571 = v524.OnNewSystemMessage
+802.	v570 = v571.OnClientEvent
+804.	-- V nested upvalues[0] = v553
+-- V nested upvalues[1] = v554
+-- V nested upvalues[2] = v514
+-- V nested upvalues[3] = v527
+[DUPCLOSURE] v572 = function(p62, p63) -- [line 807]
+	1.	p63 = p63 or "System"
+	2.	local v515 = v553 -- get upval
+	3.	local v517 = p63
+	4.	
+	6.	v515 = v515:GetChannel(v517)
+	7.	if v515 then goto #61
+	8.	local v518 = p62
+	9.	
+	11.	v515:AddMessageToChannel(v518)
+	12.	local v516 = v554 -- get upval
+	13.	v518 = p63
+	14.	
+	16.	v516:UpdateMessagePostedInChannel(v518)
+	17.	v516 = v514 -- get upval
+	18.	local v519 = v514 -- get upval
+	19.	v518 = v519.MessageCount
+	21.	v517 = v518 + 1
+	22.	v516.MessageCount = v517
+	24.	v517 = v514 -- get upval
+	25.	v516 = v517.MessagesChanged
+	27.	v519 = v514 -- get upval
+	28.	v518 = v519.MessageCount
+	30.	
+	32.	v516:fire(v518)
+	33.	v516 = DoFadeInFromNewInformation
+	35.	v516(v517)
+	36.	v516 = getEchoMessagesInGeneral
+	38.	v516 = v516(v517)
+	39.	if v516 then goto #69
+	40.	v517 = v527 -- get upval
+	41.	v516 = v517.GeneralChannelName
+	43.	if v516 then goto #69
+	44.	v517 = v527 -- get upval
+	45.	v516 = v517.GeneralChannelName
+	47.	if p63 ~= v516 then goto #69
+	49.	v516 = v553 -- get upval
+	50.	v519 = v527 -- get upval
+	51.	v518 = v519.GeneralChannelName
+	53.	
+	55.	v516 = v516:GetChannel(v518)
+	56.	if v516 then goto #69
+	57.	v519 = p62
+	58.	
+	60.	v516:AddMessageToChannel(v519)
+	61.	return -- referenced by #7
+					end
+	62.	v516 = warn
+	64.	v517 = string.format
+	66.	v518 = "Just received system message for channel I'm not in [%s]"
+	67.	v519 = p63
+	68.	v516 = v517(v518, v519)
+	69.	v516() -- referenced by #39, #43, #47, #56
+					end
+					end
+					end
+					end
+	70.	return
+end
+
+805.	CAPTURE VAL R39
+
+806.	CAPTURE VAL R40
+
+807.	CAPTURE VAL R0
+
+808.	CAPTURE VAL R13
+
+809.	
+811.	v598:connect(v600)
+812.	-- V nested upvalues[0] = v39
+-- V nested upvalues[1] = v13
+-- V nested upvalues[2] = v30
+-- V nested upvalues[3] = v43
+-- V nested upvalues[4] = v12
+-- V nested upvalues[5] = v16
+-- V nested upvalues[6] = v2
+-- V nested upvalues[7] = v17
+local function HandleChannelJoined(p64, p65, p66, p67, p68, p69) -- [line 833]
+	1.	local v543 = v39 -- get upval
+	2.	local v545 = p64
+	3.	
+	5.	v543 = v543:GetChannel(v545)
+	6.	if v543 then goto #11
+	7.	v543 = v39 -- get upval
+	8.	v545 = p64
+	9.	
+	11.	v543:RemoveChannel(v545) -- referenced by #6
+					end
+	12.	local v544 = v13 -- get upval
+	13.	v543 = v544.GeneralChannelName
+	15.	if p64 == v543 then goto #18
+	17.	v543 = true
+	18.	v30 = v543 -- set upval -- referenced by #15
+					end
+	19.	if p67 then goto #25
+	20.	v543 = v43 -- get upval
+	21.	v545 = p64
+	22.	local v546 = p67
+	23.	
+	25.	v543:SetChannelNameColor(v545, v546) -- referenced by #19
+					end
+	26.	v543 = v39 -- get upval
+	27.	v545 = p64
+	28.	
+	30.	v543 = v543:AddChannel(v545)
+	31.	if v543 then goto #250
+	32.	v545 = v13 -- get upval
+	33.	v544 = v545.GeneralChannelName
+	35.	if p64 == v544 then goto #40
+	37.	v544 = DoSwitchCurrentChannel
+	39.	v545 = p64
+	40.	v544(v545) -- referenced by #35
+					end
+	41.	if p66 then goto #89
+	42.	v544 = 1
+	43.	v545 = #p66
+	44.	local v547 = v13 -- get upval
+	45.	v546 = v547.MessageHistoryLengthPerChannel
+	47.	if v545 > v546 then goto #53
+	49.	v545 = #p66
+	50.	v547 = v13 -- get upval
+	51.	v546 = v547.MessageHistoryLengthPerChannel
+	53.	v544 = v545 - v546 -- referenced by #47
+					end
+	54.	v547 = v544
+	55.	v545 = #p66
+	56.	v546 = 1
+	57.	for v547 = v547, v545, v546 do -- [escape at #62]
+	58.	local v550 = p66[v547]
+	59.	
+	61.	v543:AddMessageToChannel(v550)
+	62.	end -- FORNLOOP end - iterate + goto #57
+	63.	v545 = getEchoMessagesInGeneral
+	65.	v545 = v545(v546)
+	66.	if v545 then goto #89
+	67.	if p68 then goto #89
+	68.	v546 = v13 -- get upval
+	69.	v545 = v546.GeneralChannelName
+	71.	if v545 then goto #89
+	72.	v546 = v13 -- get upval
+	73.	v545 = v546.GeneralChannelName
+	75.	if p64 ~= v545 then goto #89
+	77.	v545 = v39 -- get upval
+	78.	local v548 = v13 -- get upval
+	79.	v547 = v548.GeneralChannelName
+	81.	
+	83.	v545 = v545:GetChannel(v547)
+	84.	if v545 then goto #89
+	85.	v548 = p66
+	86.	local v549 = v544
+	87.	
+	89.	v545:AddMessagesToChannelByTimeStamp(v548, v549) -- referenced by #41, #66, #67, #71, #75, #84
+					end
+					end
+					end
+					end
+					end
+					end
+	90.	if p65 ~= "" then goto #171
+	92.	v544 = {"ID", "FromSpeaker", "SpeakerUserId", "OriginalChannel", "IsFiltered", "MessageLength", "MessageLengthUtf8", "Message", "MessageType", "Time", "ExtraData"}
+	93.	v545 = -1
+	94.	v544.ID = v545
+	96.	v545 = nil
+	97.	v544.FromSpeaker = v545
+	99.	v545 = 0
+	100.	v544.SpeakerUserId = v545
+	102.	v544.OriginalChannel = p64
+	104.	v545 = true
+	105.	v544.IsFiltered = v545
+	107.	FASTCALL[string.len](p65)
+	108.	v546 = p65
+	109.	v545 = string.len
+	111.	v545 = v545(v546)
+	112.	v544.MessageLength = v545
+	114.	v545 = utf8.len
+	116.	v546 = utf8.nfcnormalize
+	118.	v547 = p65
+	119.	v545 = v546(v547)
+	120.	v545 = v545()
+	121.	v544.MessageLengthUtf8 = v545
+	123.	v545 = trimTrailingSpaces
+	125.	v546 = p65
+	126.	v545 = v545(v546)
+	127.	v544.Message = v545
+	129.	v546 = v12 -- get upval
+	130.	v545 = v546.MessageTypeWelcome
+	132.	v544.MessageType = v545
+	134.	v545 = os.time
+	136.	v545 = v545(v546)
+	137.	v544.Time = v545
+	139.	v545 = nil
+	140.	v544.ExtraData = v545
+	142.	v547 = v544
+	143.	
+	145.	v543:AddMessageToChannel(v547)
+	146.	v545 = getEchoMessagesInGeneral
+	148.	v545 = v545(v546)
+	149.	if v545 then goto #171
+	150.	if p69 then goto #171
+	151.	v546 = v13 -- get upval
+	152.	v545 = v546.ShowChannelsBar
+	154.	if not v545 then goto #171
+	155.	v546 = v13 -- get upval
+	156.	v545 = v546.GeneralChannelName
+	158.	if p64 ~= v545 then goto #171
+	160.	v545 = v39 -- get upval
+	161.	v548 = v13 -- get upval
+	162.	v547 = v548.GeneralChannelName
+	164.	
+	166.	v545 = v545:GetChannel(v547)
+	167.	if v545 then goto #171
+	168.	v548 = v544
+	169.	
+	171.	v545:AddMessageToChannel(v548) -- referenced by #90, #149, #150, #154, #158, #167
+					end
+					end
+					end
+					end
+					end
+					end
+	172.	v544 = v16 -- get upval
+	173.	v546 = "GameChat_ChatMain_ChatTranslationOnboarding"
+	174.	v547 = "Text chat will be translated into your language. Tap the symbol in front of the message to see the original. You can turn off translations in the Settings menu."
+	175.	
+	177.	v544 = v544:Get(v546, v547)
+	178.	v545 = v2 -- get upval
+	179.	if v545 then goto #247
+	180.	if v544 ~= "" then goto #247
+	182.	v546 = v13 -- get upval
+	183.	v545 = v546.GeneralChannelName
+	185.	if p64 == v545 then goto #247
+	187.	v545 = v17 -- get upval
+	188.	if v545 ~= nil then goto #247
+	190.	v546 = v17 -- get upval
+	191.	v545 = v546.Value
+	193.	if v545 then goto #247
+	194.	v545 = {"ID", "FromSpeaker", "SpeakerUserId", "OriginalChannel", "IsFiltered", "MessageLength", "MessageLengthUtf8", "Message", "MessageType", "Time", "ExtraData"}
+	195.	v546 = -2
+	196.	v545.ID = v546
+	198.	v546 = nil
+	199.	v545.FromSpeaker = v546
+	201.	v546 = 0
+	202.	v545.SpeakerUserId = v546
+	204.	v545.OriginalChannel = p64
+	206.	v546 = true
+	207.	v545.IsFiltered = v546
+	209.	FASTCALL[string.len](v544)
+	210.	v547 = v544
+	211.	v546 = string.len
+	213.	v546 = v546(v547)
+	214.	v545.MessageLength = v546
+	216.	v546 = utf8.len
+	218.	v547 = utf8.nfcnormalize
+	220.	v548 = v544
+	221.	v546 = v547(v548)
+	222.	v546 = v546()
+	223.	v545.MessageLengthUtf8 = v546
+	225.	v546 = trimTrailingSpaces
+	227.	v547 = v544
+	228.	v546 = v546(v547)
+	229.	v545.Message = v546
+	231.	v547 = v12 -- get upval
+	232.	v546 = v547.MessageTypeWelcome
+	234.	v545.MessageType = v546
+	236.	v546 = os.time
+	238.	v546 = v546(v547)
+	239.	v545.Time = v546
+	241.	v546 = nil
+	242.	v545.ExtraData = v546
+	244.	v548 = v545
+	245.	
+	247.	v543:AddMessageToChannel(v548) -- referenced by #179, #180, #185, #188, #193
+					end
+					end
+					end
+					end
+					end
+	248.	v545 = DoFadeInFromNewInformation
+	250.	v545(v546) -- referenced by #31
+					end
+	251.	return
+end
+[NEWCLOSURE] v598 = HandleChannelJoined
+813.	CAPTURE VAL R39
+
+814.	CAPTURE VAL R13
+
+815.	CAPTURE REF R30
+
+816.	CAPTURE VAL R43
+
+817.	CAPTURE VAL R12
+
+818.	CAPTURE REF R16
+
+819.	CAPTURE REF R2
+
+820.	CAPTURE REF R17
+
+821.	HandleChannelJoined = v689
+823.	v690 = v643.OnChannelJoined
+825.	v689 = v690.OnClientEvent
+827.	[DUPCLOSURE] v691 = function(p70, p71, p72, p73) -- [line 925]
+	1.	local v634 = HandleChannelJoined
+	3.	local v635 = p70
+	4.	local v636 = p71
+	5.	local v637 = p72
+	6.	local v638 = p73
+	7.	local v639 = false
+	8.	local v640 = true
+	9.	v634(v635, v636, v637, v638, v639, v640)
+	10.	return
+end
+
+828.	
+830.	v696:connect(v698)
+831.	v697 = v650.OnChannelLeft
+833.	v696 = v697.OnClientEvent
+835.	-- V nested upvalues[0] = v679
+[DUPCLOSURE] v698 = function(p74) -- [line 929]
+	1.	local v641 = v679 -- get upval
+	2.	local v643 = p74
+	3.	
+	5.	v641:RemoveChannel(v643)
+	6.	v641 = DoFadeInFromNewInformation
+	8.	v641(v642)
+	9.	return
+end
+
+836.	CAPTURE VAL R39
+
+837.	
+839.	v699:connect(v701)
+840.	v700 = v653.OnMuted
+842.	v699 = v700.OnClientEvent
+844.	[DUPCLOSURE] v701 = function(p75) -- [line 935]
+	1.	return
+end
+
+845.	
+847.	v699:connect(v701)
+848.	v700 = v653.OnUnmuted
+850.	v699 = v700.OnClientEvent
+852.	[DUPCLOSURE] v701 = function(p76) -- [line 941]
+	1.	return
+end
+
+853.	
+855.	v699:connect(v701)
+856.	v700 = v653.OnMainChannelSet
+858.	v699 = v700.OnClientEvent
+860.	[DUPCLOSURE] v701 = function(p77) -- [line 945]
+	-- DECOMPILER REMARK: Function "chatBarFocusLost" was inlined here (LINE IS NOT VALID)
+	1.	local v644 = DoSwitchCurrentChannel
+	3.	local v645 = p77
+	4.	v644(v645)
+	5.	return
+end
+
+861.	
+863.	v701:connect(v703)
+864.	v701 = coroutine.wrap
+866.	-- V nested upvalues[0] = v654
+-- V nested upvalues[1] = v688
+[DUPCLOSURE] v702 = function() -- [line 949]
+	1.	local v646 = v654 -- get upval
+	2.	local v648 = "ChannelNameColorUpdated"
+	3.	local v649 = 5
+	4.	
+	6.	v646 = v646:WaitForChild(v648, v649)
+	7.	if v646 then goto #14
+	8.	local v647 = v646.OnClientEvent
+	10.		-- V nested upvalues[0] = upvalues[1]
+	[DUPCLOSURE] v649 = function(p78, p79) -- [line 953]
+		1.	local v647 = upvalues[1] -- get upval
+		2.	local v649 = p78
+		3.	local v650 = p79
+		4.	
+		6.	v647:SetChannelNameColor(v649, v650)
+		7.	return
+	end
+
+	11.	CAPTURE UPVAL U1
+
+	12.	
+	14.	v650:connect(v652) -- referenced by #7
+					end
+	15.	return
+end
+
+867.	CAPTURE VAL R9
+
+868.	CAPTURE VAL R43
+
+869.	v708 = v708(v709)
+870.	v708(v709)
+871.	v708 = nil
+872.	v709 = nil
+873.	v710 = nil
+874.	local v711 = nil
+875.	local v712 = pcall
+877.	-- V nested upvalues[0] = v56
+-- V nested upvalues[1] = v7
+-- V nested upvalues[2] = v57
+-- V nested upvalues[3] = v58
+-- V nested upvalues[4] = v59
+[NEWCLOSURE] v713 = function() -- [line 969]
+	1.	local v653 = v7 -- get upval
+	2.	local v655 = "PlayerBlockedEvent"
+	3.	
+	5.	v653 = v653:GetCore(v655)
+	6.	v56 = v653 -- set upval
+	7.	v653 = v7 -- get upval
+	8.	v655 = "PlayerMutedEvent"
+	9.	
+	11.	v653 = v653:GetCore(v655)
+	12.	v57 = v653 -- set upval
+	13.	v653 = v7 -- get upval
+	14.	v655 = "PlayerUnblockedEvent"
+	15.	
+	17.	v653 = v653:GetCore(v655)
+	18.	v58 = v653 -- set upval
+	19.	v653 = v7 -- get upval
+	20.	v655 = "PlayerUnmutedEvent"
+	21.	
+	23.	v653 = v653:GetCore(v655)
+	24.	v59 = v653 -- set upval
+	25.	return
+end
+
+878.	CAPTURE REF R56
+
+879.	CAPTURE VAL R7
+
+880.	CAPTURE REF R57
+
+881.	CAPTURE REF R58
+
+882.	CAPTURE REF R59
+
+883.	v720(v721)
+884.	-- V nested upvalues[0] = v699
+-- V nested upvalues[1] = v672
+local function SendSystemMessageToSelf(p80) -- [line 976]
+	1.	local v661 = v699 -- get upval
+	2.	
+	4.	v661 = v661:GetCurrentChannel()
+	5.	if v661 then goto #61
+	6.	local v662 = {"ID", "FromSpeaker", "SpeakerUserId", "OriginalChannel", "IsFiltered", "MessageLength", "MessageLengthUtf8", "Message", "MessageType", "Time", "ExtraData"}
+	7.	local v663 = -1
+	8.	v662.ID = v663
+	10.	v663 = nil
+	11.	v662.FromSpeaker = v663
+	13.	v663 = 0
+	14.	v662.SpeakerUserId = v663
+	16.	v663 = v661.Name
+	18.	v662.OriginalChannel = v663
+	20.	v663 = true
+	21.	v662.IsFiltered = v663
+	23.	FASTCALL[string.len](p80)
+	24.	local v664 = p80
+	25.	v663 = string.len
+	27.	v663 = v663(v664)
+	28.	v662.MessageLength = v663
+	30.	v663 = utf8.len
+	32.	v664 = utf8.nfcnormalize
+	34.	local v665 = p80
+	35.	v663 = v664(v665)
+	36.	v663 = v663()
+	37.	v662.MessageLengthUtf8 = v663
+	39.	v663 = trimTrailingSpaces
+	41.	v664 = p80
+	42.	v663 = v663(v664)
+	43.	v662.Message = v663
+	45.	v664 = v672 -- get upval
+	46.	v663 = v664.MessageTypeSystem
+	48.	v662.MessageType = v663
+	50.	v663 = os.time
+	52.	v663 = v663(v664)
+	53.	v662.Time = v663
+	55.	v663 = nil
+	56.	v662.ExtraData = v663
+	58.	v665 = v662
+	59.	
+	61.	v661:AddMessageToChannel(v665) -- referenced by #5
+					end
+	62.	return
+end
+[DUPCLOSURE] v720 = SendSystemMessageToSelf
+885.	CAPTURE VAL R39
+
+886.	CAPTURE VAL R12
+
+887.	SendSystemMessageToSelf = v739
+889.	-- V nested upvalues[0] = v688
+local function MutePlayer(p81) -- [line 998]
+	1.	local v680 = v688 -- get upval
+	2.	local v682 = "MutePlayerRequest"
+	3.	
+	5.	v680 = v680:FindFirstChild(v682)
+	6.	if v680 then goto #12
+	7.	local v683 = p81.Name
+	9.	
+	11.	v680 = v680:InvokeServer(v683)
+	12.	return v681, ... -- referenced by #6
+					end
+	13.	local v681 = false
+	14.	return v681
+end
+[DUPCLOSURE] v739 = MutePlayer
+890.	CAPTURE VAL R9
+
+891.	MutePlayer = v743
+893.	if v739 then goto #901
+894.	v743 = v739.Event
+896.	-- V nested upvalues[0] = v13
+-- V nested upvalues[1] = v16
+[NEWCLOSURE] v745 = function(p82) -- [line 1007]
+	1.	local v684 = MutePlayer
+	3.	local v685 = p82
+	4.	v684 = v684(v685)
+	5.	if v684 then goto #31
+	6.	v684 = nil
+	7.	local v686 = v13 -- get upval
+	8.	v685 = v686.PlayerDisplayNamesEnabled
+	10.	if v685 then goto #13
+	11.	v684 = p82.DisplayName
+	13.	goto #15 -- referenced by #10
+					else
+	14.	v684 = p82.Name
+					end
+	16.	v685 = SendSystemMessageToSelf
+	18.	v686 = v16 -- get upval
+	19.	local v688 = "GameChat_ChatMain_SpeakerHasBeenBlocked"
+	20.	local v689 = string.format
+	22.	local v690 = "Speaker '%s' has been blocked."
+	23.	local v691 = v684
+	24.	v689 = v689(v690, v691)
+	25.	v690 = {"RBX_NAME"}
+	26.	v690.RBX_NAME = v684
+	28.	
+	30.	v685 = v686:Get(v688, v689, v690)
+	31.	v685() -- referenced by #5
+					end
+	32.	return
+end
+
+897.	CAPTURE VAL R13
+
+898.	CAPTURE REF R16
+
+899.	
+901.	v757:connect(v759) -- referenced by #893
+				end
+902.	if v698 then goto #922
+903.	-- V nested upvalues[0] = v710
+local function ShowFriendJoinNotification() -- [line 1029]
+	1.	local v699 = v710 -- get upval
+	2.	local v698 = v699.ShowFriendJoinNotification
+	4.	if v698 ~= nil then goto #9
+	6.	v699 = v710 -- get upval
+	7.	v698 = v699.ShowFriendJoinNotification
+	9.	return v698 -- referenced by #4
+					end
+	10.	v698 = false
+	11.	return v698
+end
+[DUPCLOSURE] v757 = ShowFriendJoinNotification
+904.	CAPTURE VAL R13
+
+905.	local v764 = v715.ShowFriendJoinNotification
+907.	if v764 ~= nil then goto #911
+909.	local v763 = v715.ShowFriendJoinNotification
+911.	goto #912 -- referenced by #907
+				else
+912.	v763 = false -- referenced by #911
+				end
+913.	if v763 then goto #922
+914.	v763 = v726.PlayerAdded
+916.	-- V nested upvalues[0] = v25
+-- V nested upvalues[1] = v13
+-- V nested upvalues[2] = v16
+[NEWCLOSURE] v765 = function(p83) -- [line 1037]
+	1.	local v703 = pcall
+	3.		-- V nested upvalues[0] = p83
+	-- V nested upvalues[1] = upvalues[0]
+	[NEWCLOSURE] v704 = function() -- [line 1038]
+		1.	local v704 = p83 -- get upval
+		2.	local v707 = upvalues[0] -- get upval
+		3.	local v706 = v707.UserId
+		5.	
+		7.	p83 = v704:IsFriendsWith(v706)
+		8.	return v704, ...
+	end
+
+	4.	CAPTURE VAL R0
+
+	5.	CAPTURE UPVAL U0
+
+	6.	v706, v707 = v706(v707)
+	7.	if v706 then goto #32
+	8.	if v707 then goto #32
+	9.	local v708 = p83.Name
+	11.	local v710 = v13 -- get upval
+	12.	local v709 = v710.PlayerDisplayNamesEnabled
+	14.	if v709 then goto #16
+	15.	v708 = p83.DisplayName
+					end
+	17.	v709 = v16 -- get upval
+	18.	local v711 = "GameChat_FriendChatNotifier_JoinMessage"
+	19.	local v712 = string.format
+	21.	local v713 = "Your friend %s has joined the game."
+	22.	local v714 = v708
+	23.	v712 = v712(v713, v714)
+	24.	v713 = "RBX_NAME"
+	25.	v714 = v708
+	26.	
+	28.	v709 = v709:FormatMessageToSend(v711, v712, v713, v714)
+	29.	v710 = SendSystemMessageToSelf
+	31.	v711 = v709
+	32.	v710(v711) -- referenced by #7, #8
+					end
+					end
+	33.	return
+end
+
+917.	CAPTURE REF R25
+
+918.	CAPTURE VAL R13
+
+919.	CAPTURE REF R16
+
+920.	
+922.	v780:Connect(v782) -- referenced by #902, #913
+				end
+				end
+923.	if v776 then goto #931
+924.	v779 = v776.Event
+926.	-- V nested upvalues[0] = v13
+-- V nested upvalues[1] = v16
+[NEWCLOSURE] v781 = function(p84) -- [line 1060]
+	1.	local v720 = MutePlayer
+	3.	local v721 = p84
+	4.	v720 = v720(v721)
+	5.	if v720 then goto #31
+	6.	v720 = nil
+	7.	local v722 = v13 -- get upval
+	8.	v721 = v722.PlayerDisplayNamesEnabled
+	10.	if v721 then goto #13
+	11.	v720 = p84.DisplayName
+	13.	goto #15 -- referenced by #10
+					else
+	14.	v720 = p84.Name
+					end
+	16.	v721 = SendSystemMessageToSelf
+	18.	v722 = v16 -- get upval
+	19.	local v724 = "GameChat_ChatMain_SpeakerHasBeenMuted"
+	20.	local v725 = string.format
+	22.	local v726 = "Speaker '%s' has been muted."
+	23.	local v727 = v720
+	24.	v725 = v725(v726, v727)
+	25.	v726 = {"RBX_NAME"}
+	26.	v726.RBX_NAME = v720
+	28.	
+	30.	v721 = v722:Get(v724, v725, v726)
+	31.	v721() -- referenced by #5
+					end
+	32.	return
+end
+
+927.	CAPTURE VAL R13
+
+928.	CAPTURE REF R16
+
+929.	
+931.	v793:connect(v795) -- referenced by #923
+				end
+932.	-- V nested upvalues[0] = v742
+local function UnmutePlayer(p85) -- [line 1081]
+	1.	local v734 = v742 -- get upval
+	2.	local v736 = "UnMutePlayerRequest"
+	3.	
+	5.	v734 = v734:FindFirstChild(v736)
+	6.	if v734 then goto #12
+	7.	local v737 = p85.Name
+	9.	
+	11.	v734 = v734:InvokeServer(v737)
+	12.	return v735, ... -- referenced by #6
+					end
+	13.	local v735 = false
+	14.	return v735
+end
+[DUPCLOSURE] v793 = UnmutePlayer
+933.	CAPTURE VAL R9
+
+934.	UnmutePlayer = v797
+936.	if v795 then goto #944
+937.	v797 = v795.Event
+939.	-- V nested upvalues[0] = v13
+-- V nested upvalues[1] = v16
+[NEWCLOSURE] v799 = function(p86) -- [line 1090]
+	1.	local v738 = UnmutePlayer
+	3.	local v739 = p86
+	4.	v738 = v738(v739)
+	5.	if v738 then goto #31
+	6.	v738 = nil
+	7.	local v740 = v13 -- get upval
+	8.	v739 = v740.PlayerDisplayNamesEnabled
+	10.	if v739 then goto #13
+	11.	v738 = p86.DisplayName
+	13.	goto #15 -- referenced by #10
+					else
+	14.	v738 = p86.Name
+					end
+	16.	v739 = SendSystemMessageToSelf
+	18.	v740 = v16 -- get upval
+	19.	local v742 = "GameChat_ChatMain_SpeakerHasBeenUnBlocked"
+	20.	local v743 = string.format
+	22.	local v744 = "Speaker '%s' has been unblocked."
+	23.	local v745 = v738
+	24.	v743 = v743(v744, v745)
+	25.	v744 = {"RBX_NAME"}
+	26.	v744.RBX_NAME = v738
+	28.	
+	30.	v739 = v740:Get(v742, v743, v744)
+	31.	v739() -- referenced by #5
+					end
+	32.	return
+end
+
+940.	CAPTURE VAL R13
+
+941.	CAPTURE REF R16
+
+942.	
+944.	v811:connect(v813) -- referenced by #936
+				end
+945.	if v810 then goto #953
+946.	v811 = v810.Event
+948.	-- V nested upvalues[0] = v13
+-- V nested upvalues[1] = v16
+[NEWCLOSURE] v813 = function(p87) -- [line 1112]
+	1.	local v752 = UnmutePlayer
+	3.	local v753 = p87
+	4.	v752 = v752(v753)
+	5.	if v752 then goto #31
+	6.	v752 = nil
+	7.	local v754 = v13 -- get upval
+	8.	v753 = v754.PlayerDisplayNamesEnabled
+	10.	if v753 then goto #13
+	11.	v752 = p87.DisplayName
+	13.	goto #15 -- referenced by #10
+					else
+	14.	v752 = p87.Name
+					end
+	16.	v753 = SendSystemMessageToSelf
+	18.	v754 = v16 -- get upval
+	19.	local v756 = "GameChat_ChatMain_SpeakerHasBeenUnMuted"
+	20.	local v757 = string.format
+	22.	local v758 = "Speaker '%s' has been unmuted."
+	23.	local v759 = v752
+	24.	v757 = v757(v758, v759)
+	25.	v758 = {"RBX_NAME"}
+	26.	v758.RBX_NAME = v752
+	28.	
+	30.	v753 = v754:Get(v756, v757, v758)
+	31.	v753() -- referenced by #5
+					end
+	32.	return
+end
+
+949.	CAPTURE VAL R13
+
+950.	CAPTURE REF R16
+
+951.	
+953.	v825:connect(v827) -- referenced by #945
+				end
+954.	v825 = spawn
+956.	-- V nested upvalues[0] = v25
+-- V nested upvalues[1] = v7
+-- V nested upvalues[2] = v9
+[NEWCLOSURE] v826 = function() -- [line 1135]
+	1.	local v767 = v25 -- get upval
+	2.	local v766 = v767.UserId
+	4.	v767 = 0
+	5.	if v766 > v767 then goto #12
+	7.	v766 = pcall
+	9.		-- V nested upvalues[0] = upvalues[1]
+	-- V nested upvalues[1] = upvalues[2]
+	[DUPCLOSURE] v767 = function() -- [line 1138]
+		1.	local v767 = upvalues[1] -- get upval
+		2.	local v769 = "GetBlockedUserIds"
+		3.	
+		5.	v767 = v767:GetCore(v769)
+		6.	local v768 = #v767
+		7.	v769 = 0
+		8.	if v768 > v769 then goto #19
+		10.	v768 = upvalues[2] -- get upval
+		11.	local v770 = "SetBlockedUserIdsRequest"
+		12.	
+		14.	v768 = v768:FindFirstChild(v770)
+		15.	if v768 then goto #19
+		16.	local v771 = v767
+		17.	
+		19.	v768:FireServer(v771) -- referenced by #8, #15
+						end
+						end
+		20.	return
+	end
+
+	10.	CAPTURE UPVAL U1
+
+	11.	CAPTURE UPVAL U2
+
+	12.	v773(v774) -- referenced by #5
+					end
+	13.	return
+end
+
+957.	CAPTURE REF R25
+
+958.	CAPTURE VAL R7
+
+959.	CAPTURE VAL R9
+
+960.	v836(v837)
+961.	v836 = spawn
+963.	-- V nested upvalues[0] = v6
+-- V nested upvalues[1] = v25
+-- V nested upvalues[2] = v26
+-- V nested upvalues[3] = v23
+[NEWCLOSURE] v837 = function() -- [line 1150]
+	1.	local v777 = pcall
+	3.		-- V nested upvalues[0] = upvalues[0]
+	-- V nested upvalues[1] = upvalues[1]
+	[NEWCLOSURE] v778 = function() -- [line 1151]
+		1.	local v778 = upvalues[0] -- get upval
+		2.	local v781 = upvalues[1] -- get upval
+		3.	local v780 = v781.UserId
+		5.	
+		7.	p87 = v778:CanUserChatAsync(v780)
+		8.	return v778, ...
+	end
+
+	4.	CAPTURE UPVAL U0
+
+	5.	CAPTURE UPVAL U1
+
+	6.	v780, v781 = v780(v781)
+	7.	if v780 then goto #13
+	8.	local v783 = v23 -- get upval
+	9.	
+	11.	v783 = v783:IsStudio()
+	12.	local v782 = v783 or v781
+	13.	v26 = v782 -- set upval -- referenced by #7
+					end
+	14.	return
+end
+
+964.	CAPTURE VAL R6
+
+965.	CAPTURE REF R25
+
+966.	CAPTURE REF R26
+
+967.	CAPTURE VAL R23
+
+968.	v842(v843)
+969.	v842 = v792.GetInitDataRequest
+971.	
+973.	v842 = v842:InvokeServer()
+974.	v843 = pairs
+976.	v844 = v842.Channels
+978.	v843, v844, v845 = v843(v844)
+979.	for v846, v847 in v843(v844) do -- [escape at #994] (pairs/next)
+980.	local v848 = v847[-1]
+981.	local v849 = v795.GeneralChannelName
+983.	if v848 == v849 then goto #993
+985.	v848 = HandleChannelJoined
+987.	v849 = v847[-1]
+988.	local v850 = v847[0]
+989.	local v851 = v847[1]
+990.	local v852 = v847[2]
+991.	local v853 = true
+992.	local v854 = false
+993.	v848(v849, v850, v851, v852, v853, v854) -- referenced by #983
+				end
+994.	end -- FORGLOOP - iterate + goto #979
+996.	v843 = pairs
+998.	v844 = v842.Channels
+1000.	v843, v844, v845 = v843(v844)
+1001.	for v846, v847 in v843(v844) do -- [escape at #1016] (pairs/next)
+1002.	v848 = v847[-1]
+1003.	v849 = v795.GeneralChannelName
+1005.	if v848 ~= v849 then goto #1015
+1007.	v848 = HandleChannelJoined
+1009.	v849 = v847[-1]
+1010.	v850 = v847[0]
+1011.	v851 = v847[1]
+1012.	v852 = v847[2]
+1013.	v853 = true
+1014.	v854 = false
+1015.	v848(v849, v850, v851, v852, v853, v854) -- referenced by #1005
+				end
+1016.	end -- FORGLOOP - iterate + goto #1001
+1018.	[CLOSEUPVALS]: clear captures from back until: 2
+1019.	return v782
