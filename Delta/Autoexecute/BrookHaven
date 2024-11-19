@@ -1,0 +1,100 @@
+local Workspace = game:GetService("Workspace")
+local RunService = game:GetService("RunService")
+local Player = game:GetService("Players").LocalPlayer
+local Camera = Workspace.CurrentCamera
+local CollisionParts = {}
+
+for _, NeonPart in ipairs(Workspace:GetDescendants()) do
+    if NeonPart.Name == "Neon" and NeonPart.Parent and NeonPart.Parent.Name == "StreetLight" then
+        local CollisionPart = NeonPart:Clone()
+        CollisionPart.Name = "CollisionPart"
+        CollisionPart.CanCollide = true
+        CollisionPart.CanQuery = true
+        CollisionPart.Anchored = true
+        CollisionPart.Transparency = 1
+        CollisionPart.Size = NeonPart.Size + Vector3.new(2, 2, 2)
+        CollisionPart.CFrame = NeonPart.CFrame
+        CollisionPart.Parent = NeonPart.Parent
+        
+        table.insert(CollisionParts, CollisionPart)
+        
+        local StartPosition = NeonPart.Position
+        local RaycastParams = RaycastParams.new()
+        RaycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+        RaycastParams.FilterDescendantsInstances = { NeonPart.Parent }
+       
+        local HitAttachment = Instance.new("Attachment")
+        local NeonAttachment = Instance.new("Attachment")
+        NeonAttachment.Visible = true
+        NeonAttachment.Parent = NeonPart
+        HitAttachment.Parent = NeonPart
+        HitAttachment.Visible = true
+        
+
+        local RaycastResult = Workspace:Raycast(StartPosition, Vector3.new(0, -100, 0), RaycastParams)
+        if RaycastResult then
+            HitAttachment.WorldPosition = RaycastResult.Position
+
+            local Beam = Instance.new("Beam")
+            Beam.Attachment0 = NeonAttachment
+            Beam.Attachment1 = HitAttachment
+            Beam.Brightness = 1
+            Beam.Texture = "rbxassetid://901813002"
+            Beam.TextureLength = 100
+            Beam.TextureMode = "Wrap"
+            Beam.TextureSpeed = 0
+            Beam.Transparency = NumberSequence.new({ NumberSequenceKeypoint.new(0, 0.5), NumberSequenceKeypoint.new(1, 1) })
+            Beam.FaceCamera = true
+            Beam.Segments = 1
+            Beam.Width0 = 0.1
+            Beam.Width1 = 100
+            Beam.Parent = NeonPart
+            
+            local BillboardGui = Instance.new("BillboardGui")
+            BillboardGui.Name = "NeonBillboard"
+            BillboardGui.Adornee = NeonPart
+            BillboardGui.Size = UDim2.new(30, 0, 30, 0) 
+            BillboardGui.AlwaysOnTop = true
+            BillboardGui.Parent = NeonPart
+        
+            local ImageLabel = Instance.new("ImageLabel")
+            ImageLabel.Size = UDim2.new(1, 0, 1, 0)
+            ImageLabel.BackgroundTransparency = 1
+            ImageLabel.ImageTransparency = 0.5
+            ImageLabel.Image = "rbxassetid://1847258023" 
+            ImageLabel.Parent = BillboardGui
+        end
+    end
+end
+
+RunService.RenderStepped:Connect(function()
+    local Character = Player.Character
+    local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
+    for _, CollisionPart in ipairs(CollisionParts) do
+        if CollisionPart and CollisionPart.Parent then
+            local NeonPart = CollisionPart.Parent:FindFirstChild("Neon")
+            local CameraPosition = Camera.CFrame.Position
+            local RaycastParams = RaycastParams.new()
+            RaycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+            
+            
+            if (HumanoidRootPart.CFrame.Position - CameraPosition).Magnitude <= 2 then
+                RaycastParams.FilterDescendantsInstances = { Character }
+            end
+            
+  
+            local Direction = (CollisionPart.Position - CameraPosition).Unit * 1000
+            local RaycastResult = Workspace:Raycast(CameraPosition, Direction, RaycastParams)
+            
+
+            local BillboardGui = NeonPart:FindFirstChild("NeonBillboard")
+            if BillboardGui and BillboardGui:IsA("BillboardGui") then
+                if RaycastResult and RaycastResult.Instance ~= CollisionPart then
+                    BillboardGui.AlwaysOnTop = false
+                else
+                    BillboardGui.AlwaysOnTop = true
+                end
+            end
+        end
+    end
+end)
