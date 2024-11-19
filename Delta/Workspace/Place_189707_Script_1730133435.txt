@@ -1,0 +1,297 @@
+-- DECOMPILED BY ADVANCED DECOMPILER V3
+1.	
+2.	local v0 = game
+4.	local v2 = "Chat"
+5.	
+7.	v0 = v0:GetService(v2)
+8.	local v1 = game
+10.	local v3 = "RunService"
+11.	
+13.	v1 = v1:GetService(v3)
+14.	local v4 = "ClientChatModules"
+15.	
+17.	v2 = v0:WaitForChild(v4)
+18.	v3 = require
+20.	local v6 = "ChatSettings"
+21.	
+23.	v3 = v2:WaitForChild(v6)
+24.	v3 = v3()
+25.	v4 = require
+27.	local v7 = "ChatConstants"
+28.	
+30.	v4 = v2:WaitForChild(v7)
+31.	v4 = v4()
+32.	local v5 = nil
+33.	v6 = pcall
+35.	-- V nested upvalues[0] = v5
+[NEWCLOSURE] v7 = function() -- [line 14]
+	1.	local v1 = require
+	3.	local v4 = game
+	5.	local v6 = "Chat"
+	6.	
+	8.	v4 = v4:GetService(v6)
+	9.	local v3 = v4.ClientChatModules
+	11.	local v2 = v3.ChatLocalization
+	13.	v1 = v1(v2)
+	14.	v5 = v1 -- set upval
+	15.	return
+end
+
+36.	CAPTURE REF R5
+
+37.	v11(v12)
+38.	if v10 == nil then goto #41
+40.	v10 = {} -- this array is empty
+				end
+42.	v11 = v10.FormatMessageToSend
+44.	if v11 then goto #47
+45.	v11 = v10.LocalizeFormattedMessage
+47.	if not v11 then goto #50 -- referenced by #44
+				end
+48.	local function FormatMessageToSend(p1, p2, p3) -- [line 17]
+	1.	return p3
+end
+[DUPCLOSURE] v11 = FormatMessageToSend
+49.	v10.FormatMessageToSend = v11
+				end
+51.	v11 = {} -- this array has (5)indexes by default
+53.	v12 = "
+"
+54.	local v13 = "
+"
+55.	local v14 = "	"
+56.	local v15 = ""
+57.	local v16 = ""
+58.	v11[1] = v12
+v11[2] = v13
+v11[3] = v14
+v11[4] = v15
+v11[5] = v16
+
+60.	v12 = v8.DisallowedWhiteSpace
+62.	if v12 then goto #64
+63.	v11 = v8.DisallowedWhiteSpace
+				end
+65.	-- V nested upvalues[0] = v8
+local function isMessageValidServer(p4) -- [line 27]
+	1.	
+	3.	v6 = p4:len()
+	4.	local v9 = v8 -- get upval
+	5.	local v8 = v9.MaximumMessageLength
+	7.	local v7 = v8 * 6
+	8.	if v6 > v7 then goto #11
+	10.	local v6 = false
+	11.	return v6 -- referenced by #8
+					end
+	12.	v6 = utf8.len
+	14.	v7 = p4
+	15.	v6 = v6(v7)
+	16.	if v6 == nil then goto #19
+	18.	v6 = false
+	19.	return v6 -- referenced by #16
+					end
+	20.	v6 = utf8.len
+	22.	v7 = utf8.nfcnormalize
+	24.	v8 = p4
+	25.	v6 = v7(v8)
+	26.	v6 = v6()
+	27.	v8 = v8 -- get upval
+	28.	v7 = v8.MaximumMessageLength
+	30.	if v6 > v7 then goto #33
+	32.	v6 = false
+	33.	return v6 -- referenced by #30
+					end
+	34.	v6 = true
+	35.	return v6
+end
+[DUPCLOSURE] v12 = isMessageValidServer
+66.	CAPTURE VAL R3
+
+67.	-- V nested upvalues[0] = v20
+-- V nested upvalues[1] = v19
+local function CanUserChat(p5) -- [line 47]
+	1.	local v20 = v20 -- get upval
+	2.	
+	4.	v20 = v20:IsStudio()
+	5.	if v20 then goto #7
+	6.	v20 = true
+	7.	return v20 -- referenced by #5
+					end
+	8.	v20 = pcall
+	10.		-- V nested upvalues[0] = upvalues[1]
+	-- V nested upvalues[1] = p5
+	[NEWCLOSURE] v21 = function() -- [line 51]
+		1.	local v21 = upvalues[1] -- get upval
+		2.	local v24 = p5 -- get upval
+		3.	local v23 = v24.UserId
+		5.	
+		7.	p5 = v21:CanUserChatAsync(v23)
+		8.	return v21, ...
+	end
+
+	11.	CAPTURE UPVAL U1
+
+	12.	CAPTURE VAL R0
+
+	13.	v23, v24 = v23(v24)
+	14.	local v25 = v23 and v24
+	15.	return v25
+end
+[DUPCLOSURE] v30 = CanUserChat
+68.	CAPTURE VAL R1
+
+69.	CAPTURE VAL R0
+
+70.	-- V nested upvalues[0] = v1
+-- V nested upvalues[1] = v0
+-- V nested upvalues[2] = v5
+-- V nested upvalues[3] = v7
+-- V nested upvalues[4] = v6
+-- V nested upvalues[5] = v4
+local function Run(p6) -- [line 57]
+	1.		-- V nested upvalues[0] = p6
+	-- V nested upvalues[1] = upvalues[0]
+	-- V nested upvalues[2] = upvalues[1]
+	-- V nested upvalues[3] = upvalues[2]
+	-- V nested upvalues[4] = upvalues[3]
+	-- V nested upvalues[5] = upvalues[4]
+	local function ValidateChatFunction(p7, p8, p9) -- [line 58]
+		1.	local v28 = p6 -- get upval
+		2.	local v30 = p7
+		3.	
+		5.	v28 = v28:GetSpeaker(v30)
+		6.	
+		8.	v29 = v28:GetPlayer()
+		9.	if not v28 then goto #11
+		10.	v30 = false
+		11.	return v30 -- referenced by #9
+						end
+		12.	if not v29 then goto #14
+		13.	v30 = false
+		14.	return v30 -- referenced by #12
+						end
+		15.	v30 = upvalues[0] -- get upval
+		16.	
+		18.	v30 = v30:IsStudio()
+		19.	if not v30 then goto #26
+		20.	v30 = v29.UserId
+		22.	local v31 = 1
+		23.	if v31 > v30 then goto #26
+		25.	v30 = true
+		26.	return v30 -- referenced by #19, #23
+						end
+						end
+		-- DECOMPILER REMARK: Function "CanUserChat" was inlined here (LINE IS NOT VALID)
+	27.	v31 = upvalues[0] -- get upval
+		28.	
+		30.	v31 = v31:IsStudio()
+		31.	if v31 then goto #33
+		32.	v30 = true
+		33.	goto #40 -- referenced by #31
+						else
+		34.	v31 = pcall
+		36.			-- V nested upvalues[0] = upvalues[2]
+		-- V nested upvalues[1] = v3
+		[NEWCLOSURE] v32 = function() -- [line 51]
+			1.	local v29 = upvalues[2] -- get upval
+			2.	local v32 = v3 -- get upval
+			3.	local v31 = v32.UserId
+			5.	
+			7.	p9 = v29:CanUserChatAsync(v31)
+			8.	return v29, ...
+		end
+
+		37.	CAPTURE UPVAL U2
+
+		38.	CAPTURE VAL R4
+
+		39.	v34, v35 = v34(v35)
+		40.	v33 = v34 and v35 -- referenced by #33
+						end
+		41.	if not v33 then goto #53
+		42.	local v35 = upvalues[2] -- get upval
+		43.	local v37 = "GameChat_ChatMessageValidator_SettingsError"
+		44.	local v38 = "Your chat settings prevent you from sending messages."
+		45.	
+		47.	v35 = v35:FormatMessageToSend(v37, v38)
+		48.	local v36 = p9
+		49.	
+		51.	v31:SendSystemMessage(v35, v36)
+		52.	v33 = true
+		53.	return v33 -- referenced by #41
+						end
+		54.	v33 = upvalues[3] -- get upval
+		55.	v34 = p8
+		56.	v33 = v33(v34)
+		57.	if not v33 then goto #70
+		58.	v33 = upvalues[2] -- get upval
+		59.	v35 = "GameChat_ChatMessageValidator_MaxLengthError"
+		60.	v36 = "Your message exceeds the maximum message length."
+		61.	
+		63.	v33 = v33:FormatMessageToSend(v35, v36)
+		64.	v36 = v33
+		65.	v37 = p9
+		66.	
+		68.	v31:SendSystemMessage(v36, v37)
+		69.	v34 = true
+		70.	return v34 -- referenced by #57
+						end
+		71.	v33 = pairs
+		73.	v34 = upvalues[4] -- get upval
+		74.	v33, v34, v35 = v33(v34)
+		75.	for v36, v37 in v33(v34) do -- [escape at #93] (pairs/next)
+		76.	local v40 = v37
+		77.	
+		79.	v38 = p8:find(v40)
+		80.	if v38 then goto #92
+		81.	v40 = upvalues[2] -- get upval
+		82.	local v42 = "GameChat_ChatMessageValidator_WhitespaceError"
+		83.	local v43 = "Your message contains whitespace that is not allowed."
+		84.	
+		86.	v40 = v40:FormatMessageToSend(v42, v43)
+		87.	local v41 = p9
+		88.	
+		90.	v31:SendSystemMessage(v40, v41)
+		91.	v38 = true
+		92.	return v38 -- referenced by #80
+						end
+		93.	end -- FORGLOOP - iterate + goto #75
+		95.	v33 = false
+		96.	return v33
+	end
+	[NEWCLOSURE] v30 = ValidateChatFunction
+	2.	CAPTURE VAL R0
+
+	3.	CAPTURE UPVAL U0
+
+	4.	CAPTURE UPVAL U1
+
+	5.	CAPTURE UPVAL U2
+
+	6.	CAPTURE UPVAL U3
+
+	7.	CAPTURE UPVAL U4
+
+	8.	local v67 = "message_validation"
+	9.	local v68 = v64
+	10.	local v70 = v4 -- get upval
+	11.	local v69 = v70.VeryHighPriority
+	13.	
+	15.	p9:RegisterProcessCommandsFunction(v67, v68, v69)
+	16.	return
+end
+[NEWCLOSURE] v72 = Run
+71.	CAPTURE VAL R1
+
+72.	CAPTURE VAL R0
+
+73.	CAPTURE REF R5
+
+74.	CAPTURE VAL R7
+
+75.	CAPTURE REF R6
+
+76.	CAPTURE VAL R4
+
+77.	[CLOSEUPVALS]: clear captures from back until: 5
+78.	return v76
