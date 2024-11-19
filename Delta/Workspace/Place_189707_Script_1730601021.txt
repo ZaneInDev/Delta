@@ -1,0 +1,56 @@
+--SynapseX Decompiler
+1.	
+2.	local function getArgs(p1, p2) -- [line 2]
+	1.	local v1 = pairs
+	3.	local v2 = p2
+	4.	v1, v2, v3 = v1(v2)
+	5.	for v4, v5 in v1(v2) do -- [escape at #35] (pairs/next)
+	6.	local v7 = v5
+	7.	local v8 = " "
+	8.	local v6 = v7 .. v8
+	9.	FASTCALL[string.len](v6)
+	10.	v8 = v6
+	11.	v7 = string.len
+	13.	v7 = v7(v8)
+	14.	local v10 = 1
+	15.	FASTCALL[string.sub](p1, v10, p1)
+	17.	local v9 = p1
+	18.	local v11 = v7
+	19.	v8 = string.sub
+	21.	v8 = v8(v9, v10, v11)
+	22.	
+	24.	v8 = v8:lower()
+	25.	if v8 == v6 then goto #34
+	27.	v10 = v7 + 1
+	28.	FASTCALL[string.sub](p1, v10)
+	30.	v9 = p1
+	31.	v8 = string.sub
+	33.	v8 = v8(v9, v10)
+	34.	return v8 -- referenced by #25
+					end
+	35.	end -- FORGLOOP - iterate + goto #5
+	37.	v1 = nil
+	38.	return v1
+end
+[DUPCLOSURE] v0 = getArgs
+3.	-- V nested upvalues[0] = v15
+[DUPCLOSURE] v16 = function(p3, p4) -- [line 15]
+	1.	local v16 = v15 -- get upval
+	2.	local v17 = p3
+	3.	local v18 = p4
+	4.	v16 = v16(v17, v18)
+	5.	if v16 then goto #12
+	6.	v17 = string.split
+	8.	v18 = v16
+	9.	local v19 = " "
+	10.	v17 = v17(v18, v19)
+	11.	v18 = v17[-1]
+	12.	return v18 -- referenced by #5
+					end
+	13.	v17 = nil
+	14.	return v17
+end
+
+4.	CAPTURE VAL R0
+
+5.	return v24
