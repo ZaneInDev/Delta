@@ -1,0 +1,69 @@
+local CoreGui = game:GetService("CoreGui")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local PlayerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+
+local Hotbar = CoreGui.RobloxGui:WaitForChild("Backpack"):WaitForChild("Hotbar")
+Hotbar.BackgroundTransparency = 0
+local TextButton = Instance.new("TextButton")
+
+TextButton.Parent = Hotbar
+TextButton.Size = UDim2.new(0.2, 0, 0.3, 0)
+TextButton.AnchorPoint = Vector2.new(0.5, 0.5)
+TextButton.Text = "^"
+TextButton.TextScaled = true
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BackgroundTransparency = 1
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+
+local UIGradient = Instance.new("UIGradient")
+UIGradient.Parent = Hotbar
+UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))}) 
+UIGradient.Transparency = NumberSequence.new({ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(0.5, 0), NumberSequenceKeypoint.new(1, 1) })
+
+local Mouse = game.Players.LocalPlayer:GetMouse()
+local IsMouseDown = false
+local MaxYSize = Hotbar.AbsoluteSize.Y
+local CurrentPosition = Hotbar.Position
+local HalfMaxYSize = MaxYSize / 3
+local IsMaximized = false
+
+local function CreateTween(Target, Properties)
+    return TweenService:Create(Target, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), Properties)
+end
+
+Hotbar.Position = UDim2.new(CurrentPosition.X.Scale, CurrentPosition.X.Offset, CurrentPosition.Y.Scale, 1)
+TextButton.Position = UDim2.new(0.5, 0, 1, -80)
+
+local function UpdateSize()
+    if IsMaximized then return end
+
+    IsMouseDown = true
+    repeat
+        task.wait()
+        local OffsetY = math.clamp(TextButton.AbsolutePosition.Y - Mouse.Y, 0, MaxYSize)
+        if OffsetY > HalfMaxYSize then
+            IsMouseDown = false
+            IsMaximized = true
+            CreateTween(Hotbar, { Position = UDim2.new(CurrentPosition.X.Scale, CurrentPosition.X.Offset, CurrentPosition.Y.Scale, -MaxYSize) }):Play()
+            break
+        end
+    until not IsMouseDown
+end
+
+TextButton.MouseButton1Down:Connect(function()
+    if IsMaximized then
+        IsMaximized = false
+        CreateTween(Hotbar, { Position = UDim2.new(CurrentPosition.X.Scale, CurrentPosition.X.Offset, CurrentPosition.Y.Scale, 1) }):Play()
+    else
+        UpdateSize()
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(Input)
+    if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+        IsMouseDown = false
+    end
+end)
