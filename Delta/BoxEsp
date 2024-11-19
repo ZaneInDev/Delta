@@ -1,0 +1,145 @@
+-- Settings
+local ESPSettings = {
+    Enabled = false,
+    Boxes = true,
+    BoxShift = CFrame.new(0, -1.5, 0),
+    BoxSize = Vector3.new(4, 6, 0),
+    Color = Color3.fromRGB(255, 170, 0),
+    Thickness = 2
+}
+
+-- Services
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Camera = workspace.CurrentCamera
+
+-- Variables
+local LocalPlayer = Players.LocalPlayer
+local ESPObjects = {}
+
+-- Utility Functions
+local function Draw(ObjectType, Properties)
+    local DrawingObject = Drawing.new(ObjectType)
+    for Property, Value in pairs(Properties or {}) do
+        DrawingObject[Property] = Value
+    end
+    return DrawingObject
+end
+
+local function WorldToViewport(Position)
+    local ViewportPosition, OnScreen, Depth = Camera:WorldToViewportPoint(Position)
+    return Vector2.new(ViewportPosition.X, ViewportPosition.Y), OnScreen, Depth
+end
+
+-- ESP Logic
+local function CreateESPForCharacter(Character, Options)
+    local Drawings = {
+        Box = Draw("Quad", {
+            Thickness = ESPSettings.Thickness,
+            Color = Options.Color or ESPSettings.Color,
+            Transparency = 1,
+            Filled = false,
+            Visible = ESPSettings.Enabled and ESPSettings.Boxes
+        })
+    }
+
+    ESPObjects[Character] = {
+        Drawings = Drawings,
+        PrimaryPart = Options.PrimaryPart or Character:FindFirstChild("HumanoidRootPart"),
+        Color = Options.Color or ESPSettings.Color,
+        Size = Options.Size or ESPSettings.BoxSize
+    }
+
+    Character.AncestryChanged:Connect(function(_, Parent)
+        if Parent == nil then
+            ESPObjects[Character] = nil
+        end
+    end)
+
+    local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+    if Humanoid then
+        Humanoid.Died:Connect(function()
+            ESPObjects[Character] = nil
+        end)
+    end
+end
+
+local function RemoveESPForCharacter(Character)
+    local ESPObject = ESPObjects[Character]
+    if ESPObject then
+        for _, Drawing in pairs(ESPObject.Drawings) do
+            Drawing:Remove()
+        end
+        ESPObjects[Character] = nil
+    end
+end
+
+local function UpdateESPForCharacter(Character, ESPObject)
+    local PrimaryPart = ESPObject.PrimaryPart
+    if not PrimaryPart or not workspace:IsAncestorOf(PrimaryPart) then
+        RemoveESPForCharacter(Character)
+        return
+    end
+
+    local BoxSize = ESPObject.Size
+    local CFramePosition = PrimaryPart.CFrame
+    local Locations = {
+        TopLeft = WorldToViewport((CFramePosition * ESPSettings.BoxShift * CFrame.new(BoxSize.X / 2, BoxSize.Y / 2, 0)).Position),
+        TopRight = WorldToViewport((CFramePosition * ESPSettings.BoxShift * CFrame.new(-BoxSize.X / 2, BoxSize.Y / 2, 0)).Position),
+        BottomLeft = WorldToViewport((CFramePosition * ESPSettings.BoxShift * CFrame.new(BoxSize.X / 2, -BoxSize.Y / 2, 0)).Position),
+        BottomRight = WorldToViewport((CFramePosition * ESPSettings.BoxShift * CFrame.new(-BoxSize.X / 2, -BoxSize.Y / 2, 0)).Position)
+    }
+
+    local Box = ESPObject.Drawings.Box
+    if Box and Locations.TopLeft and Locations.TopRight and Locations.BottomLeft and Locations.BottomRight then
+        Box.Visible = true
+        Box.PointA = Locations.TopRight
+        Box.PointB = Locations.TopLeft
+        Box.PointC = Locations.BottomLeft
+        Box.PointD = Locations.BottomRight
+        Box.Color = ESPObject.Color
+    else
+        Box.Visible = false
+    end
+end
+
+-- Player Connection Logic
+local function OnCharacterAdded(Character)
+    local Player = Players:GetPlayerFromCharacter(Character)
+    local PrimaryPart = Character:WaitForChild("HumanoidRootPart", 10) or Character.PrimaryPart
+    if PrimaryPart then
+        CreateESPForCharacter(Character, { PrimaryPart = PrimaryPart, Color = Player.TeamColor.Color })
+    end
+end
+
+local function OnPlayerAdded(Player)
+    Player.CharacterAdded:Connect(OnCharacterAdded)
+    if Player.Character then
+        OnCharacterAdded(Player.Character)
+    end
+end
+
+local function OnPlayerRemoving(Player)
+    if Player.Character then
+        RemoveESPForCharacter(Player.Character)
+    end
+end
+
+-- Initialize ESP for existing players
+for _, Player in ipairs(Players:GetPlayers()) do
+    if Player ~= LocalPlayer then
+        OnPlayerAdded(Player)
+    end
+end
+
+Players.PlayerAdded:Connect(OnPlayerAdded)
+Players.PlayerRemoving:Connect(OnPlayerRemoving)
+
+-- Update ESP on RenderStepped
+RunService.RenderStepped:Connect(function()
+    for Character, ESPObject in pairs(ESPObjects) do
+        UpdateESPForCharacter(Character, ESPObject)
+    end
+end)
+
+ESPSettings.Enabled = true
