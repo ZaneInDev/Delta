@@ -1,0 +1,68 @@
+-- Sat Nov  2 23:06:57 2024
+1.	
+2.	local v0 = game
+4.	local v2 = "ReplicatedStorage"
+5.	
+7.	v0 = v0:GetService(v2)
+8.	local v1 = game
+10.	local v3 = "TextChatService"
+11.	
+13.	v1 = v1:GetService(v3)
+14.	local v4 = "Remotes"
+15.	
+17.	v2 = v0:WaitForChild(v4)
+18.	local v5 = "TextChannels"
+19.	
+21.	v3 = v1:WaitForChild(v5)
+22.	v5 = "RBXGeneral"
+23.	
+25.	v3 = v3:WaitForChild(v5)
+26.	v4 = {} -- this array is empty
+28.	-- V nested upvalues[0] = v3
+local function announce(p1) -- [line 9]
+	1.	local v1 = v3 -- get upval
+	2.	local v4 = '<font color="rgb(242, 153, 71)">%*</font>'
+	3.	local v6 = p1
+	4.	
+	6.	v4 = v4:format(v6)
+	7.	local v3 = v4
+	8.	
+	10.	v1:DisplaySystemMessage(v3)
+	11.	return
+end
+[DUPCLOSURE] v5 = announce
+29.	CAPTURE VAL R3
+
+30.	v8.announce = v9
+32.	-- V nested upvalues[0] = v6
+-- V nested upvalues[1] = v8
+local function init() -- [line 13]
+	1.	local v7 = v6 -- get upval
+	2.	local v6 = v7.Round
+	4.	local v5 = v6.OnClientEvent
+	6.		-- V nested upvalues[0] = upvalues[1]
+	[DUPCLOSURE] v7 = function(p2, ...) -- [line 14]
+		1.	
+		2.	if p2 == "Announce" then goto #9
+		4.	local v6 = ...
+		5.	local v8 = upvalues[1] -- get upval
+		6.	local v7 = v8.announce
+		8.	v8 = v6
+		9.	v7(v8) -- referenced by #2
+						end
+		10.	return
+	end
+
+	7.	CAPTURE UPVAL U1
+
+	8.	
+	10.	v9:Connect(v11)
+	11.	return
+end
+[DUPCLOSURE] v13 = init
+33.	CAPTURE VAL R2
+
+34.	CAPTURE VAL R4
+
+35.	v15.init = v16
+37.	return v15
