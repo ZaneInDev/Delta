@@ -1,0 +1,957 @@
+-- DECOMPILED BY ADVANCED DECOMPILER V3
+-- USED GLOBALS: script, IsPlayerVerified, AppendVerifiedBadge, CreateMessageLabel.
+1.	
+2.	local v0 = false
+3.	local v1 = pcall
+5.	[DUPCLOSURE] v2 = function() -- [line 8]
+	1.	local v1 = UserSettings
+	3.	v1 = v1(v2)
+	4.	local v3 = "UserIsChatTranslationEnabled2"
+	5.	
+	7.	p0 = v1:IsUserFeatureEnabled(v3)
+	8.	return v1, ...
+end
+
+6.	v3, v4 = v3(v4)
+7.	v2 = v3 and v4
+8.	v3 = game
+10.	local v5 = "Players"
+11.	
+13.	v3 = v3:GetService(v5)
+14.	local v6 = script
+16.	v5 = v6.Parent
+18.	local v4 = v5.Parent
+20.	v5 = require
+22.	local v8 = "ChatSettings"
+23.	
+25.	v5 = v4:WaitForChild(v8)
+26.	v5 = v5()
+27.	v6 = require
+29.	local v9 = "ChatConstants"
+30.	
+32.	v6 = v4:WaitForChild(v9)
+33.	v6 = v6()
+34.	local v7 = require
+36.	v9 = script
+38.	v8 = v9.Parent
+40.	local v10 = "Util"
+41.	
+43.	v7 = v8:WaitForChild(v10)
+44.	v7 = v7()
+45.	v8 = utf8.char
+47.	v9 = 57344
+48.	v8 = v8(v9)
+49.	-- V nested upvalues[0] = v3
+local function IsPlayerVerified(p1) -- [line 23]
+	1.	local v3 = v3 -- get upval
+	2.	local v5 = p1
+	3.	
+	5.	v3 = v3:GetPlayerByUserId(v5)
+	6.	if not v3 then goto #8
+	7.	local v4 = false
+	8.	return v4 -- referenced by #6
+					end
+	9.	v4 = pcall
+	11.		-- V nested upvalues[0] = v1
+	[NEWCLOSURE] v5 = function() -- [line 30]
+		1.	local v5 = v1 -- get upval
+		2.	local v4 = v5.HasVerifiedBadge
+		4.	return v4
+	end
+
+	12.	CAPTURE VAL R1
+
+	13.	v6, v7 = v6(v7)
+	14.	if v6 then goto #16
+	15.	local v8 = v7
+	16.	return v8 -- referenced by #14
+					end
+	17.	v8 = false
+	18.	return v8
+end
+[DUPCLOSURE] v11 = IsPlayerVerified
+50.	CAPTURE VAL R1
+
+51.	IsPlayerVerified = v17
+53.	-- V nested upvalues[0] = v16
+local function AppendVerifiedBadge(p2) -- [line 37]
+	1.	local v12 = p2
+	2.	local v13 = v16 -- get upval
+	3.	local v11 = v12 .. v13
+	4.	return v11
+end
+[DUPCLOSURE] v17 = AppendVerifiedBadge
+54.	CAPTURE VAL R6
+
+55.	AppendVerifiedBadge = v20
+57.	-- V nested upvalues[0] = v3
+-- V nested upvalues[1] = v5
+-- V nested upvalues[2] = v0
+local function CreateMessageLabel(p3, p4, p5) -- [line 41]
+	1.	local v14 = p3.FromSpeaker
+	3.	local v15 = nil
+	4.	local v17 = v3 -- get upval
+	5.	local v16 = v17.PlayerDisplayNamesEnabled
+	7.	if v16 then goto #13
+	8.	v16 = p3.SpeakerDisplayName
+	10.	if v16 then goto #13
+	11.	v15 = p3.SpeakerDisplayName
+	13.	goto #14 -- referenced by #7, #10
+					else
+					and (else)
+	14.	v15 = v14 -- referenced by #13
+					end
+	15.	v16 = p3.SpeakerUserId
+	17.	v17 = IsPlayerVerified
+	19.	local v18 = v16
+	20.	v17 = v17(v18)
+	21.	if v17 then goto #26
+	22.	v17 = AppendVerifiedBadge
+	24.	v18 = v15
+	25.	v17 = v17(v18)
+	26.	v15 = v17 -- referenced by #21
+					end
+	27.	v17 = p3.Message
+	29.	v18 = p3.ExtraData
+	31.	if not v18 then goto #33
+	32.	v18 = {} -- this array is empty
+					end
+	34.	local v19 = v18.Font
+	36.	if not v19 then goto #39
+	37.	local v20 = v3 -- get upval
+	38.	v19 = v20.DefaultFont
+					end
+	40.	v20 = v18.TextSize
+	42.	if not v20 then goto #45
+	43.	local v21 = v3 -- get upval
+	44.	v20 = v21.ChatWindowTextSize
+					end
+	46.	v21 = v18.NameColor
+	48.	if not v21 then goto #51
+	49.	local v22 = v3 -- get upval
+	50.	v21 = v22.DefaultNameColor
+					end
+	52.	v22 = v18.ChatColor
+	54.	if not v22 then goto #57
+	55.	local v23 = v3 -- get upval
+	56.	v22 = v23.DefaultMessageColor
+					end
+	58.	local v24 = v18.ChannelColor
+	60.	v23 = v24 or v22
+	61.	v24 = v18.Tags
+	63.	if not v24 then goto #65
+	64.	v24 = {} -- this array is empty
+					end
+	66.	local v25 = string.format
+	68.	local v26 = "[%s]:"
+	69.	local v27 = v15
+	70.	v25 = v25(v26, v27)
+	71.	v26 = v5 -- get upval
+	72.	local v28 = v25
+	73.	local v29 = v19
+	74.	local v30 = v20
+	75.	
+	77.	v26 = v26:GetStringTextBounds(v28, v29, v30)
+	78.	v28 = v5 -- get upval
+	79.	v30 = v25
+	80.	local v31 = v19
+	81.	local v32 = v20
+	82.	
+	84.	v28 = v28:GetNumberOfSpaces(v30, v31, v32)
+	85.	v27 = v28 + 1
+	86.	v28 = v5 -- get upval
+	87.	v30 = ""
+	88.	v31 = v19
+	89.	v32 = v20
+	90.	local v33 = v22
+	91.	
+	93.	v28, v29 = v28:CreateBaseMessage(v30, v31, v32, v33)
+	94.	v30 = v5 -- get upval
+	95.	v32 = v29
+	96.	v33 = v21
+	97.	local v34 = v25
+	98.	local v35 = v14
+	99.	
+	101.	v30 = v30:AddNameButtonToBaseMessage(v32, v33, v34, v35)
+	102.	v31 = nil
+	103.	v32 = UDim2.new
+	105.	v33 = 0
+	106.	v34 = 0
+	107.	v35 = 0
+	108.	local v36 = 0
+	109.	v32 = v32(v33, v34, v35, v36)
+	110.	v33 = p3.OriginalChannel
+	112.	if p4 ~= v33 then goto #161
+	114.	v33 = string.format
+	116.	v34 = "{%s}"
+	117.	v35 = p3.OriginalChannel
+	119.	v33 = v33(v34, v35)
+	120.	v34 = v5 -- get upval
+	121.	v36 = v29
+	122.	local v37 = v23
+	123.	local v38 = v33
+	124.	local v39 = p3.OriginalChannel
+	126.	
+	128.	v34 = v34:AddChannelButtonToBaseMessage(v36, v37, v38, v39)
+	129.	v31 = v34
+	130.	v34 = UDim2.new
+	132.	v35 = 0
+	133.	v39 = v31.Size
+	135.	v38 = v39.X
+	137.	v37 = v38.Offset
+	139.	v39 = v5 -- get upval
+	140.	local v41 = " "
+	141.	local v42 = v19
+	142.	local v43 = v20
+	143.	
+	145.	v39 = v39:GetStringTextBounds(v41, v42, v43)
+	146.	v38 = v39.X
+	148.	v36 = v37 + v38
+	149.	v37 = 0
+	150.	v38 = 0
+	151.	v34 = v34(v35, v36, v37, v38)
+	152.	v32 = v34
+	153.	v35 = v5 -- get upval
+	154.	v37 = v33
+	155.	v38 = v19
+	156.	v39 = v20
+	157.	
+	159.	v35 = v35:GetNumberOfSpaces(v37, v38, v39)
+	160.	v34 = v27 + v35
+	161.	v27 = v34 + 1 -- referenced by #112
+					end
+	162.	v33 = {} -- this array is empty
+	164.	v34 = pairs
+	166.	v35 = v24
+	167.	v34, v35, v36 = v34(v35)
+	168.	for v37, v38 in v34(v35) do -- [escape at #223] (pairs/next)
+	169.	v39 = v38.TagColor
+	171.	if not v39 then goto #177
+	172.	v39 = Color3.fromRGB
+	174.	local v40 = 255
+	175.	v41 = 0
+	176.	v42 = 255
+	177.	v39 = v39(v40, v41, v42) -- referenced by #171
+					end
+	178.	v41 = v38.TagText
+	180.	v40 = v41 or "???"
+	181.	v41 = string.format
+	183.	v42 = "[%s] "
+	184.	v43 = v40
+	185.	v41 = v41(v42, v43)
+	186.	v42 = v5 -- get upval
+	187.	local v44 = v29
+	188.	local v45 = v39
+	189.	local v46 = v41
+	190.	
+	192.	v42 = v42:AddTagLabelToBaseMessage(v44, v45, v46)
+	193.	v42.Position = v32
+	195.	v43 = v5 -- get upval
+	196.	v45 = v41
+	197.	v46 = v19
+	198.	local v47 = v20
+	199.	
+	201.	v43 = v43:GetNumberOfSpaces(v45, v46, v47)
+	202.	v27 = v27 + v43
+	203.	v43 = UDim2.new
+	205.	v44 = 0
+	206.	v47 = v42.Size
+	208.	v46 = v47.X
+	210.	v45 = v46.Offset
+	212.	v46 = 0
+	213.	v47 = 0
+	214.	v43 = v43(v44, v45, v46, v47)
+	215.	v32 = v32 + v43
+	216.	FASTCALL[table.insert](v33, v42)
+	218.	v44 = v33
+	219.	v45 = v42
+	220.	v43 = table.insert
+	222.	v43(v44, v45)
+	223.	end -- FORGLOOP - iterate + goto #168
+	225.	v30.Position = v32
+	227.	v34 = false
+	228.	v35 = nil
+	229.	v36 = v0 -- get upval
+	230.	if v36 then goto #239
+	231.	v36 = pcall
+	233.		-- V nested upvalues[0] = v22
+	-- V nested upvalues[1] = upvalues[1]
+	-- V nested upvalues[2] = v16
+	-- V nested upvalues[3] = v19
+	-- V nested upvalues[4] = v17
+	[NEWCLOSURE] v37 = function() -- [line 105]
+		1.	local v15 = upvalues[1] -- get upval
+		2.	local v17 = v16 -- get upval
+		3.	
+		5.	v15 = v15:AddTranslationButtonToBaseMessage(v17)
+		6.	v22 = v15 -- set upval
+		7.	local v16 = v19 -- get upval
+		8.	v17 = UDim2.new
+		10.	local v18 = 0
+		11.	local v23 = v17 -- get upval
+		12.	local v22 = v23.Size
+		14.	local v21 = v22.X
+		16.	local v20 = v21.Offset
+		18.	local v19 = v20 + 2
+		19.	v20 = 0
+		20.	v21 = 0
+		21.	v17 = v17(v18, v19, v20, v21)
+		22.	v15 = v16 + v17
+		23.	v19 = v15 -- set upval
+		24.	v15 = v22 -- get upval
+		25.	v16 = v19 -- get upval
+		26.	v15.Position = v16
+		28.	return
+	end
+
+	234.	CAPTURE REF R24
+
+	235.	CAPTURE UPVAL U1
+
+	236.	CAPTURE VAL R18
+
+	237.	CAPTURE REF R21
+
+	238.	CAPTURE VAL R19
+
+	239.	v51(v52) -- referenced by #230
+					end
+	240.		-- V nested upvalues[0] = v21
+	-- V nested upvalues[1] = p3
+	-- V nested upvalues[2] = v16
+	-- V nested upvalues[3] = upvalues[1]
+	-- V nested upvalues[4] = v14
+	local function useOriginalText(p6) -- [line 112]
+		1.	local v30 = false
+		2.	v21 = v30 -- set upval
+		3.	local v31 = p3 -- get upval
+		4.	v30 = v31.IsFiltered
+		6.	if v30 then goto #23
+		7.	v30 = v16 -- get upval
+		8.	local v34 = upvalues[1] -- get upval
+		9.	local v36 = v14 -- get upval
+		10.	
+		12.	v34 = v34:CreateLeadingSpaces(v36)
+		13.	local v32 = v34
+		14.	local v33 = upvalues[1] -- get upval
+		15.	local v35 = p6.Message
+		17.	
+		19.	v33 = v33:SanitizeForRichText(v35)
+		20.	v31 = v32 .. v33
+		21.	v30.Text = v31
+		23.	return -- referenced by #6
+						end
+		24.	v30 = p6.MessageLengthUtf8
+		26.	if not v30 then goto #28
+		27.	v30 = p6.MessageLength
+						end
+		29.	v31 = v16 -- get upval
+		30.	v35 = upvalues[1] -- get upval
+		31.	local v37 = v14 -- get upval
+		32.	
+		34.	v35 = v35:CreateLeadingSpaces(v37)
+		35.	v33 = v35
+		36.	v34 = string.rep
+		38.	v35 = "_"
+		39.	v36 = v30
+		40.	v34 = v34(v35, v36)
+		41.	v32 = v33 .. v34
+		42.	v31.Text = v32
+		44.	return
+	end
+	[NEWCLOSURE] v51 = useOriginalText
+	241.	CAPTURE REF R23
+
+	242.	CAPTURE VAL R0
+
+	243.	CAPTURE VAL R18
+
+	244.	CAPTURE UPVAL U1
+
+	245.	CAPTURE REF R16
+
+	246.		-- V nested upvalues[0] = v22
+	-- V nested upvalues[1] = v14
+	-- V nested upvalues[2] = v21
+	-- V nested upvalues[3] = v23
+	-- V nested upvalues[4] = v16
+	-- V nested upvalues[5] = upvalues[1]
+	local function useTranslatedText(p7) -- [line 122]
+		1.	local v50 = v22 -- get upval
+		2.	if v50 == nil then goto #4
+		4.	return -- referenced by #2
+						end
+		5.	local v51 = v22 -- get upval
+		6.	v50 = v51.Visible
+		8.	if v50 == false then goto #12
+		10.	v51 = v14 -- get upval
+		11.	v50 = v51 + 6
+		12.	v14 = v50 -- set upval -- referenced by #8
+						end
+		13.	v50 = v22 -- get upval
+		14.	v51 = true
+		15.	v50.Visible = v51
+		17.	v50 = true
+		18.	v21 = v50 -- set upval
+		19.	v50 = p7.TranslatedMessage
+		21.	if v50 == "" then goto #26
+		23.	v50 = v23 -- get upval
+		24.	v51 = p7
+		25.	v50(v51)
+		26.	return -- referenced by #21
+						end
+		27.	v50 = v16 -- get upval
+		28.	local v54 = upvalues[1] -- get upval
+		29.	local v56 = v14 -- get upval
+		30.	
+		32.	v54 = v54:CreateLeadingSpaces(v56)
+		33.	local v52 = v54
+		34.	local v53 = upvalues[1] -- get upval
+		35.	local v55 = p7.TranslatedMessage
+		37.	
+		39.	v53 = v53:SanitizeForRichText(v55)
+		40.	v51 = v52 .. v53
+		41.	v50.Text = v51
+		43.	return
+	end
+	[NEWCLOSURE] v72 = useTranslatedText
+	247.	CAPTURE REF R24
+
+	248.	CAPTURE REF R16
+
+	249.	CAPTURE REF R23
+
+	250.	CAPTURE VAL R25
+
+	251.	CAPTURE VAL R18
+
+	252.	CAPTURE UPVAL U1
+
+	253.		-- V nested upvalues[0] = p5
+	-- V nested upvalues[1] = v22
+	-- V nested upvalues[2] = v14
+	-- V nested upvalues[3] = v21
+	-- V nested upvalues[4] = v23
+	-- V nested upvalues[5] = v16
+	-- V nested upvalues[6] = upvalues[1]
+	local function UpdateTextFunction_Chat(p8) -- [line 142]
+		1.	local v68 = p5 -- get upval
+		2.	local v69 = p8.TranslatedMessage
+		4.	v68.TranslatedMessage = v69
+		6.	v68 = p8.TranslatedMessage
+		8.	if v68 then goto #51
+		-- DECOMPILER REMARK: Function "useTranslatedText" was inlined here (LINE IS NOT VALID)
+	9.	v68 = v22 -- get upval
+		10.	if v68 == nil then goto #12
+		12.	return -- referenced by #10
+						end
+		13.	v69 = v22 -- get upval
+		14.	v68 = v69.Visible
+		16.	if v68 == false then goto #20
+		18.	v69 = v14 -- get upval
+		19.	v68 = v69 + 6
+		20.	v14 = v68 -- set upval -- referenced by #16
+						end
+		21.	v68 = v22 -- get upval
+		22.	v69 = true
+		23.	v68.Visible = v69
+		25.	v68 = true
+		26.	v21 = v68 -- set upval
+		27.	v68 = p8.TranslatedMessage
+		29.	if v68 == "" then goto #34
+		31.	v68 = v23 -- get upval
+		32.	v69 = p8
+		33.	v68(v69)
+		34.	return -- referenced by #29
+						end
+		35.	v68 = v16 -- get upval
+		36.	local v72 = upvalues[1] -- get upval
+		37.	local v74 = v14 -- get upval
+		38.	
+		40.	v72 = v72:CreateLeadingSpaces(v74)
+		41.	local v70 = v72
+		42.	local v71 = upvalues[1] -- get upval
+		43.	local v73 = p8.TranslatedMessage
+		45.	
+		47.	v71 = v71:SanitizeForRichText(v73)
+		48.	v69 = v70 .. v71
+		49.	v68.Text = v69
+		51.	return -- referenced by #8
+						end
+		52.	v68 = v23 -- get upval
+		53.	v69 = p8
+		54.	v68(v69)
+		55.	return
+	end
+	[NEWCLOSURE] v91 = UpdateTextFunction_Chat
+	254.	CAPTURE VAL R0
+
+	255.	CAPTURE REF R24
+
+	256.	CAPTURE REF R16
+
+	257.	CAPTURE REF R23
+
+	258.	CAPTURE VAL R25
+
+	259.	CAPTURE VAL R18
+
+	260.	CAPTURE UPVAL U1
+
+	261.		-- V nested upvalues[0] = upvalues[2]
+	-- V nested upvalues[1] = p6
+	-- V nested upvalues[2] = v22
+	-- V nested upvalues[3] = v14
+	-- V nested upvalues[4] = v21
+	-- V nested upvalues[5] = v23
+	-- V nested upvalues[6] = v16
+	-- V nested upvalues[7] = upvalues[1]
+	local function UpdateTextFunction(p9) -- [line 151]
+		1.	local v91 = upvalues[2] -- get upval
+		2.	if v91 then goto #57
+		3.	v91 = p6 -- get upval
+		4.	local v92 = p9.TranslatedMessage
+		6.	v91.TranslatedMessage = v92
+		8.	v91 = p9.TranslatedMessage
+		10.	if v91 then goto #53
+		11.	v91 = v22 -- get upval
+		12.	if v91 == nil then goto #14
+		14.	return -- referenced by #12
+						end
+		15.	v92 = v22 -- get upval
+		16.	v91 = v92.Visible
+		18.	if v91 == false then goto #22
+		20.	v92 = v14 -- get upval
+		21.	v91 = v92 + 6
+		22.	v14 = v91 -- set upval -- referenced by #18
+						end
+		23.	v91 = v22 -- get upval
+		24.	v92 = true
+		25.	v91.Visible = v92
+		27.	v91 = true
+		28.	v21 = v91 -- set upval
+		29.	v91 = p9.TranslatedMessage
+		31.	if v91 == "" then goto #36
+		33.	v91 = v23 -- get upval
+		34.	v92 = p9
+		35.	v91(v92)
+		36.	return -- referenced by #31
+						end
+		37.	v91 = v16 -- get upval
+		38.	local v95 = upvalues[1] -- get upval
+		39.	local v97 = v14 -- get upval
+		40.	
+		42.	v95 = v95:CreateLeadingSpaces(v97)
+		43.	local v93 = v95
+		44.	local v94 = upvalues[1] -- get upval
+		45.	local v96 = p9.TranslatedMessage
+		47.	
+		49.	v94 = v94:SanitizeForRichText(v96)
+		50.	v92 = v93 .. v94
+		51.	v91.Text = v92
+		53.	return -- referenced by #10
+						end
+		54.	v91 = v23 -- get upval
+		55.	v92 = p9
+		56.	v91(v92)
+		57.	return -- referenced by #2
+						end
+		58.	v92 = p6 -- get upval
+		59.	v91 = v92.IsFiltered
+		61.	if v91 then goto #78
+		62.	v91 = v16 -- get upval
+		63.	v95 = upvalues[1] -- get upval
+		64.	v97 = v14 -- get upval
+		65.	
+		67.	v95 = v95:CreateLeadingSpaces(v97)
+		68.	v93 = v95
+		69.	v94 = upvalues[1] -- get upval
+		70.	v96 = p9.Message
+		72.	
+		74.	v94 = v94:SanitizeForRichText(v96)
+		75.	v92 = v93 .. v94
+		76.	v91.Text = v92
+		78.	return -- referenced by #61
+						end
+		79.	v91 = p9.MessageLengthUtf8
+		81.	if not v91 then goto #83
+		82.	v91 = p9.MessageLength
+						end
+		84.	v92 = v16 -- get upval
+		85.	v96 = upvalues[1] -- get upval
+		86.	local v98 = v14 -- get upval
+		87.	
+		89.	v96 = v96:CreateLeadingSpaces(v98)
+		90.	v94 = v96
+		91.	v95 = string.rep
+		93.	v96 = "_"
+		94.	v97 = v91
+		95.	v95 = v95(v96, v97)
+		96.	v93 = v94 .. v95
+		97.	v92.Text = v93
+		99.	return
+	end
+	[NEWCLOSURE] v115 = UpdateTextFunction
+	262.	CAPTURE UPVAL U2
+
+	263.	CAPTURE VAL R0
+
+	264.	CAPTURE REF R24
+
+	265.	CAPTURE REF R16
+
+	266.	CAPTURE REF R23
+
+	267.	CAPTURE VAL R25
+
+	268.	CAPTURE VAL R18
+
+	269.	CAPTURE UPVAL U1
+
+	270.		-- V nested upvalues[0] = v21
+	-- V nested upvalues[1] = p7
+	-- V nested upvalues[2] = v22
+	-- V nested upvalues[3] = v14
+	-- V nested upvalues[4] = v23
+	-- V nested upvalues[5] = v16
+	-- V nested upvalues[6] = upvalues[1]
+	-- V nested upvalues[7] = p9
+	local function toggleTranslation() -- [line 164]
+		1.	local v134 = v21 -- get upval
+		2.	if not v134 then goto #50
+		3.	local v135 = p7 -- get upval
+		4.	v134 = v135.TranslatedMessage
+		6.	if v134 then goto #50
+		7.	v134 = p7 -- get upval
+		-- DECOMPILER REMARK: Function "useTranslatedText" was inlined here (LINE IS NOT VALID)
+	8.	v135 = v22 -- get upval
+		9.	if v135 == nil then goto #11
+		11.	goto #53 -- referenced by #9
+						else
+		12.	local v136 = v22 -- get upval
+		13.	v135 = v136.Visible
+		15.	if v135 == false then goto #19
+		17.	v136 = v14 -- get upval
+		18.	v135 = v136 + 6
+		19.	v14 = v135 -- set upval -- referenced by #15
+						end
+		20.	v135 = v22 -- get upval
+		21.	v136 = true
+		22.	v135.Visible = v136
+		24.	v135 = true
+		25.	v21 = v135 -- set upval
+		26.	v135 = v134.TranslatedMessage
+		28.	if v135 == "" then goto #33
+		30.	v135 = v23 -- get upval
+		31.	v136 = v134
+		32.	v135(v136)
+		33.	goto #53 -- referenced by #28
+						elseif
+		34.	v135 = v16 -- get upval
+		35.	local v139 = upvalues[1] -- get upval
+		36.	local v141 = v14 -- get upval
+		37.	
+		39.	v139 = v139:CreateLeadingSpaces(v141)
+		40.	local v137 = v139
+		41.	local v138 = upvalues[1] -- get upval
+		42.	local v140 = v134.TranslatedMessage
+		44.	
+		46.	v138 = v138:SanitizeForRichText(v140)
+		47.	v136 = v137 .. v138
+		48.	v135.Text = v136
+		50.	goto #53 -- referenced by #2, #6
+						else
+						and (else)
+		51.	v134 = v23 -- get upval
+		52.	v135 = p7 -- get upval
+		53.	v134(v135) -- referenced by #11, #33, #50
+						end
+						end
+		54.	v134 = p9 -- get upval
+		55.	if v134 then goto #57
+		56.	v134 = p9 -- get upval
+		57.	v134(v135) -- referenced by #55
+						end
+		58.	return
+	end
+	[NEWCLOSURE] v159 = toggleTranslation
+	271.	CAPTURE REF R23
+
+	272.	CAPTURE VAL R0
+
+	273.	CAPTURE REF R24
+
+	274.	CAPTURE REF R16
+
+	275.	CAPTURE VAL R25
+
+	276.	CAPTURE VAL R18
+
+	277.	CAPTURE UPVAL U1
+
+	278.	CAPTURE VAL R2
+
+	279.	v186 = v0 -- get upval
+	280.	if v186 then goto #307
+	281.	if v180 ~= nil then goto #307
+	283.	v186 = v180.MouseButton1Click
+	285.		-- V nested upvalues[0] = v21
+	-- V nested upvalues[1] = p7
+	-- V nested upvalues[2] = v22
+	-- V nested upvalues[3] = v14
+	-- V nested upvalues[4] = v23
+	-- V nested upvalues[5] = v16
+	-- V nested upvalues[6] = upvalues[1]
+	-- V nested upvalues[7] = p9
+	[NEWCLOSURE] v188 = function() -- [line 176]
+		1.	local v160 = v21 -- get upval
+		2.	if not v160 then goto #50
+		3.	local v161 = p7 -- get upval
+		4.	v160 = v161.TranslatedMessage
+		6.	if v160 then goto #50
+		7.	v160 = p7 -- get upval
+		-- DECOMPILER REMARK: Function "useTranslatedText" was inlined here (LINE IS NOT VALID)
+	8.	v161 = v22 -- get upval
+		9.	if v161 == nil then goto #11
+		11.	goto #53 -- referenced by #9
+						else
+		12.	local v162 = v22 -- get upval
+		13.	v161 = v162.Visible
+		15.	if v161 == false then goto #19
+		17.	v162 = v14 -- get upval
+		18.	v161 = v162 + 6
+		19.	v14 = v161 -- set upval -- referenced by #15
+						end
+		20.	v161 = v22 -- get upval
+		21.	v162 = true
+		22.	v161.Visible = v162
+		24.	v161 = true
+		25.	v21 = v161 -- set upval
+		26.	v161 = v160.TranslatedMessage
+		28.	if v161 == "" then goto #33
+		30.	v161 = v23 -- get upval
+		31.	v162 = v160
+		32.	v161(v162)
+		33.	goto #53 -- referenced by #28
+						elseif
+		34.	v161 = v16 -- get upval
+		35.	local v165 = upvalues[1] -- get upval
+		36.	local v167 = v14 -- get upval
+		37.	
+		39.	v165 = v165:CreateLeadingSpaces(v167)
+		40.	local v163 = v165
+		41.	local v164 = upvalues[1] -- get upval
+		42.	local v166 = v160.TranslatedMessage
+		44.	
+		46.	v164 = v164:SanitizeForRichText(v166)
+		47.	v162 = v163 .. v164
+		48.	v161.Text = v162
+		50.	goto #53 -- referenced by #2, #6
+						else
+						and (else)
+		51.	v160 = v23 -- get upval
+		52.	v161 = p7 -- get upval
+		53.	v160(v161) -- referenced by #11, #33, #50
+						end
+						end
+		54.	v160 = p9 -- get upval
+		55.	if v160 then goto #57
+		56.	v160 = p9 -- get upval
+		57.	v160(v161) -- referenced by #55
+						end
+		58.	return
+	end
+
+	286.	CAPTURE REF R23
+
+	287.	CAPTURE VAL R0
+
+	288.	CAPTURE REF R24
+
+	289.	CAPTURE REF R16
+
+	290.	CAPTURE VAL R25
+
+	291.	CAPTURE VAL R18
+
+	292.	CAPTURE UPVAL U1
+
+	293.	CAPTURE VAL R2
+
+	294.	
+	296.	v212 = v212:connect(v214)
+	297.	v213 = nil
+	298.	v214 = v206.Changed
+	300.		-- V nested upvalues[0] = v28
+	-- V nested upvalues[1] = v29
+	[NEWCLOSURE] v216 = function(p10) -- [line 181]
+		1.	if p10 == "Parent" then goto #10
+		3.	local v186 = v28 -- get upval
+		4.	
+		6.	v186:Disconnect()
+		7.	v186 = v29 -- get upval
+		8.	
+		10.	v186:Disconnect() -- referenced by #1
+						end
+		11.	return
+	end
+
+	301.	CAPTURE VAL R30
+
+	302.	CAPTURE REF R31
+
+	303.	
+	305.	v216 = v216:connect(v218)
+	306.	v215 = v216
+	307.	[CLOSEUPVALS]: clear captures from back until: 31 -- referenced by #280, #281
+					end
+					end
+	308.	v214 = v212
+	309.	v215 = p8
+	310.	v214(v215)
+	311.		-- V nested upvalues[0] = upvalues[1]
+	-- V nested upvalues[1] = v16
+	-- V nested upvalues[2] = v15
+	local function GetHeightFunction(p11) -- [line 191]
+		1.	local v188 = upvalues[1] -- get upval
+		2.	local v190 = v16 -- get upval
+		3.	local v191 = v15 -- get upval
+		4.	local v192 = p11
+		5.	
+		7.	p11 = v188:GetMessageHeight(v190, v191, v192)
+		8.	return v188, ...
+	end
+	[NEWCLOSURE] v214 = GetHeightFunction
+	312.	CAPTURE UPVAL U1
+
+	313.	CAPTURE VAL R18
+
+	314.	CAPTURE VAL R17
+
+	315.	v219 = {} -- this array is empty
+	317.	v220 = {"TextTransparency", "TextStrokeTransparency"}
+	318.	v221 = {"FadedIn", "FadedOut"}
+	319.	v222 = 0
+	320.	v221.FadedIn = v222
+	322.	v222 = 1
+	323.	v221.FadedOut = v222
+	325.	v220.TextTransparency = v221
+	327.	v221 = {"FadedIn", "FadedOut"}
+	328.	v222 = 0.75
+	329.	v221.FadedIn = v222
+	331.	v222 = 1
+	332.	v221.FadedOut = v222
+	334.	v220.TextStrokeTransparency = v221
+	336.	v219[v207] = v220
+	337.	v220 = v0 -- get upval
+	338.	if v220 then goto #351
+	339.	if v212 ~= nil then goto #351
+	341.	v220 = {"ImageTransparency"}
+	342.	v221 = {"FadedIn", "FadedOut"}
+	343.	v222 = 0
+	344.	v221.FadedIn = v222
+	346.	v222 = 1
+	347.	v221.FadedOut = v222
+	349.	v220.ImageTransparency = v221
+	351.	v219[v212] = v220 -- referenced by #338, #339
+					end
+					end
+	352.	v220 = {"TextTransparency", "TextStrokeTransparency"}
+	353.	v221 = {"FadedIn", "FadedOut"}
+	354.	v222 = 0
+	355.	v221.FadedIn = v222
+	357.	v222 = 1
+	358.	v221.FadedOut = v222
+	360.	v220.TextTransparency = v221
+	362.	v221 = {"FadedIn", "FadedOut"}
+	363.	v222 = 0.75
+	364.	v221.FadedIn = v222
+	366.	v222 = 1
+	367.	v221.FadedOut = v222
+	369.	v220.TextStrokeTransparency = v221
+	371.	v219[v206] = v220
+	372.	v220 = pairs
+	374.	v221 = v210
+	375.	v220, v221, v222 = v220(v221)
+	376.	for v223, v224 in v220(v221) do -- [escape at #402] (pairs/next)
+	377.	local v225 = string.format
+	379.	local v226 = "Tag%d"
+	380.	local v227 = v223
+	381.	v225 = v225(v226, v227)
+	382.	v226 = {"TextTransparency", "TextStrokeTransparency"}
+	383.	v227 = {"FadedIn", "FadedOut"}
+	384.	local v228 = 0
+	385.	v227.FadedIn = v228
+	387.	v228 = 1
+	388.	v227.FadedOut = v228
+	390.	v226.TextTransparency = v227
+	392.	v227 = {"FadedIn", "FadedOut"}
+	393.	v228 = 0.75
+	394.	v227.FadedIn = v228
+	396.	v228 = 1
+	397.	v227.FadedOut = v228
+	399.	v226.TextStrokeTransparency = v227
+	401.	v219[v224] = v226
+	402.	end -- FORGLOOP - iterate + goto #376
+	404.	if v208 then goto #424
+	405.	v220 = {"TextTransparency", "TextStrokeTransparency"}
+	406.	v221 = {"FadedIn", "FadedOut"}
+	407.	v222 = 0
+	408.	v221.FadedIn = v222
+	410.	v222 = 1
+	411.	v221.FadedOut = v222
+	413.	v220.TextTransparency = v221
+	415.	v221 = {"FadedIn", "FadedOut"}
+	416.	v222 = 0.75
+	417.	v221.FadedIn = v222
+	419.	v222 = 1
+	420.	v221.FadedOut = v222
+	422.	v220.TextStrokeTransparency = v221
+	424.	v219[v208] = v220 -- referenced by #404
+					end
+	425.	v220 = v5 -- get upval
+	426.	v222 = v219
+	427.	
+	429.	v220, v221, v222 = v220:CreateFadeFunctions(v222)
+	430.	v223 = {} -- this array is empty
+	432.	v225 = v5 -- get upval
+	433.	v224 = v225.KEY_BASE_FRAME
+	435.	v223[v224] = v205
+	436.	v225 = v5 -- get upval
+	437.	v224 = v225.KEY_BASE_MESSAGE
+	439.	v223[v224] = v206
+	440.	v225 = v5 -- get upval
+	441.	v224 = v225.KEY_UPDATE_TEXT_FUNC
+	443.	v223[v224] = v216
+	444.	v225 = v5 -- get upval
+	445.	v224 = v225.KEY_GET_HEIGHT
+	447.	v223[v224] = v218
+	448.	v225 = v5 -- get upval
+	449.	v224 = v225.KEY_FADE_IN
+	451.	v223[v224] = v220
+	452.	v225 = v5 -- get upval
+	453.	v224 = v225.KEY_FADE_OUT
+	455.	v223[v224] = v221
+	456.	v225 = v5 -- get upval
+	457.	v224 = v225.KEY_UPDATE_ANIMATION
+	459.	v223[v224] = v222
+	460.	[CLOSEUPVALS]: clear captures from back until: 16
+	461.	return v223
+end
+[NEWCLOSURE] v197 = CreateMessageLabel
+58.	CAPTURE VAL R3
+
+59.	CAPTURE VAL R5
+
+60.	CAPTURE REF R0
+
+61.	CreateMessageLabel = v387
+63.	v387 = {} -- this array is empty
+65.	v388 = v385.KEY_MESSAGE_TYPE
+67.	local v389 = v384.MessageTypeDefault
+69.	v387[v388] = v389
+70.	v388 = v385.KEY_CREATOR_FUNCTION
+72.	v389 = CreateMessageLabel
+74.	v387[v388] = v389
+75.	[CLOSEUPVALS]: clear captures from back until: 0
+76.	return v387
