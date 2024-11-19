@@ -1,0 +1,2 @@
+cmd.add({"EmotesUI"}, {"AnimUI", "Executes a GUI with FE Emotes in it. (credits to illremember)"}, function()
+loadstring(game:HttpGet("https://pastebin.com/raw/RmD3qNp7", true))()()end)
