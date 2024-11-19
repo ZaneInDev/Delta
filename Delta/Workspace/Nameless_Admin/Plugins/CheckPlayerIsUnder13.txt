@@ -1,0 +1,60 @@
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local NotificationClient = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+local PlayersService = game:GetService("Players")
+local ReplicatedStorageService = game:GetService("ReplicatedStorage")
+
+local function Notify(NotificationTable)
+    NotificationClient:Notify(
+        {Title = NotificationTable.Title, Description = NotificationTable.Description},
+        {OutlineColor = Color3.fromRGB(80, 80, 80), Time = NotificationTable.Duration, Type = "default"}
+    )
+end
+
+local function FindPlayerWithName(Name)
+    for _, Player in ipairs(PlayersService:GetPlayers()) do
+        if Player.Name:lower():find(Name:lower()) or Player.DisplayName:lower():find(Name:lower()) then
+            return Player
+        end
+    end
+    return nil
+end
+
+local function GetPlayerName(Player)
+    local PlayerInfo = ""
+    if Player then
+        local DisplayName = Player.DisplayName
+        local Name = Player.Name
+        
+        if DisplayName ~= Name then
+            PlayerInfo = DisplayName .. " ( " .. Name .. " )"
+        else 
+            PlayerInfo = Name
+        end
+        return PlayerInfo
+    end
+    return nil
+end
+
+cmd.add({"getunder13"}, {"getunder13", "returns if player is above or under 13."}, function(Text)
+    local TargetPlayer = FindPlayerWithName(Text)
+    if TargetPlayer then
+        local PlayerName = GetPlayerName(TargetPlayer)
+        local NotificationText = nil
+        if TargetPlayer:GetUnder13() then
+            NotificationText = PlayerName .. "'s Account Age is under 13."
+        else
+            NotificationText = PlayerName .. "'s Account Age is or above 13."
+        end
+        Notify({
+            Title = "Retrieved Information!",
+            Description = NotificationText,
+            Duration = 5
+        })
+    else
+        local NotificationTable = {
+            Description = "Player '" .. Text .. "' not found.",
+            Title = "Warning!",
+            Duration = 5
+        }
+    end
+end)
