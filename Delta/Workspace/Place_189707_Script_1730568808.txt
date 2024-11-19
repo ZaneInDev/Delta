@@ -1,0 +1,42 @@
+-- boo 👻
+-- USED GLOBALS: script.
+1.	
+2.	local v0 = {} -- this array is empty
+4.	local v2 = script
+6.	local v1 = v2.Parent
+8.	v2 = {} -- this array is empty
+10.	v2.__index = v2
+12.	local function SendMessage(p1, p2, p3) -- [line 15]
+	1.	local v1 = p1.SayMessageRequest
+	3.	local v3 = p2
+	4.	local v4 = p3
+	5.	
+	7.	v1:FireServer(v3, v4)
+	8.	return
+end
+[DUPCLOSURE] v3 = SendMessage
+13.	v5.SendMessage = v6
+15.	local function RegisterSayMessageFunction(p4, p5) -- [line 19]
+	1.	p4.SayMessageRequest = p5
+	3.	return
+end
+[DUPCLOSURE] v6 = RegisterSayMessageFunction
+16.	v5.RegisterSayMessageFunction = v6
+18.	-- V nested upvalues[0] = v5
+local function new() -- [line 26]
+	1.	local v5 = {} -- this array is empty
+	3.	local v6 = v5 -- get upval
+	4.	FASTCALL[setmetatable](v5, v6)
+	6.	local v4 = setmetatable
+	8.	v4 = v4(v5, v6)
+	9.	v5 = nil
+	10.	v4.SayMessageRequest = v5
+	12.	return v4
+end
+[DUPCLOSURE] v6 = new
+19.	CAPTURE VAL R2
+
+20.	v7.new = v10
+22.	local v10 = v7.new
+24.	v9 = v10(v11)
+25.	return v10, ...
