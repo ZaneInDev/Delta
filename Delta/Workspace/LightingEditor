@@ -1,0 +1,226 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({
+    Name = "RTX Graphics Settings",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "OrionRTX"
+})
+
+local Tab = Window:MakeTab({
+    Name = "Graphics",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+    Name = "Lighting Effects"
+})
+
+-- Color Correction Effect for Saturation
+local colorCorrection = game.Lighting:FindFirstChild("ColorCorrection") or Instance.new("ColorCorrectionEffect", game.Lighting)
+colorCorrection.Name = "ColorCorrection"
+colorCorrection.Enabled = false
+
+Tab:AddToggle({
+    Name = "Enable Saturation",
+    Default = false,
+    Callback = function(Value)
+        colorCorrection.Enabled = Value
+    end
+})
+
+Tab:AddSlider({
+    Name = "Saturation",
+    Min = -1,
+    Max = 1,
+    Default = 0,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 0.1,
+    ValueName = "Saturation",
+    Callback = function(Value)
+        colorCorrection.Saturation = Value
+    end    
+})
+
+-- Ambient Lighting Intensity
+Tab:AddToggle({
+    Name = "Enable Ambient Lighting Intensity",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+            game.Lighting.Ambient = Color3.fromRGB(127, 127, 127)  -- Default value
+        else
+            game.Lighting.Ambient = Color3.fromRGB(0, 0, 0)
+        end
+    end
+})
+
+Tab:AddSlider({
+    Name = "Ambient Lighting Intensity",
+    Min = 0,
+    Max = 255,
+    Default = 127,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 1,
+    ValueName = "Intensity",
+    Callback = function(Value)
+        game.Lighting.Ambient = Color3.fromRGB(Value, Value, Value)
+    end    
+})
+
+-- Brightness
+Tab:AddToggle({
+    Name = "Enable Brightness",
+    Default = false,
+    Callback = function(Value)
+        game.Lighting.Brightness = Value and 2 or 0  -- Default Brightness when enabled
+    end
+})
+
+Tab:AddSlider({
+    Name = "Brightness Level",
+    Min = 1,
+    Max = 10,
+    Default = 2,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 1,
+    ValueName = "Brightness",
+    Callback = function(Value)
+        game.Lighting.Brightness = Value
+    end    
+})
+
+-- Color Shift Bottom
+Tab:AddToggle({
+    Name = "Enable Color Shift Bottom",
+    Default = false,
+    Callback = function(Value)
+        game.Lighting.ColorShift_Bottom = Value and Color3.fromRGB(255, 220, 180) or Color3.fromRGB(0, 0, 0)
+    end
+})
+
+Tab:AddSlider({
+    Name = "Color Shift Bottom Intensity",
+    Min = 0,
+    Max = 255,
+    Default = 0,
+    Color = Color3.fromRGB(255, 220, 180),
+    Increment = 1,
+    ValueName = "Color Shift Bottom",
+    Callback = function(Value)
+        game.Lighting.ColorShift_Bottom = Color3.fromRGB(Value, Value * 0.86, Value * 0.7)
+    end    
+})
+
+-- Color Shift Top
+Tab:AddToggle({
+    Name = "Enable Color Shift Top",
+    Default = false,
+    Callback = function(Value)
+        game.Lighting.ColorShift_Top = Value and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(0, 0, 0)
+    end
+})
+
+Tab:AddSlider({
+    Name = "Color Shift Top Intensity",
+    Min = 0,
+    Max = 255,
+    Default = 0,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 1,
+    ValueName = "Color Shift Top",
+    Callback = function(Value)
+        game.Lighting.ColorShift_Top = Color3.fromRGB(Value, Value, Value)
+    end    
+})
+
+-- Bloom Effect
+local bloom = game.Lighting:FindFirstChild("Bloom") or Instance.new("BloomEffect", game.Lighting)
+bloom.Name = "Bloom"
+bloom.Enabled = false
+
+Tab:AddToggle({
+    Name = "Enable Bloom",
+    Default = false,
+    Callback = function(Value)
+        bloom.Enabled = Value
+    end
+})
+
+Tab:AddSlider({
+    Name = "Bloom Intensity",
+    Min = 0,
+    Max = 10,
+    Default = 1,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 0.1,
+    ValueName = "Bloom",
+    Callback = function(Value)
+        bloom.Intensity = Value
+    end    
+})
+
+-- Sun Rays Effect
+local sunRays = game.Lighting:FindFirstChild("SunRays") or Instance.new("SunRaysEffect", game.Lighting)
+sunRays.Name = "SunRays"
+sunRays.Enabled = false
+
+Tab:AddToggle({
+    Name = "Enable Sun Rays",
+    Default = false,
+    Callback = function(Value)
+        sunRays.Enabled = Value
+    end
+})
+
+Tab:AddSlider({
+    Name = "Sun Rays Intensity",
+    Min = 0,
+    Max = 1,
+    Default = 0.1,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 0.01,
+    ValueName = "Sun Rays",
+    Callback = function(Value)
+        sunRays.Intensity = Value
+    end    
+})
+
+-- Fog Settings
+Tab:AddToggle({
+    Name = "Enable Fog",
+    Default = false,
+    Callback = function(Value)
+        if not Value then
+            game.Lighting.FogStart = 100000
+            game.Lighting.FogEnd = 100000
+        end
+    end
+})
+
+Tab:AddSlider({
+    Name = "Fog Start Distance",
+    Min = 0,
+    Max = 1000,
+    Default = 200,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 10,
+    ValueName = "Fog Start",
+    Callback = function(Value)
+        game.Lighting.FogStart = Value
+    end    
+})
+
+Tab:AddSlider({
+    Name = "Fog End Distance",
+    Min = 0,
+    Max = 1000,
+    Default = 500,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 10,
+    ValueName = "Fog End",
+    Callback = function(Value)
+        game.Lighting.FogEnd = Value
+    end    
+})
