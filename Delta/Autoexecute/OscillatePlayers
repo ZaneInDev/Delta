@@ -1,0 +1,47 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local OscillationAmplitude = 1 
+local OscillationFrequency = 2
+local PlayerBodyParts = {}
+
+local function AddPlayer(Player)
+    local Character = Player.Character or Player.CharacterAdded:Wait()
+    local Humanoid = Character:WaitForChild("Humanoid")
+    
+    local BodyParts = {}
+    if Character:FindFirstChild("UpperTorso") and Character:FindFirstChild("LowerTorso") then
+        BodyParts = { Character:FindFirstChild("UpperTorso"), Character:FindFirstChild("LowerTorso") }
+    elseif Character:FindFirstChild("Torso") then
+        BodyParts = { Character:FindFirstChild("Torso") }
+    end
+
+    if #BodyParts > 0 then
+        PlayerBodyParts[Player] = { Humanoid = Humanoid, BodyParts = BodyParts }
+    end
+end
+
+local function RemovePlayer(Player)
+    PlayerBodyParts[Player] = nil
+end
+
+Players.PlayerAdded:Connect(AddPlayer)
+Players.PlayerRemoving:Connect(RemovePlayer)
+
+for _, Player in ipairs(Players:GetPlayers()) do
+    AddPlayer(Player)
+end
+
+RunService.RenderStepped:Connect(function()
+    for Player, Data in pairs(PlayerBodyParts) do
+        local Humanoid = Data.Humanoid
+        local BodyParts = Data.BodyParts
+
+        if Humanoid and Humanoid.MoveDirection.Magnitude == 0 then
+            local OscillationOffset = math.sin(tick() * OscillationFrequency) * OscillationAmplitude
+            for _, BodyPart in ipairs(BodyParts) do
+                BodyPart.CFrame = BodyPart.CFrame * CFrame.new(0, OscillationOffset, 0)
+            end
+        end
+    end
+end)
