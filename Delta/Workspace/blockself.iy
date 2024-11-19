@@ -1,0 +1,26 @@
+local Plugin = {
+    ["PluginName"] = "BlockSelf",
+    ["PluginDescription"] = "Makes you blocky and fat.",
+    ["Commands"] = {
+        ["blockself"] = {
+            ["ListName"] = "blockself [delay]",
+            ["Description"] = "DESCRIPTION HERE",
+            ["Aliases"] = {"fat","blockself"},
+            ["Function"] = function(args,speaker)
+              game.Players.LocalPlayer.Character.CharacterMesh:Destroy()
+wait(args[1])
+game.Players.LocalPlayer.Character.CharacterMesh:Destroy()
+wait(args[1])
+game.Players.LocalPlayer.Character.CharacterMesh:Destroy()
+wait(args[1])
+game.Players.LocalPlayer.Character.CharacterMesh:Destroy()
+wait(args[1])
+game.Players.LocalPlayer.Character.CharacterMesh:Destroy()
+wait(0.01)
+notify('Yum!', 'You just ate '..math.random(500, 900)..' hamburgers.') 
+            end
+        }
+     }
+}
+
+return Plugin
