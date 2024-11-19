@@ -1,0 +1,2 @@
+cmd.add({"emotes"}, {"emotes", "you get all emotes the keybind is comma"}, function()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Gi7331/scripts/main/Emote.lua"))()end)
