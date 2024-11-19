@@ -1,0 +1,156 @@
+-- Variables
+local RunService = game:GetService('RunService')
+
+local Player = game:GetService('Players').LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local Humanoid = Character:WaitForChild('Humanoid')
+local HRP = Character:WaitForChild('HumanoidRootPart')
+
+Player.CharacterAdded:Connect(function(NewCharacter)
+    Character = NewCharacter
+    Humanoid = Character:WaitForChild('Humanoid')
+    HRP = Character:WaitForChild('HumanoidRootPart')
+end)
+
+local Camera = workspace.CurrentCamera
+
+local RandomGenerator = Random.new()
+
+-- Saving settings in variable
+local Configuration = {
+-- These settings apply to character's jumping
+
+    JumpSpeed = 5,
+    JumpAngle = 0.5,
+    JumpHeight = 0.25,
+
+-- These settings apply to character's landing
+
+    LandSpeed = 5,
+    LandAngle = 0.5,
+    LandHeight = 0.25,
+
+-- These settings apply to character's horizontal velocity
+
+    Smoothness = 0.25, -- (0:1] How smooth your camera moves
+    WalkAngle = 1, -- Maximum camera angle tilt when walking
+    TiltAngle = 2, -- Maximum camera angle tilt when walking sideways
+    CameraSwayAngle = 5, -- Maximum camera angle tilt when swaying camera in different directions
+    Amplitude = 0.25, -- Maximum camera height when walking
+    Speed = 32, -- How fast camera 'jumps' when walking
+
+-- These settings apply to character's vertical velocity
+
+    ShakeSpeed = Vector2.new(1,2), -- How fast screen shakes when falling or flying
+    ShakeInfluence = Vector2.new(.25,.25), -- How hard screen shakes when falling or flying
+    ShakeCap = 300, -- Character's vertical speed cap, so screen doesn't go crazy at high speed
+
+-- These settings apply to character's velocity
+
+    FOVMin = 70, -- Minimum camera field of view (FOV)
+    FOVMax = 90, -- Maximum camera field of view (FOV)
+    FOVSmoothness = 0.05, -- (0:1] How smooth your camera changes FOV
+    FOVInfluence = 0.5, -- How much character's velocity influence FOV change
+}
+
+-- Converting angles from degrees to radians, so computer won't strungle converting them everytime I need them
+Configuration.JumpSpeed = math.rad(Configuration.JumpSpeed)
+Configuration.JumpAngle = math.rad(Configuration.JumpAngle)
+
+Configuration.LandSpeed = math.rad(Configuration.LandSpeed)
+Configuration.LandAngle = math.rad(Configuration.LandAngle)
+
+Configuration.Speed = math.rad(Configuration.Speed)
+Configuration.ShakeSpeed = Vector2.new(math.rad(Configuration.ShakeSpeed.X),math.rad(Configuration.ShakeSpeed.Y))
+
+Configuration.WalkAngle = math.rad(Configuration.WalkAngle)
+Configuration.TiltAngle = math.rad(Configuration.TiltAngle)
+
+Configuration.CameraSwayAngle = math.rad(Configuration.CameraSwayAngle)
+
+-- Veriables to save between frames
+local walk_sway = 0
+local fall_sway = Vector2.new()
+local humanoid_sway = 0
+
+local humanoid_vertical_movement = 0
+
+local last_cframe = CFrame.new()
+local last_camera_cframe = Camera.CFrame
+local last_fov = Configuration.FOVMin
+
+-- Lerp function, smooth changing numbers
+local function NumberLerp(a, b, c)
+    return a+(b-a)*c
+end
+
+-- Main function
+local function Main(delta)
+    -- Saving variables for this frame, because it's short
+    local move_direction = Humanoid.MoveDirection
+    local velocity = math.abs(HRP.Velocity.Y) <= 0.01 and Vector3.new(HRP.Velocity.X,0,HRP.Velocity.Z) or HRP.Velocity-Vector3.new(0,.01,0)
+    
+    -- Same thing here
+    local abs_velocity_y = math.abs(velocity.Y)
+    
+    -- Adding walk and fall cycle, gotta use that for trigonometry
+    walk_sway = move_direction.Magnitude > 0 and walk_sway+Configuration.Speed*delta*move_direction.Magnitude*Humanoid.WalkSpeed or 0
+    walk_sway = walk_sway >= math.pi*2 and walk_sway-math.pi*2 or walk_sway
+    
+    fall_sway = abs_velocity_y > 0 and fall_sway+delta*Configuration.ShakeSpeed*1000 or Vector2.new()
+    fall_sway = Vector2.new(fall_sway.X >= math.pi*2 and fall_sway.X-math.pi*2 or fall_sway.X, fall_sway.Y >= math.pi*2 and fall_sway.Y-math.pi*2 or fall_sway.Y)
+    
+    -- Adding cycle for jumping and landing
+    if humanoid_vertical_movement ~= 0 then
+        local setting = humanoid_vertical_movement > 0 and Configuration.JumpSpeed or Configuration.LandSpeed
+        humanoid_sway = humanoid_sway + setting*delta*humanoid_vertical_movement*100
+        if math.abs(humanoid_sway) >= math.pi then
+            humanoid_sway = 0
+            humanoid_vertical_movement = 0
+        end
+    end
+    
+    -- Getting Dot products of character walking sideways and camera rotating around
+    local walk_dot = HRP.CFrame.RightVector:Dot(move_direction.Magnitude > 0 and move_direction or HRP.CFrame.LookVector)
+    local camera_dot = Camera.CFrame.RightVector:Dot(last_camera_cframe.LookVector)
+    
+    -- Saving walk sinus, because it's short
+    local walk_sin = math.sin(walk_sway)
+    
+    -- Applying influence and cap to fall cycle
+    local fall_rad = math.rad(math.min(abs_velocity_y,Configuration.ShakeCap))
+    local X = math.cos(fall_sway.X)*Configuration.ShakeInfluence.X*fall_rad/100
+    local Y = math.sin(fall_sway.Y)*Configuration.ShakeInfluence.Y*fall_rad/100
+    
+    -- Applying influence to jump/land cycle
+    local HumanoidAngle = math.cos(humanoid_sway)*((humanoid_vertical_movement > 0 and Configuration.JumpAngle) or (humanoid_vertical_movement < 0 and Configuration.LandAngle) or 0)*humanoid_vertical_movement
+    local HumanoidHeight = math.sin(humanoid_sway)*((humanoid_vertical_movement > 0 and Configuration.JumpHeight) or (humanoid_vertical_movement < 0 and Configuration.LandHeight) or 0)
+    
+    -- Same here, but for walking cycle
+    local Z = walk_sin*Configuration.WalkAngle-Configuration.TiltAngle*walk_dot-Configuration.CameraSwayAngle*camera_dot
+    
+    -- Final cframe we got
+    local new_cframe = CFrame.new(0,math.abs(walk_sin)*Configuration.Amplitude+HumanoidHeight,0)*CFrame.Angles(Y+HumanoidAngle,X,Z)
+    
+    -- Smooth camera movement, and save to the next frame
+    last_cframe = last_cframe:Lerp(new_cframe,Configuration.Smoothness)
+    last_camera_cframe = last_camera_cframe:Lerp(Camera.CFrame,Configuration.Smoothness)
+    
+    -- Changing camera field of view according to character's velocity
+    last_fov = math.min(NumberLerp(last_fov,Configuration.FOVMin+velocity.Magnitude*Configuration.FOVInfluence,Configuration.FOVSmoothness),Configuration.FOVMax)
+    
+    -- Applying changes
+    Camera.CFrame = Camera.CFrame*last_cframe
+    Camera.FieldOfView = last_fov
+end
+
+-- Binding that to frame render
+RunService:BindToRenderStep('Dynamic Camera', Enum.RenderPriority.Camera.Value+1,Main)
+
+Humanoid.StateChanged:Connect(function(_, new)
+    local old = humanoid_vertical_movement
+    humanoid_vertical_movement = (new == Enum.HumanoidStateType.Jumping and 1) or (new == Enum.HumanoidStateType.Landed and -1) or humanoid_vertical_movement
+    if humanoid_vertical_movement ~= old then
+        humanoid_sway = 0
+    end
+end)
