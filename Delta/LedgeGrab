@@ -1,0 +1,140 @@
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+local Debris = game:GetService("Debris")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local JumpButton = Player.PlayerGui.TouchGui.TouchControlFrame.JumpButton
+local ClimbingLoop
+local IsClimbing = false
+local Ledge = nil
+local ClimbOffset = CFrame.new()
+local LastDirection = Vector3.new()
+local RayLength = 5
+local Character = nil
+local Humanoid = nil
+local HumanoidRootPart = nil
+local Head = nil
+
+function WorldMovingDirection(Direction, MultiDirectional)
+	local NewMultiDirectional = MultiDirectional or false
+	local Angle = math.atan2(Direction.X, -Direction.Z)
+	local QuarterTurn 
+	if NewMultiDirectional then
+		QuarterTurn = math.pi / 4
+	else
+		QuarterTurn = math.pi / 2
+	end
+
+	local CurrentVector = nil
+	local MovingDirection
+	if Direction == Vector3.new(0, 0, 0) then return 'Idle' end
+	Angle = -math.round(Angle / QuarterTurn) * QuarterTurn
+
+	local NewX = math.round(-math.sin(Angle))
+	local NewZ = math.round(-math.cos(Angle))
+
+	if math.abs(NewX) <= 1e-10 then NewX = 0 end
+	if math.abs(NewZ) <= 1e-10 then NewZ = 0 end
+	CurrentVector = Vector3.new(NewX, 0, NewZ)
+
+	local Directions = {
+		['Forward'] = Vector3.new(0, 0, -1),
+		['Left'] = Vector3.new(-1, 0, 0),
+		['Backwards'] = Vector3.new(0, 0, 1),
+		['Right'] = Vector3.new(1, 0, 0)
+	}
+
+	if NewMultiDirectional then
+		Directions["ForwardLeft"] = Vector3.new(-1, 0, -1)
+		Directions["ForwardRight"] = Vector3.new(1, 0, -1)
+		Directions["BackwardLeft"] = Vector3.new(-1, 0, 1)
+		Directions["BackwardRight"] = Vector3.new(1, 0, 1)
+	end
+
+	for DirectionName, Vector in Directions do
+		if CurrentVector == Vector then
+			MovingDirection = DirectionName
+		end
+	end
+
+	return MovingDirection
+end
+
+
+local function CalculateRayPosition(RaycastResult)
+	local RaycastInstance = RaycastResult.Instance
+	local ObjectSpace = RaycastInstance.CFrame:PointToObjectSpace(RaycastResult.Position)
+	local NewOffset = CFrame.lookAt(RaycastInstance.CFrame:PointToWorldSpace(Vector3.new(ObjectSpace.X, RaycastInstance.Size.Y / 2, ObjectSpace.Z)), RaycastInstance.CFrame:PointToWorldSpace(Vector3.new(ObjectSpace.X, RaycastInstance.Size.Y / 2, ObjectSpace.Z)) - RaycastResult.Normal)
+	
+	ClimbOffset = NewOffset + Vector3.new(0, -2, 0) + NewOffset.LookVector * -1
+	
+	return NewOffset
+end
+
+local function CheckLedgeClimb(RayDirection)
+	local Params = RaycastParams.new()
+	Params.FilterType = Enum.RaycastFilterType.Exclude
+	Params.FilterDescendantsInstances = {Character, Ledge}
+	local Raycast = workspace:Raycast(Head.Position, RayDirection, Params)
+	if Raycast then
+		CalculateRayPosition(Raycast)
+		Ledge = Raycast.Instance
+	end
+end
+
+RunService.RenderStepped:Connect(function()
+    Character = Player.Character or Player.CharacterAdded:Wait()
+	Humanoid = Character:FindFirstChildOfClass("Humanoid")
+	HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+	Head = Character:FindFirstChild("Head")
+	if IsClimbing then
+		HumanoidRootPart.Anchored = true
+		Humanoid:ChangeState(Enum.HumanoidStateType.Seated)
+		Humanoid.AutoRotate = false
+		HumanoidRootPart.CFrame = HumanoidRootPart.CFrame:Lerp(CFrame.lookAt(ClimbOffset.Position, (ClimbOffset * CFrame.new(0, 0, -1)).Position), 0.25)
+	else
+		HumanoidRootPart.Anchored = false
+		Humanoid:ChangeState(Enum.HumanoidStateType.None)
+		Humanoid.AutoRotate = true
+	end
+	
+	local MoveDirection = WorldMovingDirection(Humanoid.MoveDirection)
+	if MoveDirection ~= LastDirection then
+	    LastDirection = MoveDirection
+	    print(MoveDirection)
+	end
+    if MoveDirection ~= 'Idle' then
+        if MoveDirection == 'Forward' then
+            CheckLedgeClimb(Head.CFrame.LookVector * RayLength)
+        elseif MoveDirection == 'Backwards' then
+            CheckLedgeClimb(Head.CFrame.Position + Head.CFrame.UpVector * RayLength, Head.CFrame.LookVector * RayLength)
+        elseif MoveDirection == 'Right' or MoveDirection == 'ForwardRight' or MoveDirection == 'BackwardRight' then
+            CheckLedgeClimb(Head.CFrame.Position + Vector3.new(0, -1, 0) + Head.CFrame.RightVector * RayLength, Head.CFrame.RightVector * -RayLength + Head.CFrame.LookVector * RayLength)
+        elseif MoveDirection == 'Left' or MoveDirection == 'ForwardLeft' or MoveDirection == 'BackwardLeft' then
+            CheckLedgeClimb(Head.CFrame.Position + Vector3.new(0, -1, 0) + Head.CFrame.RightVector * -RayLength, Head.CFrame.RightVector * RayLength + Head.CFrame.LookVector * (RayLength / 2))
+        end
+    end
+end)
+
+
+
+JumpButton.Activated:Connect(function()
+	if IsClimbing then
+		if ClimbingLoop ~= nil then ClimbingLoop:Disconnect() end
+		IsClimbing = false
+		Ledge = nil
+		HumanoidRootPart.Anchored = false
+		Humanoid:ChangeState(Enum.HumanoidStateType.None)
+		Humanoid.AutoRotate = true
+		local BodyVelocity = Instance.new("BodyVelocity", HumanoidRootPart)
+		BodyVelocity.Velocity = Vector3.new(0, 15, 0) + Head.CFrame.LookVector * 5
+		BodyVelocity.MaxForce = Vector3.one * math.huge
+		Debris:AddItem(BodyVelocity, 0.4)
+	else
+		if Humanoid.FloorMaterial == Enum.Material.Air or (Humanoid:GetState() == Enum.HumanoidStateType.Freefall or Humanoid:GetState() == Enum.HumanoidStateType.Jumping) then
+			CheckLedgeClimb(Head.CFrame.LookVector * RayLength)
+			if Ledge then IsClimbing = true end
+		end
+	end
+end)
