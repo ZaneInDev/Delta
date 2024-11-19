@@ -1,0 +1,158 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local function FindPlayerWithName(Name, Speaker)
+    local PlayersList = getPlayer(Name, Speaker)
+    for _, PlayerName in pairs(PlayersList) do
+        local Player = Players:FindFirstChild(PlayerName)
+        if Player then
+            return Player
+        end
+    end
+    return nil
+end
+
+local function GetPlayingAnimations(Player)
+    local Humanoid = Player.Character and Player.Character:FindFirstChildOfClass("Humanoid")
+    if not Humanoid then return {} end
+
+    local Animator = Humanoid:FindFirstChildOfClass("Animator")
+    if not Animator then return {} end
+
+    local PlayingAnimations = Animator:GetPlayingAnimationTracks()
+    local AnimationIds = {}
+
+    for _, AnimationTrack in ipairs(PlayingAnimations) do
+        if AnimationTrack.Animation and AnimationTrack.Animation.AnimationId then
+            table.insert(AnimationIds, AnimationTrack.Animation.AnimationId)
+        end
+    end
+
+    return AnimationIds
+end
+
+local function SaveAnimationsToFile(Player, AnimationIds, FileName)
+    local FolderPath = "Animations"
+    local FilePath = FolderPath .. "/" .. FileName .. ".txt"
+
+    if not isfile(FolderPath) then
+        makefolder(FolderPath)
+    end
+
+    local Contents = table.concat(AnimationIds, "\n")
+    writefile(FilePath, Contents)
+end
+
+local function LoadAnimationsFromFile(FileName)
+    local FolderPath = "Animations"
+    local FilePath = FolderPath .. "/" .. FileName .. ".txt"
+
+    if isfile(FilePath) then
+        local Contents = readfile(FilePath)
+        return string.split(Contents, "\n")
+    end
+
+    return nil
+end
+
+local function StopPlayingAnimations(Player)
+    local Humanoid = Player.Character and Player.Character:FindFirstChildOfClass("Humanoid")
+    if not Humanoid then return end
+
+    local Animator = Humanoid:FindFirstChildOfClass("Animator")
+    if not Animator then return end
+
+    for _, AnimationTrack in ipairs(Animator:GetPlayingAnimationTracks()) do
+        AnimationTrack:Stop()
+    end
+end
+
+local function PlayAnimations(Player, AnimationIds)
+    local Humanoid = Player.Character and Player.Character:FindFirstChildOfClass("Humanoid")
+    if not Humanoid then return end
+
+    local Animator = Humanoid:FindFirstChildOfClass("Animator")
+    if not Animator then return end
+
+    StopPlayingAnimations(Player)  
+
+    for _, AnimationId in ipairs(AnimationIds) do
+        local Animation = Instance.new("Animation")
+        Animation.AnimationId = AnimationId
+        Animator:LoadAnimation(Animation):Play()
+    end
+end
+
+local Plugin = {
+    ["PluginName"] = "Animation ID Copier",
+    ["PluginDescription"] = "Copies ongoing animation IDs of a specified player, saves them to files, and generates playback commands.",
+    ["Commands"] = {
+        ["saveanimation"] = {
+            ["ListName"] = "saveanimation / saveanim / sa [Player][FileName]",
+            ["Description"] = "Copies the animation IDs of all playing animations for the given player and saves them to a specified file.",
+            ["Aliases"] = {"saveanimation", "saveanim", "sa"},
+            ["Function"] = function(args, speaker)
+                local PlayerName = args[1]
+                local FileName = args[2]
+
+                if not PlayerName then
+                    notify("Animation Saver", "Please specify a player name.")
+                    return
+                end
+
+                local Player = FindPlayerWithName(PlayerName, speaker)
+                if not Player then
+                    notify("Animation Saver", "Player not found.")
+                    return
+                end
+
+                
+                if not FileName then
+                    FileName = Player.Name
+                end
+
+                local AnimationIds = GetPlayingAnimations(Player)
+
+                if #AnimationIds == 0 then
+                    notify("Animation Saver", "No animations are currently playing for this player.")
+                    return
+                end
+
+                SaveAnimationsToFile(Player, AnimationIds, FileName)
+                notify("Animation Saver", "Saved " .. #AnimationIds .. " animation IDs for player " .. Player.Name .. " to the file '" .. FileName .. ".txt'.")
+            end
+        }
+    }
+}
+
+local FolderPath = "Animations"
+if not isfolder(FolderPath) then
+    makefolder(FolderPath)
+end
+
+local Files = listfiles(FolderPath)
+for _, FileName in ipairs(Files) do
+    if FileName then
+        Plugin.Commands["e_" .. FileName] = {
+            ["ListName"] = "e_" .. FileName,
+            ["Description"] = "Plays the animations saved in the file '" .. FileName .. ".txt' on the local player.",
+            ["Function"] = function(args, speaker)
+                if not LocalPlayer or not LocalPlayer.Character then
+                    notify("Animation Saver", "Local player or character not found.")
+                    return
+                end
+
+                local AnimationIds = LoadAnimationsFromFile(FileName)
+                if not AnimationIds then
+                    notify("Animation Saver", "No animation data found in '" .. FileName .. ".txt'.")
+                    return
+                end
+
+                PlayAnimations(LocalPlayer, AnimationIds)
+                notify("Animation Saver", "Playing animations from '" .. FileName .. ".txt' for the local player.")
+            end
+        }
+    end
+end
+
+return Plugin
