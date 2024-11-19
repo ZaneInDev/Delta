@@ -1,0 +1,56 @@
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+
+local HeadHorFactor = 1
+local HeadVerFactor = 0.6
+local BodyHorFactor = 0.5
+local BodyVerFactor = 0.4
+local UpdateSpeed = 0.1
+
+local LocalPlayer = Players.LocalPlayer
+local CurrentCamera = workspace.CurrentCamera
+
+local NeckC0
+local WaistC0
+
+local function Look()
+    local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    local Humanoid = Character:WaitForChild("Humanoid")
+    local IsR6 = Humanoid.RigType == Enum.HumanoidRigType.R6
+    local Head = Character.Head
+    local Root = Character.HumanoidRootPart
+    local Torso = IsR6 and Character.Torso or Character.UpperTorso
+    local Neck = IsR6 and Torso.Neck or Head.Neck
+    local Waist = not IsR6 and Torso.Waist
+    
+    if not NeckC0 then
+        NeckC0 = Neck.C0
+    end
+    if not IsR6 and not WaistC0 then
+        WaistC0 = Waist.C0
+    end
+    
+    if Torso and Head and ((IsR6 and Neck) or (Neck and Waist)) and CurrentCamera.CameraSubject == Humanoid then
+        local CamCF = CurrentCamera.CFrame
+        local HeadCF = Head.CFrame
+        local TorsoLV = Torso.CFrame.LookVector
+
+        local Dist = (HeadCF.p - CamCF.p).Magnitude
+        local Diff = HeadCF.Y - CamCF.Y
+
+        local AsinDiffDist = math.asin(math.clamp(Diff / Dist, -1, 1))
+        local CrossProductY = ((HeadCF.p - CamCF.p).Unit:Cross(TorsoLV)).Y
+
+        if IsR6 then
+            Neck.C0 = Neck.C0:lerp(NeckC0 * CFrame.Angles(-AsinDiffDist * HeadVerFactor, 0, -CrossProductY * HeadHorFactor), UpdateSpeed)
+        else
+            Neck.C0 = Neck.C0:lerp(NeckC0 * CFrame.Angles(AsinDiffDist * HeadVerFactor, -CrossProductY * HeadHorFactor, 0), UpdateSpeed)
+            Waist.C0 = Waist.C0:lerp(WaistC0 * CFrame.Angles(AsinDiffDist * BodyVerFactor, -CrossProductY * BodyHorFactor, 0), UpdateSpeed)
+        end
+    end
+end
+
+Look()
+RunService.Heartbeat:Connect(Look)
+
+    
